@@ -16,7 +16,7 @@
 - 사용자가 CLI에서 입력한 정보를 바탕으로 연락처 등록, 검색, 수정, 삭제 
 
 ## 팀원
-- 최준규(팀장)
-- 최환
-- 이율원
-- 장세현
+- [최준규(팀장)](https://github.com/junkyn)
+- [최환](https://github.com/Hwan616)
+- [이율원](https://github.com/sterdsterd)
+- [장세현](https://github.com/nofeboy)
