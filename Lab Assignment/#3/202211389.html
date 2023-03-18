@@ -5,14 +5,18 @@
 		HTML5BasicPage
 
 	</title>
+	<style>
+		nav li:hover{color:red;}
+		.input-search:focus{background:yellow;}
+	</style>
 <body>
 	<div id = "page-wrapper">
 		<header id="main-header">
-			<h1 class = "main-title"> 웹 프로그래밍 완전 정복</h1>
-				<h2 class = "main-discription"> 건국대학교 컴퓨터공학부</h2>
+			<h1 class = "master-title"> 웹 프로그래밍 완전 정복</h1>
+				<h2 class = "master-description"> 건국대학교 컴퓨터공학부</h2>
 		</header>
 
-		<nav id="main-navigator">
+		<nav id="main-navigation">
 			<div class="pull-left">
 			<ul class ="outer-menu">
 				<li class="outer-menu-item">HTML5 </li>
@@ -21,8 +25,10 @@
 				<li class="outer-menu-item">JavaScript </li>
 				</ul></div>
 			<div class="pull-right">
-				<input type="text" class ="input-search"></input>
-				<button type="submit" class="input-search-submit">검색</button>
+				<form>
+				<input type="text" class ="input-search" name="search">
+				<input type="submit" class="input-search-submit" value="검색">
+				</form>
 			</div>
 		</nav>
 
