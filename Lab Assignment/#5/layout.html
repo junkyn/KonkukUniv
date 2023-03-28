@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Layout</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&family=Sunflower:wght@300&display=swap" rel="stylesheet">
+	<!-- 초기화-->
+	<style>
+		*{margin:0;padding:0;}
+		body{font-family:'Times New Roman', serif;}
+		nav{font-family: 'Delicious Handrawn', cursive;
+font-family: 'Sunflower', sans-serif;}
+
+		li{list-style:none;}
+		a{text-decoration:none;}
+		img{border:0;}
+		#main-header{width:960px;height:160px;margin:0 auto;position:relative;}
+		#main-header>#title{position:absolute;right:20px;top:30px;}
+		#main-header>nav{position:absolute;left:0;bottom:0;}
+		#title{font-family: 'Delicious Handrawn', cursive;}
+		#content{font-family: 'Sunflower', sans-serif;}
+		nav>ul{overflow:hidden;}
+		nav>ul>li{float:left;}
+		nav>ul>li>a{display:block;width:100px;height:20px;padding:10px;text-align:center;line-height:20px;border:1px solid blue;}
+		nav>ul>li>a:hover{background-color:black;color:white;}
+		nav>ul>li:first-child>a{border-radius:15px 0 0 15px;}
+		nav>ul>li:last-child>a{border-radius:0 15px 15px 0;}
+		#content{width:960px;margin:0 auto;}
+		#content>section{float:left;width:720px;}
+		#content>aside{float:right;width:230px;}
+		input:nth-of-type(1){display:none;}
+		input:nth-of-type(1)~div:nth-of-type(1){display:none;}
+		input:nth-of-type(1):checked~div:nth-of-type(1){display:block;}
+
+		input:nth-of-type(2){display:none;}
+		input:nth-of-type(2)~div:nth-of-type(2){display:none;}
+		input:nth-of-type(2):checked~div:nth-of-type(2){display:block;}
+		section.tab-title{overflow:hidden;}
+		section.tab-title>label{
+			display:block;
+			float:left;
+			width:100px;
+			height:30px;
+			line-height:30px;
+			text-align:center;
+			border:1px solid black;
+
+			background:black;
+			color:white;
+		}
+		input:nth-of-type(1):checked~section.tab-title>label:nth-of-type(1){
+			background:white;
+			color:black;
+		}
+		input:nth-of-type(2):checked~section.tab-title>label:nth-of-type(2){
+			background:white;
+			color:black;
+
+		}
+		.item{
+			overflow:hidden;
+			width:182px;
+			padding:10px;
+			border:1px solid black;
+			border-top:none;
+		}
+		.thumbnail{
+			float:left;
+		}
+		.description{
+			display:block;
+			width:120px;
+			white-space:nowrap;
+			overflow:hidden;
+			text-overflow:ellipsis;
+			float:left;
+			margin-left:10px;
+		}
+	</style>
+</head>
+<body>
+	<header id=main-header>
+		<div id=title>
+			<h1>Weekly Hot Issued</h1>
+		</div>
+		<nav>
+			<ul>
+				<li><a href="#">영화</a></li>
+				<li><a href="#">드라마</a></li>
+				<li><a href="#">TV예능</a></li>
+				<li><a href="#">다큐멘터리</a></li>
+				<li><a href="#">뉴스</a></li>
+			</ul>
+		</nav>
+	</header>
+	<div id=content>
+		<section>
+		</section>
+		<aside>
+			<input id=song type=radio name=tab checked=checked>
+			<input id=movie type=radio name=tab>
+			<section class=tab-title>
+				<label for=song>Song Top 5</label>
+				<label for=movie>Movie Top 5</label>
+			</section>
+			<div class=tab-item>
+				<ul>
+					<li class="item"><a href=https://youtu.be/A1tZgPAcpjE target="_blank">
+						<div class="thumbnail">
+							<img src="song1.png">
+						</div>
+						<div class="description">
+							<strong>▶ 잔나비 - 사랑하긴 했었나요 스쳐가는 인연이었나요 짧지않은 우리 함께했던 시간들이 자꾸 내 마음을 가둬두네</strong>
+						</div></a>	
+					<li class="item"><a href=https://youtu.be/5lQrf60gxNI target="_blank">
+					<div class="thumbnail">
+							<img src="song2.png">
+						</div>
+						<div class="description">
+							<strong>▶ 백아 - 첫사랑</strong></div></a>
+					<li class="item"><a href=https://youtu.be/ckJlE2G4LQ4 target="_blank">
+					<div class="thumbnail">
+							<img src="song3.png">
+						</div>
+						<div class="description">
+							<strong>▶ DK(디셈버) - 심</strong></div></a>
+					<li class="item"><a href=https://youtu.be/Hm-yT5Mj64g target="_blank">
+					<div class="thumbnail">
+							<img src="song4.png">
+						</div>
+						<div class="description">
+							<strong>▶ 더 네임 - 그녀를 찾아주세요</strong></div></a>
+					<li class="item"><a href=https://youtu.be/sVTy_wmn5SU target="_blank">
+					<div class="thumbnail">
+							<img src="song5.png">
+						</div>
+						<div class="description">
+							<strong>▶ 뉴진스 - OMG</strong></div></a>
+				</ul>
+			</div>
+			<div class=tab-item>
+				<ul>
+					<li class="item"><a href=http://www.cgv.co.kr/movies/detail-view/?midx=86815 target="_blank">
+					<div class="thumbnail">
+							<img src="http://placehold.it/45x45">
+						</div>
+						<div class="description">
+							<strong>▶ 스즈메의 문단속</strong></div></a>
+					<li class="item"><a href=http://www.cgv.co.kr/movies/detail-view/?midx=86826 target="_blank">
+					<div class="thumbnail">
+							<img src="http://placehold.it/45x45">
+						</div>
+						<div class="description">
+							<strong>▶ 귀멸의 칼날 상현집결 그리고 도공마을로</strong></div></a>
+					<li class="item"><a href=http://www.cgv.co.kr/movies/detail-view/?midx=86720 taret="_blank">
+					<div class="thumbnail">
+							<img src="http://placehold.it/45x45">
+						</div>
+						<div class="description">
+							<strong>▶ 더 퍼스트 슬램덩크</strong></div></a>
+					<li class="item"><a href=http://www.cgv.co.kr/movies/detail-view/?midx=86823 target="_blank">
+					<div class="thumbnail">
+							<img src="http://placehold.it/45x45">
+						</div>
+						<div class="description">
+							<strong>▶ 웅남이</strong></div></a>
+					<li class="item"><a href=http://www.cgv.co.kr/movies/detail-view/?midx=86909 target="_blank">
+					<div class="thumbnail">
+							<img src="http://placehold.it/45x45">
+						</div>
+						<div class="description">
+							<strong>▶ 존 윅4</strong></div></a>
+				</ul>
+			</div>	
+						
+		</aside>
+	</div>
+	<footer></footer>
