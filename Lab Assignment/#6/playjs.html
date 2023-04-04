@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <html>
 <head>
 
@@ -6,8 +7,8 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Alkatra&display=swap" rel="stylesheet">
 	<link type="text/css"rel="stylesheet"href="playjs.css">
-
-
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+	<script src="playjs.js"></script>
 </head>
 <body>
 	<header>
@@ -27,6 +28,18 @@
 	</header>
 	<div id="content">
 		Put contents here.
+		<div class="lab">
+			<h3>덧셈 계산기</h3>
+			<form name="myform">
+				첫번째 정수:
+				<input id="x"/><br/>
+				두번째 정수:
+				<input id="y"/><br/>
+				합계:
+				<input id="sum"/><br/>
+				<input type="button" value="계산" onclick="calc();"/>
+			</form>
+		</div>
 	</div>
 	<footer>
 		<p>Web Programming, Spring 2023</p>
