@@ -43,3 +43,10 @@ footer>p{
 	border:1px solid black;
 	margin-top:10px;
 }
+.lab .level{
+	background-color:bisque;
+}
+.lab tr{
+	
+	text-align:center;
+}
