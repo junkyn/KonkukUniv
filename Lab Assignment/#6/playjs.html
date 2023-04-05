@@ -58,9 +58,20 @@
 							document.write("</tr>")
 						}
 					</script>
-
-
 			</table>
+			<h3>숫자 맞추기 게임</h3>
+			<p>이 게임은 컴퓨터가 생성한 숫자를 맞추는 게임입니다.<br>
+			숫자는 1부터 100 사이에 있습니다.</p><br>
+			<form>
+				숫자:
+				<input type="text" id="user" size="5">
+				<input type="button" value="확인" onclick="guess()";>
+				<br><br>
+				추측횟수:
+				<input type="text" id="guesses" size="5">
+				힌트:
+				<input type="text" id="result" size="16">
+			</form>
 		</div>
 
 
