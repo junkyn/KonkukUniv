@@ -27,7 +27,6 @@ int srch(int x) {
 void dlte(int x) {
 	for (int i = lef;i < S - 1; i++)
 		A[i] = A[i+1];
-	A[rig] = x;
 	S--;
 }
 
@@ -71,7 +70,7 @@ int main() {
 			}
 		}
 		else if (c == 'q') {
-			cout << "Delete\n" << endl;
+			break;
 		}
 		else {
 			cout << "???\n";

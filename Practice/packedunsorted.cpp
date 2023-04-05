@@ -58,7 +58,7 @@ int main() {
 			}
 		}
 		else if (c == 'q') {
-			cout << "Delete\n" << endl;
+			break;
 		}
 		else {
 			cout << "???\n";
