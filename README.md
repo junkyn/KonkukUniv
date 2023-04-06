@@ -10,7 +10,7 @@
 - [201911277 장세현](https://github.com/nofeboy)
 
 <p align="center">
-사용흐름도
+# 사용흐름도
 </p>
 
 ![사용흐름도-1](https://user-images.githubusercontent.com/122720798/230251596-0d853149-180f-412c-80a5-1b584cb0c554.png)
