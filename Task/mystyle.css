@@ -91,7 +91,7 @@ header div{
     top:100px;
     left:30px;
     font-size:60px;
-    animation : rotation 1s 0s infinite alternate;
+    animation : rotation 2.5s linear infinite alternate;
 
 }
 #name{
@@ -108,6 +108,35 @@ header div:hover{
     height:1000px;
     background-color:burlywood;
 
+}
+#friendpage{
+    font-size:0px;
+    display:block;
+    text-align:center;
+    width: 100%;
+    height:1000px;
+    background-color:burlywood;
+}
+#placepage{
+    font-size:0px;
+    display:block;
+    text-align:center;
+    width: 100%;
+    height:1000px;
+    background-color:burlywood;
+
+}
+#descpage{
+    font-size:0px;
+    display:block;
+    text-align:center;
+    width: 100%;
+    height:1000px;
+    background-color:burlywood;
+
+}
+#friendimg{
+    padding:50px;
 }
 #myimg{
     padding:50px;
@@ -129,5 +158,5 @@ header div:hover{
 }
 @keyframes rotation{
     from{transform:rotateY(0deg);}
-    to{transform:rotateY(180deg);}
+    to{transform:rotateY(360deg);}
 }
