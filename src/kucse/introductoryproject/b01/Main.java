@@ -1,4 +1,4 @@
-package kucse.introductoryprojrct.b01;
+package kucse.introductoryproject.b01;
 
 public class Main {
     public static void main(String[] args) {
