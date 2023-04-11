@@ -3,29 +3,63 @@ body{margin:0 auto;}
 #everything{
     width:100%;
 }
+
 li{list-style:none;}
 a{text-decoration:none;}
 img{border:0;}
-header{ width:100%; height:50px; 
+header{ 
+        width:100%; height:50px; 
         background-color:rgb(122, 147, 255,0.3);
 		position:fixed; top:0; 
         padding: 0 30px 0 10px;font-family: 'Dokdo', cursive;
+        z-index:100;
     }
-header div{
+header label{
     width:16%;
     height:45px;
-    border:0px solid;
     line-height:45px;
     border-radius: 10%;
     font-size:300%;
     text-align:center;
     float:right;
     text-overflow:ellipsis;
+
     color:whitesmoke;
 }
-header div a{
-    color:whitesmoke;
+label:hover{
+    background-color:skyblue;
 }
+input:nth-of-type(1){display:none;}
+input:nth-of-type(1)~.tab-item:nth-of-type(1){display:none;}
+input:nth-of-type(1):checked~.tab-item:nth-of-type(1){display:block;}
+input:nth-of-type(1):checked ~header>label:nth-of-type(1) {
+    background-color: skyblue;
+ }
+ input:nth-of-type(2){display:none;}
+input:nth-of-type(2)~.tab-item:nth-of-type(2){display:none;}
+input:nth-of-type(2):checked~.tab-item:nth-of-type(2){display:block;}
+input:nth-of-type(2):checked ~header>label:nth-of-type(5) {
+    background-color: skyblue;
+ }
+ input:nth-of-type(3){display:none;}
+input:nth-of-type(3)~.tab-item:nth-of-type(3){display:none;}
+input:nth-of-type(3):checked~.tab-item:nth-of-type(3){display:block;}
+input:nth-of-type(3):checked ~header>label:nth-of-type(4) {
+    background-color: skyblue;
+ }
+ input:nth-of-type(4){display:none;}
+input:nth-of-type(4)~.tab-item:nth-of-type(4){display:none;}
+input:nth-of-type(4):checked~.tab-item:nth-of-type(4){display:block;}
+input:nth-of-type(4):checked ~header>label:nth-of-type(3) {
+    background-color: skyblue;
+ }
+ input:nth-of-type(5){display:none;}
+input:nth-of-type(5)~.tab-item:nth-of-type(5){display:none;}
+input:nth-of-type(5):checked~.tab-item:nth-of-type(5){display:block;}
+input:nth-of-type(5):checked ~header>label:nth-of-type(2) {
+    background-color: skyblue;
+ }
+
 footer{
     font-family: 'Dokdo', cursive;
     font-size:23px;
@@ -89,7 +123,6 @@ footer{
 }
 #main{
     float:left;
-    margin-right:200px;
 }
 #hello{
     width:200px;
@@ -112,12 +145,9 @@ footer{
 #name{
     font-family: 'Nanum Brush Script', cursive;
 }
-header div:hover{
-    background-color:skyblue;
-}
+
 #mainmypage{
     font-size:0px;
-    display:block;
     text-align:center;
     width: 100%;
     height:720px;
@@ -127,7 +157,6 @@ header div:hover{
 }
 #friendpage{
     font-size:0px;
-    display:block;
     text-align:center;
     width: 100%;
     height:720px;
@@ -136,7 +165,6 @@ header div:hover{
 }
 #placepage{
     font-size:0px;
-    display:block;
     text-align:center;
     width: 100%;
     height:720px;
@@ -146,7 +174,6 @@ header div:hover{
 #descpage{
     padding-top:50px;
     font-size:0px;
-    display:block;
     text-align:center;
     width: 100%;
     height:720px;

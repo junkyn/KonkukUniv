@@ -11,7 +11,20 @@
 
     </head>
     <body>
-            <section id="title">
+        <input id="titlelink" type="radio" name="tab-item" checked="checked">
+        <input id="melink" type="radio" name="tab-item">
+        <input id="friendlink" type="radio" name="tab-item">
+        <input id="placelink" type="radio" name="tab-item">
+        <input id="visitlink" type="radio" name="tab-item">
+        <header id="menu">
+
+            <label for="titlelink" id="main">메인 화면</label>
+            <label for="visitlink">어떻게 가느냐,,</label>
+            <label for="placelink">좋은 장소,,</label>
+            <label for="friendlink">벗,,</label>
+            <label for="melink">나란놈,,</label>
+        </header>
+            <section id="title" class="tab-item">
                 <div id="title_image">
                     <img src="titleimg.jpg">
                     <div id="TextField">
@@ -32,27 +45,8 @@
                 </div>
     
             </section>
-            <header id="menu">
-                <div id="main">
-                    <a href="#title">202211389</a>
-                </div>
-                <div id="howtogo">
-                    <a href="#descpage">어떻게가느냐,,</a>
-                </div>
-                <div id="place">
-                    <a href="#placepage">좋은 장소,,</a>
-                </div>
-                <div id="mate">
-                    <a href="#friendpage">벗,,</a>
-                </div>
-                <div id="mypage">
-                    <a href="#mainmypage">나란놈,,</a>
-                </div>
-    
-    
-    
-            </header>
-            <section id="mainmypage">
+
+            <section id="mainmypage" class="tab-item">
                 <div id="myimg"><img src="itsme.png"><div id="mypagecontent">
                     <p class="content">안녕하신감, 나는 건국대학교 컴퓨타공학부에 재학중인 최준규라고 하네,,😁
                     <br>꽃다운 스물둘의 나이로 하루하루를 감사하게 살아가고 있어.
@@ -64,7 +58,7 @@
                     <div id="answer" class="content">정답은 호바이트라네! hob'bit'이 8명이면 </br>hob'byte'가 되는 고급 유우머랄까 핫하하</div>
                 </div></div>
             </section>
-            <section id="friendpage">
+            <section id="friendpage" class="tab-item">
                 <div id="friendimg"><img src="question1.jpg"></div><div id="friendcontent">
 
 
@@ -96,7 +90,7 @@
                 <br>재밌는 시간이었던것 같어,,
                 </div>
             </section>
-            <section id="placepage">
+            <section id="placepage" class="tab-item">
                 <div id="placecontent">
                     <img src="intro1.jpg">
                     <p class="content">우리는 산책을 어디로 갈지 많은 곳을 알아봤지.
@@ -117,7 +111,7 @@
                     </p>
                 </div>
             </section>
-            <section id="descpage">
+            <section id="descpage" class="tab-item">
                 <div class="description">
                     <img  id="firstdesc" src="desc1.jpg">
                     <p class="content">장소 설명에서 말했다시피 어린이대공원은 <b>2️⃣7️⃣어린이대공원역</b>과<b>5️⃣아차산역</b>이 붙어있어
