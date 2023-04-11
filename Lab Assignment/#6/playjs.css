@@ -1,5 +1,5 @@
 *{margin:0; padding:0;}
-body{width:960px;margin:0 auto;}
+body{width:960px;margin:0 auto;font-family: 'Gamja Flower', cursive;}
 li{list-style:none;}
 a{text-decoration:none;}
 img{border:0;}
@@ -13,7 +13,16 @@ header{ width:900px; height:80px; background-color:#f6f9d4;
 	font-size:30px; font-weight:bold; 
 	}
 header>nav{height:40px;overflow:hidden;}
-#ctime{width:250px;height:36px;float:right; border:1px dashed orange; border-radius:15px;}
+#ctime{
+	width:250px;
+	height:36px;
+	float:right; 
+	border:1px dashed orange; 
+	border-radius:15px;
+	text-align : center;
+	font-family: 'Gamja Flower', cursive;
+	line-height:36px;
+}
 .main-menu{
 	display:block;
 	float:left;
@@ -49,4 +58,20 @@ footer>p{
 .lab tr{
 	
 	text-align:center;
+}
+#hangman{
+	text-align:center;
+	font-family: 'Gamja Flower', cursive;
+}
+#hangman button{
+	font-family: 'Gamja Flower', cursive;
+}
+#newgamearea {
+	margin-top:2em;
+}
+#clue,#guesstr{
+	font-family:monospace;
+	font-size:2em;
+	padding:1em;
+	font-family: 'Gamja Flower', cursive;
 }

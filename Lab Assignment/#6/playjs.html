@@ -8,6 +8,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Alkatra&display=swap" rel="stylesheet">
 	<link type="text/css"rel="stylesheet"href="playjs.css">
 	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
 	<script src="playjs.js"></script>
 </head>
 <body>
@@ -73,6 +74,22 @@
 				<input type="text" id="result" size="16">
 			</form>
 		</div>
+			<div id="hangman">
+				<div>
+					<img id="hangmanpic" src="hangman6.gif" alt="hangman"/>
+				</div>
+				<div id="clue">Press New Game to play!</div>
+				<div>
+					<input id="hguess" type="text" size="1" maxlength="1"/>
+					<button id="guessbutton" onclick="guessLetter();"
+						disabled="disabled">Guess</button>
+				</div>
+				<div id="newgamearea">
+					<button onclick="newGame()";>New Game</button>
+				</div>
+				<div id="guessstr"></div>
+			</div>
+
 
 
 	</div>
