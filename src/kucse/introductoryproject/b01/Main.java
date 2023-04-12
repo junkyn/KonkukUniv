@@ -1,7 +1,14 @@
 package kucse.introductoryproject.b01;
 
+import java.io.File;
+import java.util.HashSet;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello, world!");
+        HashSet<Contact> contactArrayList = Contact.parseContactsFromCSV(new File("dummyContacts.csv"));
+
+        for (Contact it : contactArrayList) {
+            System.out.println(it);
+        }
     }
 }
