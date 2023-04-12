@@ -1,11 +1,6 @@
 *{margin:0; padding:0;    overflow:hidden;}
 body{margin:0 auto;}
-#everything{
-    width:100%;
-}
 
-li{list-style:none;}
-a{text-decoration:none;}
 img{border:0;}
 header{ 
         width:100%; height:50px; 
@@ -25,6 +20,9 @@ header label{
     text-overflow:ellipsis;
 
     color:whitesmoke;
+}
+#main{
+    float:left;
 }
 label:hover{
     background-color:skyblue;
@@ -66,18 +64,13 @@ footer{
     color:white;
     position:fixed;
     bottom:0;
-    
 }
 #title{
     position:relative;
     font-size:0px;
-
-
 }
 #title_image{
     position: relative;
-    
-    
 }
 #title_image>img{
     width:100%;
@@ -88,7 +81,6 @@ footer{
     right:10%;
     font-size:100px;
     color:white;
-
 }
 #TextEng{
     position:relative;
@@ -101,6 +93,15 @@ footer{
     top:0;
     right:-5%
 }
+.TitleEng{
+
+    font-family: 'Dancing Script', cursive;
+    color:rgb(173, 255, 164);
+}
+.TitleKor{
+    font-size:100px;
+    color:rgb(19, 189, 0);
+}
 #music{
     
     position:absolute;
@@ -111,18 +112,6 @@ footer{
     text-align:center;
     left:80%;
     
-}
-.TitleEng{
-
-    font-family: 'Dancing Script', cursive;
-    color:rgb(173, 255, 164);
-}
-.TitleKor{
-    font-size:100px;
-    color:rgb(19, 189, 0);
-}
-#main{
-    float:left;
 }
 #hello{
     width:200px;
@@ -140,20 +129,13 @@ footer{
     left:30px;
     font-size:60px;
     animation : rotation 2.5s linear infinite alternate;
-
 }
-#name{
-    font-family: 'Nanum Brush Script', cursive;
-}
-
 #mainmypage{
     font-size:0px;
     text-align:center;
     width: 100%;
     height:720px;
     background-color:burlywood;
-
-
 }
 #friendpage{
     font-size:0px;
@@ -181,12 +163,8 @@ footer{
     overflow-y:auto;
 }
 
-#firstplaceimg{
-    padding:50px 0 0 0;
-}
-.description{
-    margin-bottom: 10px;
-}
+
+
 #descpage img{
     width:500px;
     height:500px;
@@ -197,10 +175,11 @@ footer{
     margin-top:50px;
     margin-bottom:50px;
 }
-.pclassindesc{
-    height:300px;
-}
+
 #placecontent{
+    padding:50px 0 0 0;
+}
+#firstplaceimg{
     padding:50px 0 0 0;
 }
 #friendimg{
