@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d444d2f4-7998-42d9-85ad-154bef6933d1" name="Changes" comment="Feat: UserInfo Class 추가">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+    <list default="true" id="d444d2f4-7998-42d9-85ad-154bef6933d1" name="Changes" comment="Feat: parseContactsFromCSV 메서드 구현">
       <change afterPath="$PROJECT_DIR$/dummyUserData.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dummyContacts.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kucse/introductoryproject/b01/Contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kucse/introductoryproject/b01/Contact.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kucse/introductoryproject/b01/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kucse/introductoryproject/b01/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kucse/introductoryproject/b01/UserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kucse/introductoryproject/b01/UserInfo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +49,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.kucse.introductoryproject.b01.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="kucse.introductoryprojrct.b01.Main" />
@@ -94,7 +97,7 @@
       <option name="presentableId" value="Default" />
       <updated>1678353008016</updated>
       <workItem from="1678353008828" duration="1000" />
-      <workItem from="1681308767202" duration="1738000" />
+      <workItem from="1681308767202" duration="2586000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: Contact Class 추가">
       <created>1681310623781</created>
@@ -110,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681310723618</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Feat: parseContactsFromCSV 메서드 구현">
+      <created>1681311876267</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1681311876267</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -119,6 +129,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Feat: Contact Class 추가" />
     <MESSAGE value="Feat: UserInfo Class 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat: UserInfo Class 추가" />
+    <MESSAGE value="Feat: parseContactsFromCSV 메서드 구현" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat: parseContactsFromCSV 메서드 구현" />
   </component>
 </project>
