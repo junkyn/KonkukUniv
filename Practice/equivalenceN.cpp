@@ -2,7 +2,7 @@
 #include <cstdio>
 #include <vector>
 #include <time.h>
-//O(n) , Use Stack,Vector DFS
+//O(n+m) , Use Stack,Vector DFS
 using namespace std;
 
 int n, m;
@@ -21,15 +21,15 @@ int Pop() {
 int isEmpty() {
 	return (SP == 0);
 }
-void SetLink(int x, int y) { // ¿¬°á~
-	MAP[x].push_back(y); // º¤ÅÍ x¿¡ y³ÖÀ½
+void SetLink(int x, int y) { // ì—°ê²°~
+	MAP[x].push_back(y); // ë²¡í„° xì— yë„£ìŒ
 	return;
 }
 int LastForward[1000];
-int NextForward(int x) { // x³ëµå¿Í ¿¬°áµÈ ³ëµå Ã£À½ xº¤ÅÍ¿¡¼­~
-	LastForward[x]++; // LastForward´Â -1ºÎÅÍ ½ÃÀÛÇÏ¹Ç·Î 0ºÎÅÍ~
-	if (LastForward[x] < MAP[x].size()) // size´Â ¿¬°áµÈ ¼ö´Ï±î
-		return MAP[x][LastForward[x]]; // º¤ÅÍ¶û ¹è¿­ ¸®ÅÏ»ç¿ë¹ıÀº °°À½. 
+int NextForward(int x) { // xë…¸ë“œì™€ ì—°ê²°ëœ ë…¸ë“œ ì°¾ìŒ xë²¡í„°ì—ì„œ~
+	LastForward[x]++; // LastForwardëŠ” -1ë¶€í„° ì‹œì‘í•˜ë¯€ë¡œ 0ë¶€í„°~
+	if (LastForward[x] < MAP[x].size()) // sizeëŠ” ì—°ê²°ëœ ìˆ˜ë‹ˆê¹Œ
+		return MAP[x][LastForward[x]]; // ë²¡í„°ë‘ ë°°ì—´ ë¦¬í„´ì‚¬ìš©ë²•ì€ ê°™ìŒ. 
 	else
 		return -1;
 
@@ -44,7 +44,7 @@ void Mark(int x) {
 int NextStart() {
 	LastStart++;
 	while (LastStart <= n) {
-		if (Visited[LastStart] == 0) // 1ºÎÅÍ ¿Ã¶ó°¡¼­ ¹æ¹®¾ÈÇÑ ³ëµå Å½»ö
+		if (Visited[LastStart] == 0) // 1ë¶€í„° ì˜¬ë¼ê°€ì„œ ë°©ë¬¸ì•ˆí•œ ë…¸ë“œ íƒìƒ‰
 			return LastStart;
 		else
 			LastStart++;
@@ -55,32 +55,32 @@ int main() {
 
 	int i, x, y, cur, s;
 	scanf("%d %d", &n, &m);
-	for (int i = 0; i < 1000; i++)LastForward[i] = -1; //º¤ÅÍÀÇ ½ÃÀÛÀº 0ÀÌ¹Ç·Î -1·Î ¸¸µé¾îÁÜ
+	for (int i = 0; i < 1000; i++)LastForward[i] = -1; //ë²¡í„°ì˜ ì‹œì‘ì€ 0ì´ë¯€ë¡œ -1ë¡œ ë§Œë“¤ì–´ì¤Œ
 	for (i = 0; i < m; i++) {
 		scanf("%d %d", &x, &y);
 		SetLink(x, y);
 		SetLink(y, x);
 	}
 
-	while ((cur = NextStart()) != -1) { // ¹æ¹®ÇÏÁö ¾ÊÀº ³ëµå Å½»ö
-		printf("%d", cur); // ¹æ¹®¾ÈÇÑ ³ëµå°¡ ÇöÀç³ëµå´Ï±î Ãâ·Â
-		Mark(cur); // ¹æ¹®Çß´Ù°í ¸¶Å©
+	while ((cur = NextStart()) != -1) { // ë°©ë¬¸í•˜ì§€ ì•Šì€ ë…¸ë“œ íƒìƒ‰
+		printf("%d", cur); // ë°©ë¬¸ì•ˆí•œ ë…¸ë“œê°€ í˜„ì¬ë…¸ë“œë‹ˆê¹Œ ì¶œë ¥
+		Mark(cur); // ë°©ë¬¸í–ˆë‹¤ê³  ë§ˆí¬
 		while (1) {
-			if ((s = NextForward(cur)) != -1) { // ³ëµå ±âÁØÀ¸·Î ¿¬°áµÈ ³ëµå Å½»ö
-				if (isMarked(s) == 0) { // ±× ¿¬°áµÈ ³ëµå¸¦ ¹æ¹®Çß´Â°¡?
-					printf(" %d", s); Mark(s); // ¹æ¹®¾ÈÇßÀ¸¸é Ãâ·Â, ¹æ¹®Çß´Ù°í ¸¶Å©
-					Push(cur); // ½ºÅÃ¿¡ ³Ö±â
-					cur = s; // ¹æ¹®ÇÑ ³ëµå¸¦ ´Ù½Ã ÇöÀç³ëµå·Î
+			if ((s = NextForward(cur)) != -1) { // ë…¸ë“œ ê¸°ì¤€ìœ¼ë¡œ ì—°ê²°ëœ ë…¸ë“œ íƒìƒ‰
+				if (isMarked(s) == 0) { // ê·¸ ì—°ê²°ëœ ë…¸ë“œë¥¼ ë°©ë¬¸í–ˆëŠ”ê°€?
+					printf(" %d", s); Mark(s); // ë°©ë¬¸ì•ˆí–ˆìœ¼ë©´ ì¶œë ¥, ë°©ë¬¸í–ˆë‹¤ê³  ë§ˆí¬
+					Push(cur); // ìŠ¤íƒì— ë„£ê¸°
+					cur = s; // ë°©ë¬¸í•œ ë…¸ë“œë¥¼ ë‹¤ì‹œ í˜„ì¬ë…¸ë“œë¡œ
 				}
 				else {
 
 				}
 			}
-			else { // ¿¬°áµÈ ³ëµå°¡ ¾ø´Ù
-				if (isEmpty() == 1) // ½ºÅÃµµ ºñ¾ú³ª?
-					break; // ºñ¾úÀ¸¸é break;
+			else { // ì—°ê²°ëœ ë…¸ë“œê°€ ì—†ë‹¤
+				if (isEmpty() == 1) // ìŠ¤íƒë„ ë¹„ì—ˆë‚˜?
+					break; // ë¹„ì—ˆìœ¼ë©´ break;
 				else
-					cur = Pop(); // ½ºÅÃ¿¡¼­ ÆË (ÀÌÀü ³ëµå·Î ÀÌµ¿)
+					cur = Pop(); // ìŠ¤íƒì—ì„œ íŒ (ì´ì „ ë…¸ë“œë¡œ ì´ë™)
 			}
 		}
 		printf("\n");
