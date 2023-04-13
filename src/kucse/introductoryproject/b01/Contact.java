@@ -29,7 +29,13 @@ public class Contact {
                 String str = fileScanner.nextLine();
                 String[] contactInfo = str.split("\t");
 
-                contactList.add(new Contact(contactInfo[0].trim(), contactInfo[1].trim(), contactInfo[2].trim(), contactInfo[3].trim(), contactInfo[4].trim()));
+                String name = contactInfo[0].trim();
+                String phone = contactInfo[1].trim();
+                String address = contactInfo.length < 3 ? "" : contactInfo[2].trim();
+                String birthday = contactInfo.length < 4 ? "" : contactInfo[3].trim();
+                String memo = contactInfo.length < 5 ? "" : contactInfo[4].trim();
+
+                contactList.add(new Contact(name, phone, address, birthday, memo));
             }
 
         } catch (FileNotFoundException e) {
