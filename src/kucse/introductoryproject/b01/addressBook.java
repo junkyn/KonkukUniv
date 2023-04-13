@@ -72,7 +72,7 @@ public class addressBook {
         contactSet.add(new Contact(sameName(name),phone,address,birthday,memo));
     }
 
-    public void viewAddressBook(){
+    public void viewAddressBook(){ // view
         List<Contact> list = new ArrayList<>(contactSet);
         int maxpage = (list.size()-1)/10+1;
         if(list.isEmpty()){
@@ -90,7 +90,7 @@ public class addressBook {
             System.out.println("--------(1/"+maxpage+")--------");
         }
     }
-    public void viewAddressBook(int page){
+    public void viewAddressBook(int page){ // view (page)
         List<Contact> list = new ArrayList<>(contactSet);
         int maxpage = (list.size()-1)/10+1;
         if(list.isEmpty()){
