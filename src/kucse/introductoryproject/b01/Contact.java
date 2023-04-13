@@ -60,4 +60,8 @@ public class Contact {
                 ", memo='" + memo + '\'' +
                 '}';
     }
+
+    public String toCsv() {
+        return name + "\t" + phone + "\t" + address + "\t" + birthday + "\t" + memo + "\n";
+    }
 }
