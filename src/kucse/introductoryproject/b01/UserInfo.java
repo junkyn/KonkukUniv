@@ -31,7 +31,14 @@ public class UserInfo {
                 String str = fileScanner.nextLine();
                 String[] userInfo = str.split("\t");
 
-                userInfoHashMap.put(userInfo[0].trim(), new UserInfo(userInfo[0].trim(), userInfo[1].trim(), userInfo[2].trim(), userInfo[3].trim(), userInfo[4].trim(), userInfo[5].trim()));
+                String id = userInfo[0].trim();
+                String password = userInfo[1].trim();
+                String name = userInfo[2].trim();
+                String phone = userInfo[3].trim();
+                String address = userInfo.length < 5 ? "" : userInfo[4].trim();
+                String birthday = userInfo.length < 6 ? "" : userInfo[5].trim();
+
+                userInfoHashMap.put(id, new UserInfo(id, password, name, phone, address, birthday));
             }
 
         } catch (FileNotFoundException e) {
