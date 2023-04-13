@@ -4,23 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d444d2f4-7998-42d9-85ad-154bef6933d1" name="Changes" comment="Feat: parseContactsFromCSV 메서드 구현">
-      <change afterPath="$PROJECT_DIR$/dummyUserData.csv" afterDir="false" />
+    <list default="true" id="d444d2f4-7998-42d9-85ad-154bef6933d1" name="Changes" comment="패키지 이름 변경">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kucse/introductoryproject/b01/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kucse/introductoryproject/b01/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kucse/introductoryproject/b01/UserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kucse/introductoryproject/b01/UserInfo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -38,25 +28,15 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
+    "last_opened_file_path": "C:/Users/wnsrb/eclipse-workspace/javaclass/kujava/src/JavaTask2",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.kucse.introductoryproject.b01.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="kucse.introductoryprojrct.b01.Main" />
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="kucse.introductoryproject.b01.Main" />
       <module name="Introductory Project" />
       <extension name="coverage">
         <pattern>
@@ -68,22 +48,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="kucse.introductoryproject.b01.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="kucse.introductoryproject.b01.Main" />
-      <module name="Introductory Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="kucse.introductoryproject.b01.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.kucse.introductoryproject.b01.Main" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -97,39 +63,7 @@
       <option name="presentableId" value="Default" />
       <updated>1678353008016</updated>
       <workItem from="1678353008828" duration="1000" />
-      <workItem from="1681308767202" duration="2586000" />
     </task>
-    <task id="LOCAL-00001" summary="Feat: Contact Class 추가">
-      <created>1681310623781</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1681310623781</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Feat: UserInfo Class 추가">
-      <created>1681310723618</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1681310723618</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Feat: parseContactsFromCSV 메서드 구현">
-      <created>1681311876267</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1681311876267</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Feat: Contact Class 추가" />
-    <MESSAGE value="Feat: UserInfo Class 추가" />
-    <MESSAGE value="Feat: parseContactsFromCSV 메서드 구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat: parseContactsFromCSV 메서드 구현" />
   </component>
 </project>
