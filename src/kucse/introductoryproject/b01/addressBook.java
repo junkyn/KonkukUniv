@@ -1,11 +1,13 @@
 package kucse.introductoryproject.b01;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 
 public class addressBook {
-    private boolean isView = false;
+    private Contact OnContact;
     Scanner s = new Scanner(System.in);
 
     private HashSet<Contact> contactSet;
@@ -69,6 +71,47 @@ public class addressBook {
         }
         contactSet.add(new Contact(sameName(name),phone,address,birthday,memo));
     }
+
+    public void viewAddressBook(){
+        List<Contact> list = new ArrayList<>(contactSet);
+        int maxpage = (list.size()-1)/10+1;
+        if(list.isEmpty()){
+            System.out.println("주소록이 비어있습니다");
+        }
+        else{
+            System.out.println("---------------------");
+            for(int i = 0;i<10;i++){
+                if(list.get(i)==null)
+                    break;
+                else{
+                    System.out.println(list.get(i));
+                }
+            }
+            System.out.println("--------(1/"+maxpage+")--------");
+        }
+    }
+    public void viewAddressBook(int page){
+        List<Contact> list = new ArrayList<>(contactSet);
+        int maxpage = (list.size()-1)/10+1;
+        if(list.isEmpty()){
+            System.out.println("주소록이 비어있습니다");
+        }
+        else if(maxpage<page){
+            System.out.println("존재하지 않는 페이지 입니다");
+        }
+        else{
+            System.out.println("---------------------");
+            for(int i = (page-1)*10;i<(page-1)*10+10;i++){
+                if(list.get(i)==null)
+                    break;
+                else{
+                    System.out.println(list.get(i));
+                }
+            }
+            System.out.println("--------("+page+"/"+maxpage+")--------");
+        }
+    }
+
     private boolean isInteger(String s){ // 정수로만 이뤄졌는지 체크
         try{
             Integer.parseInt(s);
