@@ -8,9 +8,9 @@ public class addressBook {
     private boolean isView = false;
     Scanner s = new Scanner(System.in);
 
-    private HashSet<Contact> contactArrayList;
+    private HashSet<Contact> contactSet;
     public addressBook(String userName){
-        contactArrayList = Contact.parseContactsFromCSV(new File(userName+".csv"));
+        contactSet = Contact.parseContactsFromCSV(new File(userName+".csv"));
 
     }
     public void addContact(){
@@ -29,14 +29,73 @@ public class addressBook {
             else
                 break;
         }
-
+        while(true){
+            System.out.println("전화번호를 입력하세요");
+            System.out.print(">");
+            phone=s.nextLine();
+            if(phone.equals("\n"))
+                System.out.println("전화번호는 필수 입력입니다");
+            else if(phone.contains("\t"))
+                System.out.println("탭(tab)은 사용하실 수 없습니다");
+            else if(isDuplicated(phone)){
+                System.out.println("이미 존재하는 전화번호입니다");
+            }
+            else
+                break;
+        }
+        while(true){
+            System.out.println("주소를 입력하세요");
+            System.out.print(">");
+            address=s.nextLine();
+            if(address.contains("\t"))
+                System.out.println("탭(tab)은 사용하실 수 없습니다");
+            else break;
+        }
+        while(true){
+            System.out.println("생년월일을 입력하세요");
+            System.out.print(">");
+            birthday=s.nextLine();
+            if(birthday.contains("\t"))
+                System.out.println("탭(tab)은 사용하실 수 없습니다");
+            else break;
+        }
+        while(true){
+            System.out.println("메모를 입력하세요");
+            System.out.print(">");
+            memo=s.nextLine();
+            if(memo.contains("\t"))
+                System.out.println("탭(tab)은 사용하실 수 없습니다");
+            else break;
+        }
+        contactSet.add(new Contact(sameName(name),phone,address,birthday,memo));
     }
-    private boolean isInteger(String s){
+    private boolean isInteger(String s){ // 정수로만 이뤄졌는지 체크
         try{
             Integer.parseInt(s);
             return true;
         }catch(NumberFormatException e){
             return false;
         }
+    }
+    private boolean isDuplicated(String n){ // 중복 전화번호
+        for(Contact c : contactSet){
+            if(exportInt(c.getPhone()).equals(exportInt(n)))
+                return true;
+        }
+        return false;
+    }
+    private String exportInt(String s){ // 정수만 추출
+        return s.replaceAll("[^0-9]","");
+    }
+    private String sameName(String n){ // 동명이인 체크
+        int count=0;
+        for(Contact c : contactSet){
+            if(c.getName().equals(n))
+                count++;
+        }
+        if(count==0)
+            return n;
+        else
+            return n+"("+count+")";
     }
 }

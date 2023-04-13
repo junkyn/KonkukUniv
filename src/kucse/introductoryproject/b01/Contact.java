@@ -44,7 +44,12 @@ public class Contact {
 
         return contactList;
     }
-
+    public String getPhone(){
+        return this.phone;
+    }
+    public String getName(){
+        return this.name;
+    }
     @Override
     public String toString() {
         return "Contact{" +
