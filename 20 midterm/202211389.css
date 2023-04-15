@@ -1,0 +1,104 @@
+*{
+    margin : 0;
+    padding : 0;
+    font-family:serif;
+    
+}
+li{
+    list-style:none;
+}
+a{text-decoration:none;}
+img{border:0};
+
+body{
+    width:960px;
+    text-align:center;
+}
+section > div{
+    float:left;
+}
+#left{
+    width:200px;
+    height: 800px;
+    background-color:green;
+
+}
+#quick-menu{
+    width:100px;
+    height:100px;
+    background-color:rgb(256,256,256,0.3);
+    border-radius:15px;
+    margin:0 0 0 30px;
+    padding: 20px;
+    position:fixed;
+    top:40%;
+    text-align:center;
+}
+#right{
+    width:760px;
+}
+#header{
+    position:relative;
+    width:760px;height:150px;
+    background-color:#C9C9C9;
+}
+#title{
+    font-family:'Indie Flower',normal;
+    width:300px;
+    height:100px;
+    position:absolute;
+    top:25px;right:100px;
+    font-size:25px;
+    text-align:center;
+    line-height:100px;
+}
+nav{
+    width:760px;height:50px;
+    background-color:orange;
+}
+#content{
+    width:660px;height:500px;
+    background-color:yellow;
+    padding:50px;
+}
+footer{
+
+    width:960px;
+    height:100px;
+    clear: both;
+    background-color: blue;
+    color:white;
+    text-align:center;
+    line-height:100px;
+}
+.menu-item{
+    display:block;width:100px;height:50px;margin:0 70px;
+    text-align:center;line-height:50px;float:left;
+}
+.qmenu-item{
+    display:block; width:100px;height:30px;text-align:center;
+    line-height:30px;
+}
+.article{
+    width:610;height:450px;
+    padding:50px;
+    border:1px;
+    border-radius:15px;
+}
+.story1img{
+    width:250px;
+}
+input:nth-of-type(1){display:none;}
+input:nth-of-type(1)~#right>#content>.article:nth-of-type(1){display:none;}
+input:nth-of-type(1):checked~#right>#content>.article:nth-of-type(1){display:block;}
+input:nth-of-type(1):checked~#right>nav>label.menu-item:nth-of-type(1){background-color:blue;color:white;}
+    
+input:nth-of-type(2){display:none;}
+input:nth-of-type(2)~#right>#content>.article:nth-of-type(2){display:none;}
+input:nth-of-type(2):checked~#right>#content>.article:nth-of-type(2){display:block;}
+input:nth-of-type(2):checked~#right>nav>label.menu-item:nth-of-type(2){background-color:blue;color:white;}
+
+input:nth-of-type(3){display:none;}
+input:nth-of-type(3)~#right>#content>.article:nth-of-type(3){display:none;}
+input:nth-of-type(3):checked~#right>#content>.article:nth-of-type(3){display:block;}
+input:nth-of-type(3):checked~#right>nav>label.menu-item:nth-of-type(3){background-color:blue;color:white;}
