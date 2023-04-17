@@ -48,8 +48,6 @@ nav{
     height:420px;
     padding:50px;
     background-color:#ecebed;
-    display:flex;
-    align-items:center;
 }
 section{
     float:left;
@@ -93,7 +91,7 @@ footer{
     height:80px;
 }
 .story{
-    width:660px;
+    width:620px;
     height:380px;
     border-style:solid;
     border-width:1px;
@@ -101,7 +99,7 @@ footer{
     border-radius:15px;
     padding:20px;
     font-size:50px;
-    margin:auto;
+    margin: auto;
 }
 .qmenu{
     display:inline-block;
