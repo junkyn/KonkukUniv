@@ -30,7 +30,7 @@ public class CsvUtil {
         }
     }
 
-    public static void closeStatisticWriterStream() {
+    public static void closeWriterStream() {
         try {
             fileWriter.close();
         } catch (IOException e) {

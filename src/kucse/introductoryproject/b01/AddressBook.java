@@ -6,12 +6,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
-public class addressBook {
+public class AddressBook {
     private Contact OnContact;
     Scanner s = new Scanner(System.in);
 
     private HashSet<Contact> contactSet;
-    public addressBook(String userName){
+    public AddressBook(String userName){
         contactSet = Contact.parseContactsFromCSV(new File(userName+".csv"));
 
     }
