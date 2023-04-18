@@ -13,12 +13,64 @@ public class Contact {
     private String birthday;
     private String memo;
 
+    public Contact() {
+
+    }
     public Contact(String name, String phone, String address, String birthday, String memo) {
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.birthday = birthday;
         this.memo = memo;
+    }
+
+    public boolean setName(String name) {
+        if (name.isBlank())
+            System.out.println("이름은 필수 입력입니다");
+        else if (name.chars().allMatch(Character::isDigit))
+            System.out.println("정수로만 이루어진 이름은 사용할 수 없습니다");
+        else if (name.contains("\t"))
+            System.out.println("탭(tab)은 사용하실 수 없습니다");
+        else {
+            this.name = name;
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean setPhone(String phone) {
+        this.phone = phone;
+
+        return true;
+    }
+
+    public boolean setAddress(String address) {
+        if(address.contains("\t"))
+            System.out.println("탭(tab)은 사용하실 수 없습니다");
+        else {
+            this.address = address;
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean setBirthday(String birthday) {
+        if(address.contains("\t"))
+            System.out.println("탭(tab)은 사용하실 수 없습니다");
+        else {
+            this.birthday = birthday;
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean setMemo(String memo) {
+        this.memo = memo;
+
+        return true;
     }
 
     public static HashSet<Contact> parseContactsFromCSV(File file) {

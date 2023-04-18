@@ -7,15 +7,19 @@ import java.util.HashSet;
 public class Main {
     static HashMap<String, UserInfo> userInfoHashMap = UserInfo.parseUserDataFromCSV(new File("dummyUserData.csv"));
     public static void main(String[] args) {
-        for (String key : userInfoHashMap.keySet()) {
-            System.out.println(key + " : " + userInfoHashMap.get(key));
-        }
+//        for (String key : userInfoHashMap.keySet()) {
+//            System.out.println(key + " : " + userInfoHashMap.get(key));
+//        }
+//
+//        HashSet<Contact> contactArrayList = Contact.parseContactsFromCSV(new File("dummyContacts.csv"));
+//
+//        for (Contact it : contactArrayList) {
+//            System.out.println(it);
+//        }
 
-        HashSet<Contact> contactArrayList = Contact.parseContactsFromCSV(new File("dummyContacts.csv"));
-
-        for (Contact it : contactArrayList) {
-            System.out.println(it);
-        }
+        AddressBook addressBook = new AddressBook("test");
+        addressBook.addContact();
+        addressBook.viewAddressBook();
     }
 
     public static UserInfo login(String id, String pw) {
