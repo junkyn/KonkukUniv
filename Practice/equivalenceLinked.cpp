@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <cstdio>
 //O(n+m) , Use Stack,linkedlist DFS
 using namespace std;
@@ -15,24 +15,24 @@ public:
 	Node* head;
 	Node* LastForward;
 };
-void List::Insert(int x) { // �����ϰ� ��带 �տ� ��� �߰�
+void List::Insert(int x) { // 간단하게 노드를 앞에 계속 추가
 	Node* c;
 	c = new Node;
 	c->a = x;
-	c->n = head; // ����� n�� ��带 ����Ű��
-	head = c; //�ٽ� ���� c���
+	c->n = head; // 노드의 n이 헤드를 가리키게
+	head = c; //다시 헤드는 c노드
 }
 int List::NextForward() {
 	if (head == NULL) 
 		return -1;
-	if (LastForward == NULL) // ó���̳�? 
-		LastForward = head;  // ����ֱ�
+	if (LastForward == NULL) // 처음이네? 
+		LastForward = head;  // 헤드주기
 	else
-		LastForward = LastForward->n; // ó���� �ƴϾ�? �׷� ������ 
-	if (LastForward == NULL) // �����Ű� ����?
-		return -1; // ��
+		LastForward = LastForward->n; // 처음이 아니야? 그럼 다음거 
+	if (LastForward == NULL) // 다음거가 없어?
+		return -1; // 끝
 	else
-		return LastForward->a; // ������ �� ������ ��ȯ
+		return LastForward->a; // 있으면 그 데이터 반환
 }
 int n, m;
 List MAP[1000];
@@ -50,8 +50,8 @@ int Pop() {
 int isEmpty() {
 	return (SP == 0);
 }
-void SetLink(int x, int y) { // ����~
-	MAP[x].Insert(y); // ���� x�� y����
+void SetLink(int x, int y) { // 연결~
+	MAP[x].Insert(y); // 벡터 x에 y넣음
 	return;
 }
 
@@ -65,7 +65,7 @@ void Mark(int x) {
 int NextStart() {
 	LastStart++;
 	while (LastStart <= n) {
-		if (Visited[LastStart] == 0) // 1���� �ö󰡼� �湮���� ��� Ž��
+		if (Visited[LastStart] == 0) // 1부터 올라가서 방문안한 노드 탐색
 			return LastStart;
 		else
 			LastStart++;
@@ -82,25 +82,25 @@ int main() {
 		SetLink(y, x);
 	}
 
-	while ((cur = NextStart()) != -1) { // �湮���� ���� ��� Ž��
-		printf("%d", cur); // �湮���� ��尡 ������ϱ� ���
-		Mark(cur); // �湮�ߴٰ� ��ũ
+	while ((cur = NextStart()) != -1) { // 방문하지 않은 노드 탐색
+		printf("%d", cur); // 방문안한 노드가 현재노드니까 출력
+		Mark(cur); // 방문했다고 마크
 		while (1) {
-			if ((s = MAP[cur].NextForward()) != -1) { // ��� �������� ����� ��� Ž��
-				if (isMarked(s) == 0) { // �� ����� ��带 �湮�ߴ°�?
-					printf(" %d", s); Mark(s); // �湮�������� ���, �湮�ߴٰ� ��ũ
-					Push(cur); // ���ÿ� �ֱ�
-					cur = s; // �湮�� ��带 �ٽ� �������
+			if ((s = MAP[cur].NextForward()) != -1) { // 노드 기준으로 연결된 노드 탐색
+				if (isMarked(s) == 0) { // 그 연결된 노드를 방문했는가?
+					printf(" %d", s); Mark(s); // 방문안했으면 출력, 방문했다고 마크
+					Push(cur); // 스택에 넣기
+					cur = s; // 방문한 노드를 다시 현재노드로
 				}
 				else {
 
 				}
 			}
-			else { // ����� ��尡 ����
-				if (isEmpty() == 1) // ���õ� �����?
-					break; // ������� break;
+			else { // 연결된 노드가 없다
+				if (isEmpty() == 1) // 스택도 비었나?
+					break; // 비었으면 break;
 				else
-					cur = Pop(); // ���ÿ��� �� (���� ���� �̵�)
+					cur = Pop(); // 스택에서 팝 (이전 노드로 이동)
 			}
 		}
 		printf("\n");
