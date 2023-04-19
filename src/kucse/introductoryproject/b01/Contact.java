@@ -39,14 +39,23 @@ public class Contact {
         return false;
     }
 
-    public boolean setPhone(String phone) {
-        this.phone = phone;
+    public boolean setPhone(String phone, AddressBook addressBook) {
+        if (phone.isBlank())
+            System.out.println("전화번호는 필수 입력입니다");
+        else if (phone.contains("\t"))
+            System.out.println("탭(tab)은 사용하실 수 없습니다");
+        else if (addressBook.isPhoneDuplicated(phone))
+            System.out.println("이미 존재하는 전화번호입니다");
+        else {
+            this.phone = phone;
+            return true;
+        }
 
-        return true;
+        return false;
     }
 
     public boolean setAddress(String address) {
-        if(address.contains("\t"))
+        if (address.contains("\t"))
             System.out.println("탭(tab)은 사용하실 수 없습니다");
         else {
             this.address = address;
@@ -57,7 +66,7 @@ public class Contact {
     }
 
     public boolean setBirthday(String birthday) {
-        if(address.contains("\t"))
+        if (address.contains("\t"))
             System.out.println("탭(tab)은 사용하실 수 없습니다");
         else {
             this.birthday = birthday;
