@@ -74,8 +74,8 @@ public class AddressBook {
         return s.replaceAll("[^0-9]","");
     }
 
-    private String sameName(String n){ // 동명이인 체크
-        int count=0;
+    private String renameDuplicatedName(String n){ // 동명이인 체크
+        int count = 0;
         for(Contact c : contactSet){
             if(c.getName().equals(n)){
                 count++;
@@ -90,10 +90,5 @@ public class AddressBook {
             return n;
         else
             return n+"("+count+")";
-    }
-
-    private String renameDuplicatedName(String name) {
-        long count = contactSet.stream().filter(it -> it.getName().equals(name)).count();
-        return count == 0 ? name : name + "(" + count + ")";
     }
 }
