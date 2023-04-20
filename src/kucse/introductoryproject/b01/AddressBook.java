@@ -74,11 +74,24 @@ public class AddressBook {
         return s.replaceAll("[^0-9]","");
     }
 
-    /**
-     * 동명이인을 체크하는 메서드
-     * @param name 이름
-     * @return 동명이인이 없을 경우 name, 동명이인이 있을 경우 name(count)
-     */
+    private String sameName(String n){ // 동명이인 체크
+        int count=0;
+        for(Contact c : contactSet){
+            if(c.getName().equals(n)){
+                count++;
+                for(Contact con : contactSet){
+                    if(con.getName().equals(n+"("+count+")")){
+                        count++;
+                    }
+                }
+            }
+        }
+        if(count==0)
+            return n;
+        else
+            return n+"("+count+")";
+    }
+
     private String renameDuplicatedName(String name) {
         long count = contactSet.stream().filter(it -> it.getName().equals(name)).count();
         return count == 0 ? name : name + "(" + count + ")";
