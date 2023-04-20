@@ -5,9 +5,9 @@
 using namespace std;
 
 int n,m; 
-int MAP[1000][1000];
-int Visited[1000];
-int Stack[1000];
+int MAP[1000][1000]; // 길있으면 1 없으면 0
+int Visited[1000]; // 방문했으면 1 안햇으면 0
+int Stack[1000]; // 방문한거 여기다 넣음
 int LastStart;
 int SP;
 
@@ -16,7 +16,7 @@ void Push(int x) {
 }
 int Pop() {
 	return Stack[--SP];
-}
+}  
 int isEmpty() {
 	return (SP == 0);
 }
@@ -26,15 +26,15 @@ void SetLink(int x, int y) { // 연결~
 }
 int LastForward[1000];
 int NextForward(int x) { // x노드와 연결된 노드 찾는데 1부터 찬찬히 찾음
-	LastForward[x]++;
-	while (LastForward[x] <= n) {
-		if (MAP[x][LastForward[x]] == 1) 
-			return LastForward[x];
+	LastForward[x]++; // 초기값 0인데 1부터니까 하나 증가하면서 시작
+	while (LastForward[x] <= n) { // 최댓값보다 작으면~
+		if (MAP[x][LastForward[x]] == 1) // x가 이걸 갈수있나요?
+			return LastForward[x]; //갈 수 있네
 		else
-			LastForward[x]++;
+			LastForward[x]++; // 못가네 다음거 검색 -> 결국 1부터 n까지 본다는거
 		
 	}
-	return -1;
+	return -1; // 길이 없어요
 
 
 }
@@ -46,7 +46,7 @@ void Mark(int x) {
 }
 int NextStart() {
 	LastStart++;
-	while (LastStart <= n) {
+	while (LastStart <= n) { 
 		if (Visited[LastStart] == 0) // 1부터 올라가서 방문안한 노드 탐색
 			return LastStart;
 		else
@@ -62,7 +62,7 @@ int main() {
 		SetLink(x, y);
 		SetLink(y, x);
 	}
-	while ((cur = NextStart()) != -1) { // 방문하지 않은 노드 탐색
+	while ((cur = NextStart()) != -1) { // 방문하지 않은 노드 탐색, 처음 laststart는 0
 		printf("%d", cur); // 방문안한 노드가 현재노드니까 출력
 		Mark(cur); // 방문했다고 마크
 		while (1) {
