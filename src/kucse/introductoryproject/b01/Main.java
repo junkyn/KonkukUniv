@@ -35,7 +35,7 @@ public class Main {
             else if (prompt.startsWith("login "))
                 signedInUserInfo = login(prompt.split(" ")[1], prompt.split(" ")[2]);
         } while (signedInUserInfo == null);
-
+        AddressBook addressBook = new AddressBook(signedInUserInfo);
         for (String key : userInfoHashMap.keySet()) {
             System.out.println(key + " : " + userInfoHashMap.get(key));
         }

@@ -10,11 +10,12 @@ import java.util.Scanner;
 public class AddressBook {
     private Contact onContact;
     private static Scanner scanner = new Scanner(System.in);
+    private UserInfo userInfo;
 
     private HashSet<Contact> contactSet;
-    public AddressBook(String userName){
+    public AddressBook(UserInfo signedInUserInfo){
         try {
-            File file = new File(userName + ".csv");
+            File file = new File(signedInUserInfo.getName() + ".csv");
             if (!file.exists()) file.createNewFile();
             contactSet = Contact.parseContactsFromCSV(file);
         } catch (IOException e) {
@@ -85,7 +86,6 @@ public class AddressBook {
             return;
         }else{
             String order;
-            String value;
             do{
                 System.out.println("수정할 부분을 입력해주세요");
                 System.out.println("(name : 이름, num : 전화번호, address : 주소, birth : 생년월일, memo : 메모, cancel : 취소");
@@ -133,6 +133,38 @@ public class AddressBook {
         }
 
     }
+
+    public void myProfile(){
+        String order;
+        do{
+            System.out.println(userInfo);
+            System.out.println("수정할 부분을 입력해주세요");
+            System.out.println("(name : 이름, num : 전화번호, address : 주소, birth : 생년월일, cancel : 취소");
+            System.out.println(onContact.getName()+">edit>");
+            order = scanner.nextLine();
+            if(order.equals("name")){
+                do System.out.println("수정할 내용을 입력해주세요\n"+userInfo.getName()+">name>");
+                while (!userInfo.setName(scanner.nextLine()));
+            }
+            else if(order.equals("num")){
+                do System.out.println("수정할 내용을 입력해주세요\n"+userInfo.getName()+">num>");
+                while (!userInfo.setPhone(scanner.nextLine()));
+            }
+            else if(order.equals("address")){
+                do System.out.println("수정할 내용을 입력해주세요\n"+userInfo.getName()+">address>");
+                while (!userInfo.setAddress(scanner.nextLine()));
+            }
+            else if(order.equals("birth")){
+                do System.out.println("수정할 내용을 입력해주세요\n"+userInfo.getName()+">birth>");
+                while (!userInfo.setBirthday(scanner.nextLine()));
+            }
+
+        }while(order.equals("cancel"));
+    }
+
+
+
+
     public void resetOnContact(){
         onContact = null;
     }
