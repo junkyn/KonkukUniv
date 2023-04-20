@@ -2,34 +2,34 @@
 #include <cstdio>
 using namespace std;
 
-int* A;
-int N;
-int Search(int x, int* A) {
-	int m, n,r;
-	m = 0; n = N-1;
-	r = (m + n) / 2;
-	while (true) {
+int* A; // 배열
+int N; // 최대 인덱스
+int Search(int x, int* A) { // 
+	int m, n,r; 
+	m = 0; n = N-1; //m = 시작인덱스, n=끝 인덱스 
+	r = (m + n) / 2; // r은 중간값 
+	while (true) { 
 		r = (m + n) / 2;
-		if (m == r)break;
-		if (A[r] == x)return r;
-		else if (A[r] > x) {
+		if (m == r)break; // r이 m과 같으면 (m+n/2 = m, 즉 마지막까지 탐색) break
+		if (A[r] == x)return r; // 검색 
+		else if (A[r] > x) { // x가 작으면 A[r]왼쪽에 있는거니까 n=r로, 즉 절반기준 왼쪽에서 검색
 			n = r;
 		}
-		else {
+		else { // 반대
 			m = r;
 		}
 	}
-	if (A[m] == x)return m;
+	if (A[m] == x)return m; // 마지막 탐색 후 m과 n위치 값 검사
 	else if (A[n] == x)return n;
-	return -1;
+	return -1; // 검사에 안걸리면 없는거니까 검색 실패
 }
 int SearchRecur(int x, int m, int n) {
 	int r = (m + n) / 2;
-	if (r == m && A[r] != x) {
-		if (A[n] == x)return n;
+	if (r == m && A[r] != x) { // 위에서 했던걸 여기선 한번에 
+		if (A[n] == x)return n; 
 		return -1;
 	}
-	if (A[r] == x)return r;
+	if (A[r] == x)return r; 
 	else if (A[r] > x) {
 		SearchRecur(x, m, r);
 	}
