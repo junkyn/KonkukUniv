@@ -2,7 +2,6 @@ package kucse.introductoryproject.b01;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class Main {
@@ -11,6 +10,9 @@ public class Main {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        System.out.println(StringUtil.getHangulOnly("안녕하세요, 이율원입니다. ^~^"));
+        System.out.println(StringUtil.toConsonants("안녕하세요, 이율원입니다. ^~^"));
+
         for (String key : userInfoHashMap.keySet()) {
             System.out.println(key + " : " + userInfoHashMap.get(key));
         }
