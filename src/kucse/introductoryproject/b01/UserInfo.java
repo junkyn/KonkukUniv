@@ -52,10 +52,12 @@ public class UserInfo {
         return birthday;
     }
 
-    public boolean setId(String id) {
-        if (id.length() < 5)
+    public boolean setId(String id, HashMap<String, UserInfo> hashMap) {
+        if (hashMap.containsKey(id)) {
+            System.out.println("이미 존재하는 아이디입니다.");
+        } else if (id.length() < 5)
             System.out.println("ID의 길이는 5 이상이어야 합니다.");
-        else if (id.matches("^[a-zA-Z0-9]*$"))
+        else if (!id.matches("^[a-zA-Z0-9]*$"))
             System.out.println("ID는 알파벳 또는 숫자로만 이루어져야 합니다.");
         else {
             this.id = id;
