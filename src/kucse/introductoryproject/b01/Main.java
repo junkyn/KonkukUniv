@@ -34,10 +34,11 @@ public class Main {
         AddressBook addressBook = new AddressBook(signedInUserInfo);
 
 //        AddressBook addressBook = new AddressBook("test");
-//        addressBook.addContact();
-//        addressBook.addContact();
-//        addressBook.addContact();
-//        addressBook.viewAddressBook();
+        addressBook.addContact();
+        addressBook.addContact();
+        addressBook.addContact();
+        addressBook.viewAddressBook();
+        ContactUtil.closeWriterStream();
         UserInfoUtil.closeWriterStream();
     }
 

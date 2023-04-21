@@ -39,12 +39,12 @@ public class Contact {
         return false;
     }
 
-    public boolean setPhone(String phone, AddressBook addressBook) {
+    public boolean setPhone(String phone) {
         if (phone.isBlank())
             System.out.println("전화번호는 필수 입력입니다");
         else if (phone.contains("\t"))
             System.out.println("탭(tab)은 사용하실 수 없습니다");
-        else if (addressBook.isPhoneDuplicated(phone))
+        else if (ContactUtil.isPhoneDuplicated(phone))
             System.out.println("이미 존재하는 전화번호입니다");
         else {
             this.phone = phone;
@@ -82,29 +82,6 @@ public class Contact {
         return true;
     }
 
-    public static HashSet<Contact> parseContactsFromCSV(File file) {
-        HashSet<Contact> contactList = new HashSet<>();
-
-        try (Scanner fileScanner = new Scanner(file)){
-            while(fileScanner.hasNextLine()) {
-                String str = fileScanner.nextLine();
-                String[] contactInfo = str.split("\t");
-
-                String name = contactInfo[0].trim();
-                String phone = contactInfo[1].trim();
-                String address = contactInfo.length < 3 ? "" : contactInfo[2].trim();
-                String birthday = contactInfo.length < 4 ? "" : contactInfo[3].trim();
-                String memo = contactInfo.length < 5 ? "" : contactInfo[4].trim();
-
-                contactList.add(new Contact(name, phone, address, birthday, memo));
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return contactList;
-    }
     public String getPhone(){
         return this.phone;
     }

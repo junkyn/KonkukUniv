@@ -7,23 +7,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
+import static kucse.introductoryproject.b01.ContactUtil.renameDuplicatedName;
+import static kucse.introductoryproject.b01.StringUtil.getNumbersOnly;
+
 public class AddressBook {
     private Contact onContact;
     private static Scanner scanner = new Scanner(System.in);
     private UserInfo userInfo;
 
-    private HashSet<Contact> contactSet;
     public AddressBook(UserInfo signedInUserInfo){
         userInfo = signedInUserInfo;
-
-        try {
-            File file = new File(userInfo.getId() + ".csv");
-            if (!file.exists()) file.createNewFile();
-            contactSet = Contact.parseContactsFromCSV(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ContactUtil.init(userInfo.getId());
     }
+
     public void addContact(){
         Contact contact = new Contact();
 
@@ -33,7 +29,7 @@ public class AddressBook {
         while (!contact.setName(renameDuplicatedName(scanner.nextLine().trim())));
 
         do System.out.print("전화번호를 입력하세요\n> ");
-        while (!contact.setPhone(scanner.nextLine().trim(), this));
+        while (!contact.setPhone(scanner.nextLine().trim()));
 
         do System.out.print("주소를 입력하세요\n> ");
         while (!contact.setAddress(scanner.nextLine().trim()));
@@ -44,7 +40,7 @@ public class AddressBook {
         do System.out.print("메모를 입력하세요\n> ");
         while (!contact.setMemo(scanner.nextLine().trim()));
 
-        contactSet.add(contact);
+        ContactUtil.appendContact(contact);
     }
 
     public void viewAddressBook() { // view
@@ -52,7 +48,7 @@ public class AddressBook {
     }
     public void viewAddressBook(int page) { // view (page)
         resetOnContact();
-        List<Contact> list = new ArrayList<>(contactSet);
+        ArrayList<Contact> list = ContactUtil.getContactList();
         int maxPage = (list.size() - 1) / 10 + 1;
         if (list.isEmpty()) {
             System.out.println("주소록이 비어있습니다");
@@ -69,26 +65,23 @@ public class AddressBook {
             System.out.println("--------(" + page + "/" + maxPage + ")--------");
         }
     }
-    public  void viewAddressBook(String name){
-        onContact = contactSet.stream().filter(it -> it.getName().equals(name)).findFirst().orElseGet(null);
-        if(onContact==null){
+    public void viewAddressBook(String name) {
+        onContact = ContactUtil.getContactByName(name);
+        if (onContact == null) {
             System.out.println("존재하지 않는 연락처입니다");
-            return;
-        }
-        else{
+        } else {
             System.out.println(onContact);
             System.out.println();
             System.out.println(onContact.getName()+">");
         }
 
     }
-    public void editContact(){
-        if(onContact==null){
+    public void editContact() {
+        if (onContact == null) {
             System.out.println("수정할 연락처를 열람해주세요");
-            return;
-        }else{
+        } else {
             String order;
-            do{
+            do {
                 System.out.println("수정할 부분을 입력해주세요");
                 System.out.println("(name : 이름, num : 전화번호, address : 주소, birth : 생년월일, memo : 메모, cancel : 취소");
                 System.out.println(onContact.getName()+">edit>");
@@ -99,7 +92,7 @@ public class AddressBook {
                 }
                 else if(order.equals("num")){
                     do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+"edit>num>");
-                    while (!onContact.setPhone(scanner.nextLine().trim(), this));
+                    while (!onContact.setPhone(scanner.nextLine().trim()));
                 }
                 else if(order.equals("address")){
                     do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+"edit>address>");
@@ -113,32 +106,30 @@ public class AddressBook {
                     do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+"edit>memo>");
                     while (!onContact.setMemo(scanner.nextLine().trim()));
                 }
-            }while(order.equals("cancel"));
+            } while(order.equals("cancel"));
         }
     }
-    public void deleteContact(){
-        if(onContact==null){
+    public void deleteContact() {
+        if (onContact == null) {
             System.out.println("삭제할 연락처를 열람해주세요");
-            return;
-        }
-        else{
+        } else {
             String answer;
             System.out.println("정말 삭제하시겠습니까? 삭제를 원하시면 '삭제'를 입력해주세요\n"+onContact.getName()+">delete>");
             answer = scanner.nextLine();
-            if(answer.equals("삭제")){
-                contactSet.remove(onContact);
+            if (answer.equals("삭제")) {
+                ContactUtil.removeContact(onContact);
                 onContact = null;
                 System.out.println("삭제되었습니다.");
-            }else{
+            } else {
                 System.out.println("삭제되지 않았습니다");
             }
         }
 
     }
 
-    public void myProfile(){
+    public void myProfile() {
         String order;
-        do{
+        do {
             System.out.println(userInfo);
             System.out.println("수정할 부분을 입력해주세요");
             System.out.println("(name : 이름, num : 전화번호, address : 주소, birth : 생년월일, cancel : 취소");
@@ -161,38 +152,11 @@ public class AddressBook {
                 while (!userInfo.setBirthday(scanner.nextLine()));
             }
 
-        }while(order.equals("cancel"));
+        } while (order.equals("cancel"));
     }
-
-
-
 
     public void resetOnContact(){
         onContact = null;
     }
-    protected boolean isPhoneDuplicated(String n) { // 중복 전화번호
-        return contactSet.stream().anyMatch(it -> getNumbersOnly(it.getPhone()).equals(getNumbersOnly(n)));
-    }
 
-    private String getNumbersOnly(String s) { // 정수만 추출
-        return s.replaceAll("[^0-9]","");
-    }
-
-    private String renameDuplicatedName(String n){ // 동명이인 체크
-        int count = 0;
-        for(Contact c : contactSet){
-            if(c.getName().equals(n)){
-                count++;
-                for(Contact con : contactSet){
-                    if(con.getName().equals(n+"("+count+")")){
-                        count++;
-                    }
-                }
-            }
-        }
-        if(count==0)
-            return n;
-        else
-            return n+"("+count+")";
-    }
 }
