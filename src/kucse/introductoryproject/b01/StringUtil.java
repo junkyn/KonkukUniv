@@ -4,13 +4,7 @@ public class StringUtil {
     private static final String[] CONSONANTS = {"ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"};
 
     public static String getHangulOnly(String str) {
-        StringBuilder hanguls = new StringBuilder();
-        for (int i = 0; i < str.length(); i++) {
-            if (Character.toString(str.charAt(i)).matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*"))
-                hanguls.append(str.charAt(i));
-        }
-
-        return hanguls.toString();
+        return str.replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣]", "");
     }
 
     public static String getNumbersOnly(String str) { // 정수만 추출
