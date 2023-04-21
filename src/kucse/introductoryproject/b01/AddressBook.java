@@ -14,8 +14,10 @@ public class AddressBook {
 
     private HashSet<Contact> contactSet;
     public AddressBook(UserInfo signedInUserInfo){
+        userInfo = signedInUserInfo;
+
         try {
-            File file = new File(signedInUserInfo.getName() + ".csv");
+            File file = new File(userInfo.getId() + ".csv");
             if (!file.exists()) file.createNewFile();
             contactSet = Contact.parseContactsFromCSV(file);
         } catch (IOException e) {

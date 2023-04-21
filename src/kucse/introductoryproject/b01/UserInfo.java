@@ -1,12 +1,5 @@
 package kucse.introductoryproject.b01;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.function.Predicate;
-
 public class UserInfo {
     private String id;
     private String password;
@@ -28,12 +21,12 @@ public class UserInfo {
         this.birthday = birthday;
     }
 
-    public String getId() {
-        return id;
+    public boolean isMatchingPassword(String password) {
+        return this.password.equals(password);
     }
 
-    public String getPassword() {
-        return password;
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -52,8 +45,8 @@ public class UserInfo {
         return birthday;
     }
 
-    public boolean setId(String id, HashMap<String, UserInfo> hashMap) {
-        if (hashMap.containsKey(id)) {
+    public boolean setId(String id) {
+        if (UserInfoUtil.isIdPresent(id)) {
             System.out.println("이미 존재하는 아이디입니다.");
         } else if (id.length() < 5)
             System.out.println("ID의 길이는 5 이상이어야 합니다.");
@@ -130,31 +123,6 @@ public class UserInfo {
         return false;
     }
 
-    public static HashMap<String, UserInfo> parseUserDataFromCSV(File file) {
-        HashMap<String, UserInfo> userInfoHashMap = new HashMap<>();
-
-        try (Scanner fileScanner = new Scanner(file)){
-            while(fileScanner.hasNextLine()) {
-                String str = fileScanner.nextLine();
-                String[] userInfo = str.split("\t");
-
-                String id = userInfo[0].trim();
-                String password = userInfo[1].trim();
-                String name = userInfo[2].trim();
-                String phone = userInfo[3].trim();
-                String address = userInfo.length < 5 ? "" : userInfo[4].trim();
-                String birthday = userInfo.length < 6 ? "" : userInfo[5].trim();
-
-                userInfoHashMap.put(id, new UserInfo(id, password, name, phone, address, birthday));
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return userInfoHashMap;
-    }
-
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -166,4 +134,9 @@ public class UserInfo {
                 ", birthday='" + birthday + '\'' +
                 '}';
     }
+
+    public String toCsv() {
+        return id + "\t" + password + "\t" + name + "\t" + phone + "\t" + address + "\t" + birthday + "\n";
+    }
 }
+

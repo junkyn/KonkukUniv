@@ -1,21 +1,16 @@
 package kucse.introductoryproject.b01;
 
-import java.io.File;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
-    static HashMap<String, UserInfo> userInfoHashMap = UserInfo.parseUserDataFromCSV(new File("dummyUserData.csv"));
-
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         System.out.println(StringUtil.getHangulOnly("안녕하세요, 이율원입니다. ^~^"));
         System.out.println(StringUtil.toConsonants("안녕하세요, 이율원입니다. ^~^"));
 
-        for (String key : userInfoHashMap.keySet()) {
-            System.out.println(key + " : " + userInfoHashMap.get(key));
-        }
+        UserInfoUtil.init("dummyUserData");
+
 //
 //        HashSet<Contact> contactArrayList = Contact.parseContactsFromCSV(new File("dummyContacts.csv"));
 //
@@ -35,24 +30,22 @@ public class Main {
             else if (prompt.startsWith("login "))
                 signedInUserInfo = login(prompt.split(" ")[1], prompt.split(" ")[2]);
         } while (signedInUserInfo == null);
+
         AddressBook addressBook = new AddressBook(signedInUserInfo);
-        for (String key : userInfoHashMap.keySet()) {
-            System.out.println(key + " : " + userInfoHashMap.get(key));
-        }
 
 //        AddressBook addressBook = new AddressBook("test");
 //        addressBook.addContact();
 //        addressBook.addContact();
 //        addressBook.addContact();
 //        addressBook.viewAddressBook();
-
+        UserInfoUtil.closeWriterStream();
     }
 
     public static void register() {
         UserInfo userInfo = new UserInfo();
 
         do System.out.print("아이디를 입력하세요\n> ");
-        while (!userInfo.setId(scanner.nextLine().trim(), userInfoHashMap));
+        while (!userInfo.setId(scanner.nextLine().trim()));
 
         do System.out.print("비밀번호를 입력하세요\n> ");
         while (!userInfo.setPassword(scanner.nextLine().trim()));
@@ -72,23 +65,23 @@ public class Main {
         do System.out.print("생년월일을 입력하세요\n> ");
         while (!userInfo.setBirthday(scanner.nextLine().trim()));
 
-        userInfoHashMap.put(userInfo.getId(), userInfo);
+        UserInfoUtil.appendUserData(userInfo);
     }
 
     public static UserInfo login(String id, String pw) {
-        for (String key : userInfoHashMap.keySet()) {
-            if (key.equals(id)) {
-                if (userInfoHashMap.get(key).getPassword().equals(pw)) {
-                    String name = userInfoHashMap.get(key).getName();
-                    System.out.println(name + "님 환영합니다\n");
-                    return userInfoHashMap.get(key);
-                } else {
-                    System.out.println("비밀번호가 틀립니다\n");
-                    return null;
-                }
-            }
+        if (!UserInfoUtil.isIdPresent(id)) {
+            System.out.println("존재하지 않는 아이디입니다\n");
+            return null;
         }
-        System.out.println("존재하지 않는 아이디입니다\n");
-        return null;
+
+        if (UserInfoUtil.isUserInfoValid(id, pw)) {
+            UserInfo loggedInUser = UserInfoUtil.getUserInfoById(id);
+            System.out.println(loggedInUser.getName() + "님 환영합니다\n");
+            return loggedInUser;
+        } else {
+            System.out.println("비밀번호가 틀립니다\n");
+            return null;
+        }
+
     }
 }
