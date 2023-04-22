@@ -4,21 +4,36 @@ import java.util.Scanner;
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
-
+    public static UserInfo signedInUserInfo = null;
     public static void main(String[] args) {
         System.out.println(StringUtil.getHangulOnly("안녕하세요, 이율원입니다. ^~^"));
         System.out.println(StringUtil.toConsonants("안녕하세요, 이율원입니다. ^~^"));
 
         UserInfoUtil.init("dummyUserData");
 
-//
+/*
 //        HashSet<Contact> contactArrayList = Contact.parseContactsFromCSV(new File("dummyContacts.csv"));
 //
 //        for (Contact it : contactArrayList) {
 //            System.out.println(it);
 //        }
+*/
+        do{
+            loginPage();
+            promptPage();
+        }while(signedInUserInfo==null);
 
-        UserInfo signedInUserInfo = null;
+
+//        AddressBook addressBook = new AddressBook("test");
+
+    }
+
+    private static void promptPage() {
+        String prompt;
+    }
+
+    public static void loginPage(){
+
 
         System.out.print("환영합니다. ");
         do {
@@ -33,7 +48,8 @@ public class Main {
 
         AddressBook addressBook = new AddressBook(signedInUserInfo);
 
-//        AddressBook addressBook = new AddressBook("test");
+        helpList();
+
         addressBook.addContact();
         addressBook.addContact();
         addressBook.addContact();
@@ -41,7 +57,6 @@ public class Main {
         ContactUtil.closeWriterStream();
         UserInfoUtil.closeWriterStream();
     }
-
     public static void register() {
         UserInfo userInfo = new UserInfo();
 
@@ -84,5 +99,21 @@ public class Main {
             return null;
         }
 
+    }
+    public static void helpList(){
+        System.out.println();
+        System.out.println("-- view <value> : 주소록 열람");
+        System.out.println("\t<value>가 페이지 수라면 그 페이지에 해당하는 주소록을 출력합니다");
+        System.out.println("\t<value>가 이름이라면 그 이름에 해당하는 연락처를 열람합니다");
+        System.out.println("-- search <value1><value2> : 주소록 검색");
+        System.out.println("\t<value1>의 내용을 포함하는 연락처들 중");
+        System.out.println("\t<value2>에 해당하는 페이지의 연락처들을 출력합니다");
+        System.out.println("-- add 주소록 추가");
+        System.out.println("-- edit : 열람하고 있는 연락처 수정");
+        System.out.println("-- delete : 열람하고 있는 연락처 삭제");
+        System.out.println("-- myprofile : 내 정보 수정");
+        System.out.println("-- logout : 로그아웃");
+        System.out.println("-- help : 도움말");
+        System.out.println("-- exit : 프로그램 종료");
     }
 }

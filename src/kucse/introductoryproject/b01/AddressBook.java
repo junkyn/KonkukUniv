@@ -18,7 +18,9 @@ public class AddressBook {
     public AddressBook(UserInfo signedInUserInfo){
         userInfo = signedInUserInfo;
         ContactUtil.init(userInfo.getId());
+
     }
+
 
     public void addContact(){
         Contact contact = new Contact();
