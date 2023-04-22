@@ -25,7 +25,7 @@ public class AddressBook {
     public void addContact(){
         Contact contact = new Contact();
 
-        System.out.println("(Skip을 원하시면 Enter을 눌러주세요. 단, 이름과 전화번호는 필수");
+        System.out.println("(Skip을 원하시면 Enter을 눌러주세요. 단, 이름과 전화번호는 필수)");
 
         do System.out.print("이름을 입력하세요\n> ");
         while (!contact.setName(renameDuplicatedName(scanner.nextLine().trim())));
@@ -43,6 +43,7 @@ public class AddressBook {
         while (!contact.setMemo(scanner.nextLine().trim()));
 
         ContactUtil.appendContact(contact);
+        System.out.println("주소록에 추가되었습니다");
     }
 
     public void viewAddressBook() { // view
@@ -74,7 +75,7 @@ public class AddressBook {
         } else {
             System.out.println(onContact);
             System.out.println();
-            System.out.println(onContact.getName()+">");
+            System.out.print(onContact.getName());
         }
 
     }
@@ -89,26 +90,28 @@ public class AddressBook {
                 System.out.println(onContact.getName()+">edit>");
                 order = scanner.nextLine();
                 if(order.equals("name")){
-                    do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+"edit>name>");
+                    do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+">edit>name>");
                     while (!onContact.setName(renameDuplicatedName(scanner.nextLine().trim())));
                 }
                 else if(order.equals("num")){
-                    do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+"edit>num>");
+                    do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+">edit>num>");
                     while (!onContact.setPhone(scanner.nextLine().trim()));
                 }
                 else if(order.equals("address")){
-                    do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+"edit>address>");
+                    do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+">edit>address>");
                     while (!onContact.setAddress(scanner.nextLine().trim()));
                 }
                 else if(order.equals("birth")){
-                    do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+"edit>birth>");
+                    do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+">edit>birth>");
                     while (!onContact.setBirthday(scanner.nextLine().trim()));
                 }
                 else if(order.equals("memo")){
-                    do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+"edit>memo>");
+                    do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+">edit>memo>");
                     while (!onContact.setMemo(scanner.nextLine().trim()));
                 }
             } while(order.equals("cancel"));
+            System.out.println("수정되었습니다");
+            System.out.println();
         }
     }
     public void deleteContact() {
@@ -116,7 +119,7 @@ public class AddressBook {
             System.out.println("삭제할 연락처를 열람해주세요");
         } else {
             String answer;
-            System.out.println("정말 삭제하시겠습니까? 삭제를 원하시면 '삭제'를 입력해주세요\n"+onContact.getName()+">delete>");
+            System.out.print("정말 삭제하시겠습니까? 삭제를 원하시면 '삭제'를 입력해주세요\n"+onContact.getName()+">delete>");
             answer = scanner.nextLine();
             if (answer.equals("삭제")) {
                 ContactUtil.removeContact(onContact);
@@ -125,6 +128,7 @@ public class AddressBook {
             } else {
                 System.out.println("삭제되지 않았습니다");
             }
+            System.out.println();
         }
 
     }
@@ -155,6 +159,8 @@ public class AddressBook {
             }
 
         } while (order.equals("cancel"));
+        System.out.println("수정되었습니다");
+        System.out.println();
     }
 
     public void resetOnContact(){

@@ -1,10 +1,13 @@
 package kucse.introductoryproject.b01;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
     public static UserInfo signedInUserInfo = null;
+
+    public static AddressBook addressBook = null;
     public static void main(String[] args) {
         System.out.println(StringUtil.getHangulOnly("안녕하세요, 이율원입니다. ^~^"));
         System.out.println(StringUtil.toConsonants("안녕하세요, 이율원입니다. ^~^"));
@@ -22,7 +25,7 @@ public class Main {
             loginPage();
             promptPage();
         }while(signedInUserInfo==null);
-
+        System.out.println("프로그램을 종료합니다. 이용해주셔서 감사합니다");
 
 //        AddressBook addressBook = new AddressBook("test");
 
@@ -30,6 +33,48 @@ public class Main {
 
     private static void promptPage() {
         String prompt;
+        String[] value = new String[3];
+        boolean loop = true;
+        do{
+            System.out.print(">");
+            prompt = scanner.nextLine();
+            int i = 0;
+            try{
+                for(i=0;i<3;i++){
+                    value[i] = prompt.split(" ")[i];
+                }
+            }catch(ArrayIndexOutOfBoundsException e){
+                value[i] = null;
+
+            }
+            switch(value[0]){
+                case "help": helpList(); break;
+                case "logout" : logOut(); loop = false; break;
+                case "exit" : loop = false; break;
+                case "view" :
+                    if(value[1]==null) addressBook.viewAddressBook();
+                    else{
+                        try{
+                            int page = Integer.parseInt(value[1]);
+                            addressBook.viewAddressBook(page);
+                        }
+                        catch(NumberFormatException e){
+                            addressBook.viewAddressBook(value[1]);
+                        }
+                    }
+                    break;
+                case "search":
+                    break;
+                case "add":addressBook.addContact();break;
+                case "delete" : addressBook.deleteContact();break;
+                case "edit" : addressBook.editContact();break;
+                case "myprofile" : addressBook.myProfile();break;
+                default:
+                    System.out.println("잘못된 입력입니다");
+                    helpList();
+                    break;
+            }
+        }while(loop);
     }
 
     public static void loginPage(){
@@ -46,16 +91,18 @@ public class Main {
                 signedInUserInfo = login(prompt.split(" ")[1], prompt.split(" ")[2]);
         } while (signedInUserInfo == null);
 
-        AddressBook addressBook = new AddressBook(signedInUserInfo);
+        addressBook = new AddressBook(signedInUserInfo);
 
         helpList();
-
+/*
         addressBook.addContact();
         addressBook.addContact();
         addressBook.addContact();
         addressBook.viewAddressBook();
         ContactUtil.closeWriterStream();
         UserInfoUtil.closeWriterStream();
+
+ */
     }
     public static void register() {
         UserInfo userInfo = new UserInfo();
@@ -115,5 +162,8 @@ public class Main {
         System.out.println("-- logout : 로그아웃");
         System.out.println("-- help : 도움말");
         System.out.println("-- exit : 프로그램 종료");
+    }
+    public static void logOut(){
+        signedInUserInfo = null;
     }
 }
