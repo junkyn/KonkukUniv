@@ -109,7 +109,7 @@ public class AddressBook {
                     do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+">edit>memo>");
                     while (!onContact.setMemo(scanner.nextLine().trim()));
                 }
-            } while(order.equals("cancel"));
+            } while(!order.equals("cancel"));
             System.out.println("수정되었습니다");
             System.out.println();
         }
@@ -139,7 +139,7 @@ public class AddressBook {
             System.out.println(userInfo);
             System.out.println("수정할 부분을 입력해주세요");
             System.out.println("(name : 이름, num : 전화번호, address : 주소, birth : 생년월일, cancel : 취소");
-            System.out.println(onContact.getName()+">edit>");
+            System.out.println(userInfo.getName()+">edit>");
             order = scanner.nextLine();
             if(order.equals("name")){
                 do System.out.println("수정할 내용을 입력해주세요\n"+userInfo.getName()+">name>");
@@ -158,7 +158,7 @@ public class AddressBook {
                 while (!userInfo.setBirthday(scanner.nextLine()));
             }
 
-        } while (order.equals("cancel"));
+        } while (!order.equals("cancel"));
         System.out.println("수정되었습니다");
         System.out.println();
     }
