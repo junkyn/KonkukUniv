@@ -3,7 +3,7 @@ package kucse.introductoryproject.b01;
 import static kucse.introductoryproject.b01.Main.scanner;
 
 public class LoginManager {
-    UserInfoUtil userInfoUtil = null;
+    UserInfoUtil userInfoUtil;
     public LoginManager() {
         userInfoUtil = UserInfoUtil.getInstance();
     }
@@ -28,26 +28,16 @@ public class LoginManager {
     public void register() {
         UserInfo userInfo = new UserInfo();
 
-        do System.out.print("아이디를 입력하세요\n> ");
-        while (!userInfo.setId(scanner.nextLine().trim()));
-
-        do System.out.print("비밀번호를 입력하세요\n> ");
-        while (!userInfo.setPassword(scanner.nextLine().trim()));
+        userInfo.setId();
+        userInfo.setPassword();
 
         System.out.println("계정이 생성되었습니다.");
         System.out.println("(Skip을 원하시면 Enter를 눌러주세요. 단, 이름과 전화번호는 필수)\n");
 
-        do System.out.print("이름을 입력하세요\n> ");
-        while (!userInfo.setName(scanner.nextLine().trim()));
-
-        do System.out.print("전화번호를 입력하세요\n> ");
-        while (!userInfo.setPhone(scanner.nextLine().trim()));
-
-        do System.out.print("주소를 입력하세요\n> ");
-        while (!userInfo.setAddress(scanner.nextLine().trim()));
-
-        do System.out.print("생년월일을 입력하세요\n> ");
-        while (!userInfo.setBirthday(scanner.nextLine().trim()));
+        userInfo.setName();
+        userInfo.setPhone();
+        userInfo.setAddress();
+        userInfo.setBirthday();
 
         userInfoUtil.appendData(userInfo);
     }

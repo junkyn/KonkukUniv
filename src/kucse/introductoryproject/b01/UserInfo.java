@@ -1,24 +1,19 @@
 package kucse.introductoryproject.b01;
 
-public class UserInfo {
+import static kucse.introductoryproject.b01.Main.scanner;
+
+public class UserInfo extends UserData {
     private String id;
     private String password;
-    private String name;
-    private String phone;
-    private String address;
-    private String birthday;
 
     public UserInfo() {
 
     }
 
     public UserInfo(String id, String password, String name, String phone, String address, String birthday) {
+        super(name, phone, address, birthday);
         this.id = id;
         this.password = password;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-        this.birthday = birthday;
     }
 
     public boolean isMatchingPassword(String password) {
@@ -29,23 +24,12 @@ public class UserInfo {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public void setId() {
+        do System.out.print("ID를 입력하세요\n> ");
+        while (!validateId(scanner.nextLine().trim()));
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public boolean setId(String id) {
+    private boolean validateId(String id) {
         if (UserInfoUtil.getInstance().isIdPresent(id)) {
             System.out.println("이미 존재하는 아이디입니다.");
         } else if (id.length() < 5)
@@ -60,7 +44,12 @@ public class UserInfo {
         return false;
     }
 
-    public boolean setPassword(String password) {
+    public void setPassword() {
+        do System.out.print("비밀번호를 입력하세요\n> ");
+        while (!validatePassword(scanner.nextLine().trim()));
+    }
+
+    private boolean validatePassword(String password) {
         if (password.length() < 8)
             System.out.println("암호의 길이는 8 이상이어야 합니다.");
         else if (password.matches(".*\\s.*"))
@@ -73,70 +62,18 @@ public class UserInfo {
         return false;
     }
 
-    public boolean setName(String name) {
-        if (name.isBlank())
-            System.out.println("이름은 필수 입력입니다");
-        else if (name.chars().allMatch(Character::isDigit))
-            System.out.println("정수로만 이루어진 이름은 사용할 수 없습니다");
-        else if (name.contains("\t"))
-            System.out.println("탭(tab)은 사용하실 수 없습니다");
-        else {
-            this.name = name;
-            return true;
-        }
-
-        return false;
-    }
-
-    public boolean setPhone(String phone) {
-        if (phone.isBlank())
-            System.out.println("전화번호는 필수 입력입니다");
-        else if (phone.contains("\t"))
-            System.out.println("탭(tab)은 사용하실 수 없습니다");
-        else {
-            this.phone = phone;
-            return true;
-        }
-
-        return false;
-    }
-
-    public boolean setAddress(String address) {
-        if (address.contains("\t"))
-            System.out.println("탭(tab)은 사용하실 수 없습니다");
-        else {
-            this.address = address;
-            return true;
-        }
-
-        return false;
-    }
-
-    public boolean setBirthday(String birthday) {
-        if (address.contains("\t"))
-            System.out.println("탭(tab)은 사용하실 수 없습니다");
-        else {
-            this.birthday = birthday;
-            return true;
-        }
-
-        return false;
-    }
-
     @Override
     public String toString() {
         return "UserInfo{" +
                 "id='" + id + '\'' +
                 ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                ", birthday='" + birthday + '\'' +
+                super.toString() +
                 '}';
     }
 
+    @Override
     public String toCsv() {
-        return id + "\t" + password + "\t" + name + "\t" + phone + "\t" + address + "\t" + birthday + "\n";
+        return id + "\t" + password + "\t" + super.toCsv() + "\n";
     }
 }
 
