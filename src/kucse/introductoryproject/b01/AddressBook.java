@@ -139,7 +139,7 @@ public class AddressBook {
                 if (list.size() <= i)
                     break;
                 else
-                    System.out.println(list.get(i));
+                    System.out.println(list.get(i).getName()+" "+list.get(i).getPhone()+"\n");
             }
             System.out.println("--------(" + page + "/" + maxPage + ")--------");
         }
