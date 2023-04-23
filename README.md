@@ -2,7 +2,7 @@
 
 # KUdressbook
 
-#### 3238 B 01 팀
+#### 전기프1 3238 B 01 팀
 
 - [202211389 최준규](https://github.com/junkyn)
 - [202211392 최  환](https://github.com/Hwan616)
