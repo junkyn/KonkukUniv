@@ -35,7 +35,7 @@ public class AddressBook {
         do System.out.print("메모를 입력하세요\n> ");
         while (!contact.setMemo(scanner.nextLine().trim()));
 
-        contactUtil.appendData(contact.toCsv());
+        contactUtil.appendData(contact);
         System.out.println("주소록에 추가되었습니다");
     }
 

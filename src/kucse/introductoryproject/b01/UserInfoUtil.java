@@ -2,33 +2,54 @@ package kucse.introductoryproject.b01;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
-public class UserInfoUtil {
-    private static FileWriter fileWriter;
-    private static HashMap<String, UserInfo> userInfoHashMap = new HashMap<>();
+public class UserInfoUtil extends CsvUtil {
+    private static volatile UserInfoUtil instance = null;
+    private HashMap<String, UserInfo> userInfoHashMap;
 
 
-    public static void init(String fileName) {
-        File userInfoFile;
-        try {
-            userInfoFile = new File(fileName + ".csv");
-
-            if (!userInfoFile.exists()) userInfoFile.createNewFile();
-
-            fileWriter = new FileWriter(userInfoFile, true);
-
-            parseUserDataFromCSV(userInfoFile);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    protected UserInfoUtil(String fileName) {
+        super(fileName);
     }
 
-    private static void parseUserDataFromCSV(File file) {
+    public static UserInfoUtil getInstance(String fileName) {
+        if (Objects.isNull(instance)) {
+            synchronized (UserInfoUtil.class) {
+                if (Objects.isNull(instance)) {
+                    instance = new UserInfoUtil(fileName);
+                }
+            }
+        }
+        return instance;
+    }
+
+    public static UserInfoUtil getInstance() {
+        return instance;
+    }
+
+    public void appendData(UserInfo userInfo) {
+        super.appendData(userInfo.toCsv());
+        userInfoHashMap.put(userInfo.getId(), userInfo);
+    }
+
+    public boolean isIdPresent(String id) {
+        return userInfoHashMap.containsKey(id);
+    }
+
+    public boolean isUserInfoValid(String id, String password) {
+        return userInfoHashMap.get(id).isMatchingPassword(password);
+    }
+
+    public UserInfo getUserInfoById(String id) {
+        return userInfoHashMap.get(id);
+    }
+
+    @Override
+    protected void parseDataFromCSV(File file) {
+        userInfoHashMap = new HashMap<>();
         try (Scanner fileScanner = new Scanner(file)){
             while(fileScanner.hasNextLine()) {
                 String str = fileScanner.nextLine();
@@ -45,37 +66,6 @@ public class UserInfoUtil {
             }
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static boolean isIdPresent(String id) {
-        return userInfoHashMap.containsKey(id);
-    }
-
-    public static boolean isUserInfoValid(String id, String password) {
-        return userInfoHashMap.get(id).isMatchingPassword(password);
-    }
-
-    public static UserInfo getUserInfoById(String id) {
-        return userInfoHashMap.get(id);
-    }
-
-    public static void appendUserData(UserInfo userInfo) {
-        userInfoHashMap.put(userInfo.getId(), userInfo);
-
-        try {
-            fileWriter.write(userInfo.toCsv());
-            fileWriter.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void closeWriterStream() {
-        try {
-            fileWriter.close();
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }

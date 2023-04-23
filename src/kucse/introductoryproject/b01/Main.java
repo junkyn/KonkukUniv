@@ -1,6 +1,5 @@
 package kucse.introductoryproject.b01;
 
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
@@ -8,34 +7,30 @@ public class Main {
     public static UserInfo signedInUserInfo = null;
 
     public static AddressBook addressBook = null;
+
+    public static UserInfoUtil userInfoUtil = null;
+
     public static void main(String[] args) {
         System.out.println(StringUtil.getHangulOnly("안녕하세요, 이율원입니다. ^~^"));
         System.out.println(StringUtil.toConsonants("안녕하세요, 이율원입니다. ^~^"));
 
-        UserInfoUtil.init("dummyUserData");
+        userInfoUtil = UserInfoUtil.getInstance("dummyUserData");
 
-/*
-//        HashSet<Contact> contactArrayList = Contact.parseContactsFromCSV(new File("dummyContacts.csv"));
-//
-//        for (Contact it : contactArrayList) {
-//            System.out.println(it);
-//        }
-*/
-        do{
+        do {
             loginPage();
             promptPage();
-        }while(signedInUserInfo==null);
+        } while (signedInUserInfo == null);
+
         System.out.println("프로그램을 종료합니다. 이용해주셔서 감사합니다");
-
-//        AddressBook addressBook = new AddressBook("test");
-
+        ContactUtil.getInstance().closeWriterStream();
+        userInfoUtil.closeWriterStream();
     }
 
     private static void promptPage() {
         String prompt;
         String[] value = new String[3];
         boolean loop = true;
-        do{
+        do {
             System.out.print(">");
             prompt = scanner.nextLine();
             int i = 0;
@@ -47,6 +42,7 @@ public class Main {
                 value[i] = null;
 
             }
+
             switch(value[0]){
                 case "help": helpList(); break;
                 case "logout" : logOut(); loop = false; break;
@@ -94,15 +90,7 @@ public class Main {
         addressBook = new AddressBook(signedInUserInfo);
 
         helpList();
-/*
-        addressBook.addContact();
-        addressBook.addContact();
-        addressBook.addContact();
-        addressBook.viewAddressBook();
-        ContactUtil.closeWriterStream();
-        UserInfoUtil.closeWriterStream();
 
- */
     }
     public static void register() {
         UserInfo userInfo = new UserInfo();
@@ -128,17 +116,17 @@ public class Main {
         do System.out.print("생년월일을 입력하세요\n> ");
         while (!userInfo.setBirthday(scanner.nextLine().trim()));
 
-        UserInfoUtil.appendUserData(userInfo);
+        userInfoUtil.appendData(userInfo);
     }
 
     public static UserInfo login(String id, String pw) {
-        if (!UserInfoUtil.isIdPresent(id)) {
+        if (!userInfoUtil.isIdPresent(id)) {
             System.out.println("존재하지 않는 아이디입니다\n");
             return null;
         }
 
-        if (UserInfoUtil.isUserInfoValid(id, pw)) {
-            UserInfo loggedInUser = UserInfoUtil.getUserInfoById(id);
+        if (userInfoUtil.isUserInfoValid(id, pw)) {
+            UserInfo loggedInUser = userInfoUtil.getUserInfoById(id);
             System.out.println(loggedInUser.getName() + "님 환영합니다\n");
             return loggedInUser;
         } else {

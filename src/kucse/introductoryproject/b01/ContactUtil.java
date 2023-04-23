@@ -54,6 +54,11 @@ public class ContactUtil extends CsvUtil {
         }
     }
 
+    public void appendData(Contact contact) {
+        super.appendData(contact.toCsv());
+        contactHashSet.add(contact);
+    }
+
     public ArrayList<Contact> getContactList() {
         return new ArrayList<>(contactHashSet);
     }

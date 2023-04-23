@@ -27,7 +27,7 @@ public abstract class CsvUtil {
 
     protected abstract void parseDataFromCSV(File file);
 
-    public void appendData(String csvString) {
+    protected void appendData(String csvString) {
         try {
             fileWriter.write(csvString);
             fileWriter.flush();
