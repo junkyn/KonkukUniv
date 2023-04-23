@@ -32,6 +32,10 @@ public class ContactUtil extends CsvUtil {
         return instance;
     }
 
+    public synchronized static void destroyInstance() {
+        instance = null;
+    }
+
     @Override
     protected void parseDataFromCSV(File file) {
         contactHashSet = new HashSet<>();

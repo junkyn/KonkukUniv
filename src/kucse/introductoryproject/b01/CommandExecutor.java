@@ -21,6 +21,7 @@ public class CommandExecutor {
             switch (prompt.split(" ")[0]) {
                 case "help" -> displayHelpList();
                 case "logout" -> {
+                    ContactUtil.destroyInstance();
                     signedInUser = null;
                     loop = false;
                 }
