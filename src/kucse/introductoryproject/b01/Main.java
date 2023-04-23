@@ -60,6 +60,15 @@ public class Main {
                     }
                     break;
                 case "search":
+                    if (value[1]==null) System.out.print("입력 오류\n>");
+                    else {
+                        if (value[2]==null) {
+                            addressBook.searchContact(value[1]);
+                        } else {
+                            int page = Integer.parseInt(value[2]);
+                            addressBook.searchContact(value[1], page);
+                        }
+                    }
                     break;
                 case "add":addressBook.addContact();break;
                 case "delete" : addressBook.deleteContact();break;

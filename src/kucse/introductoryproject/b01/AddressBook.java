@@ -1,5 +1,6 @@
 package kucse.introductoryproject.b01;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -71,6 +72,77 @@ public class AddressBook {
             System.out.print(onContact.getName());
         }
 
+    }
+    public void searchContact(String content) { searchContact(content, 1); }
+    public void searchContact(String content, int page) {
+        ArrayList<Contact> list = new ArrayList<>();
+        ArrayList<Contact> originalList = contactUtil.getContactList();
+        ArrayList<String> originalStringList = new ArrayList<>();
+        ArrayList<String> initialStringList = new ArrayList<>();
+
+        int originalListSize = originalList.size();
+
+        // Create originalStringList
+        for (int i = 0; i < originalListSize; i++) {
+            String str = "";
+            Contact c = originalList.get(i);
+            str = str.concat(c.getName());
+            str = str.concat("\t");
+            str = str.concat(c.getPhone());
+            str = str.concat("\t");
+            str = str.concat(c.getAddress());
+            str = str.concat("\t");
+            str = str.concat(c.getBirthday());
+            str = str.concat("\t");
+            str = str.concat(c.getMemo());
+
+            originalStringList.add(str);
+        }
+
+        // Create initialStringList
+        for (int i = 0; i < originalListSize; i++) {
+            String str = "";
+            Contact c = originalList.get(i);
+            str = str.concat(StringUtil.toConsonants(c.getName()));
+            str = str.concat("\t");
+            str = str.concat(StringUtil.toConsonants(c.getPhone()));
+            str = str.concat("\t");
+            str = str.concat(StringUtil.toConsonants(c.getAddress()));
+            str = str.concat("\t");
+            str = str.concat(StringUtil.toConsonants(c.getBirthday()));
+            str = str.concat("\t");
+            str = str.concat(StringUtil.toConsonants(c.getMemo()));
+
+            initialStringList.add(str);
+        }
+
+        //Create list
+        for (int i = 0; i < originalListSize; i++) {
+            if (originalStringList.get(i).contains(content)) {
+                list.add(originalList.get(i));
+            }
+        }
+        for (int i = 0; i < originalListSize; i++) {
+            if (initialStringList.get(i).contains(content)) {
+                list.add(originalList.get(i));
+            }
+        }
+
+        int maxPage = (list.size() - 1) / 10 + 1;
+        if (list.isEmpty()) {
+            System.out.println("주소록이 비어있습니다.");
+        } else if (maxPage < page) {
+            System.out.println("존재하지 않는 페이지입니다.");
+        } else {
+            System.out.println("---------------------");
+            for (int i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++){
+                if (list.size() <= i)
+                    break;
+                else
+                    System.out.println(list.get(i));
+            }
+            System.out.println("--------(" + page + "/" + maxPage + ")--------");
+        }
     }
     public void editContact() {
         if (onContact == null) {

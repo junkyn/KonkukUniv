@@ -155,6 +155,9 @@ public class Contact {
     public String getName(){
         return this.name;
     }
+    public String getAddress() { return address; }
+    public String getBirthday() { return birthday; }
+    public String getMemo() { return memo; }
     @Override
     public String toString() {
         return "Contact{" +
