@@ -1,11 +1,5 @@
 package kucse.introductoryproject.b01;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Scanner;
-
 public class Contact {
     private String name;
     private String phone;
@@ -44,7 +38,7 @@ public class Contact {
             System.out.println("전화번호는 필수 입력입니다");
         else if (phone.contains("\t"))
             System.out.println("탭(tab)은 사용하실 수 없습니다");
-        else if (ContactUtil.isPhoneDuplicated(phone))
+        else if (ContactUtil.getInstance().isPhoneDuplicated(phone))
             System.out.println("이미 존재하는 전화번호입니다");
         else {
             this.phone = phone;

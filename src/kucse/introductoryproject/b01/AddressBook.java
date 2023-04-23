@@ -1,24 +1,17 @@
 package kucse.introductoryproject.b01;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Scanner;
-
-import static kucse.introductoryproject.b01.ContactUtil.renameDuplicatedName;
-import static kucse.introductoryproject.b01.StringUtil.getNumbersOnly;
 
 public class AddressBook {
     private Contact onContact;
     private static Scanner scanner = new Scanner(System.in);
     private UserInfo userInfo;
+    private ContactUtil contactUtil;
 
     public AddressBook(UserInfo signedInUserInfo){
         userInfo = signedInUserInfo;
-        ContactUtil.init(userInfo.getId());
-
+        contactUtil = ContactUtil.getInstance(userInfo.getId());
     }
 
 
@@ -28,7 +21,7 @@ public class AddressBook {
         System.out.println("(Skip을 원하시면 Enter을 눌러주세요. 단, 이름과 전화번호는 필수)");
 
         do System.out.print("이름을 입력하세요\n> ");
-        while (!contact.setName(renameDuplicatedName(scanner.nextLine().trim())));
+        while (!contact.setName(contactUtil.renameDuplicatedName(scanner.nextLine().trim())));
 
         do System.out.print("전화번호를 입력하세요\n> ");
         while (!contact.setPhone(scanner.nextLine().trim()));
@@ -42,7 +35,7 @@ public class AddressBook {
         do System.out.print("메모를 입력하세요\n> ");
         while (!contact.setMemo(scanner.nextLine().trim()));
 
-        ContactUtil.appendContact(contact);
+        contactUtil.appendData(contact.toCsv());
         System.out.println("주소록에 추가되었습니다");
     }
 
@@ -51,7 +44,7 @@ public class AddressBook {
     }
     public void viewAddressBook(int page) { // view (page)
         resetOnContact();
-        ArrayList<Contact> list = ContactUtil.getContactList();
+        ArrayList<Contact> list = contactUtil.getContactList();
         int maxPage = (list.size() - 1) / 10 + 1;
         if (list.isEmpty()) {
             System.out.println("주소록이 비어있습니다");
@@ -69,7 +62,7 @@ public class AddressBook {
         }
     }
     public void viewAddressBook(String name) {
-        onContact = ContactUtil.getContactByName(name);
+        onContact = contactUtil.getContactByName(name);
         if (onContact == null) {
             System.out.println("존재하지 않는 연락처입니다");
         } else {
@@ -91,7 +84,7 @@ public class AddressBook {
                 order = scanner.nextLine();
                 if(order.equals("name")){
                     do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+">edit>name>");
-                    while (!onContact.setName(renameDuplicatedName(scanner.nextLine().trim())));
+                    while (!onContact.setName(contactUtil.renameDuplicatedName(scanner.nextLine().trim())));
                 }
                 else if(order.equals("num")){
                     do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+">edit>num>");
@@ -122,7 +115,7 @@ public class AddressBook {
             System.out.print("정말 삭제하시겠습니까? 삭제를 원하시면 '삭제'를 입력해주세요\n"+onContact.getName()+">delete>");
             answer = scanner.nextLine();
             if (answer.equals("삭제")) {
-                ContactUtil.removeContact(onContact);
+                contactUtil.removeContact(onContact);
                 onContact = null;
                 System.out.println("삭제되었습니다.");
             } else {
