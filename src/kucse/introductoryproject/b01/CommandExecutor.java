@@ -27,7 +27,15 @@ public class CommandExecutor {
                 case "exit" -> loop = false;
                 case "view" -> handleViewCommand(prompt.split(" "));
                 case "search" -> {
-                    // Handle search command
+                    if (prompt.split(" ")[1]==null) System.out.print("입력 오류\n>");
+                    else {
+                        if (prompt.split(" ")[2]==null) {
+                            addressBook.searchContact(prompt.split(" ")[1]);
+                        } else {
+                            int page = Integer.parseInt(prompt.split(" ")[2]);
+                            addressBook.searchContact(prompt.split(" ")[1], page);
+                        }
+                    }
                 }
                 case "add" -> addressBook.addContact();
                 case "delete" -> addressBook.deleteContact();

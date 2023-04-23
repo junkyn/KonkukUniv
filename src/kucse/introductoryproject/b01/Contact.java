@@ -63,22 +63,9 @@ public class Contact {
     public boolean setBirthday(String birthday) {
         if (birthday.contains("\t"))
             System.out.println("탭(tab)은 사용하실 수 없습니다");
-        else {
-            if(splitBirthday(birthday)){
-                if(month>=10){
-                    if(day>=10) this.birthday = year+"-"+month+"-"+day;
-                    else this.birthday = year+"-"+month+"-0"+day;
-                }
-                else{
-                    if(day>=10) this.birthday = year+"-0"+month+"-"+day;
-                    else this.birthday = year+"-0"+month+"-0"+day;
-                }
-                return true;
-            }
-
-            else
-                return false;
-
+        else if (validateBirthday(birthday)) {
+            this.birthday = birthday;
+            return true;
         }
 
         return false;
@@ -89,64 +76,18 @@ public class Contact {
 
         return true;
     }
-    public boolean splitBirthday(String birth){
-        String[] birthsplitted;
-        try{
-            System.out.println(birth.length());
-            if(birth.length()==8){
-                year = Integer.parseInt(birth.substring(0,4));
-                month = Integer.parseInt(birth.substring(4,6));
-                day = Integer.parseInt(birth.substring(6,8));
-            }
-            else if(birth.length()==10){
-                birthsplitted = birth.split("/|.|-");
-                // 이거 왜 안되는데!!!!!!!!!!!!!!!
-                year = Integer.parseInt(birthsplitted[0]);
-                month = Integer.parseInt(birthsplitted[1]);
-                day = Integer.parseInt(birthsplitted[2]);
-            }
-            else{
-                //throw(new Exception());
-            }
 
-            if(year < 1000 || year > 2999){
-                System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
-                return false;}
-
-            if(month< 1 || month > 12) {
-                System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
-                return false;}
-            if((year % 400==0 || (year%4==0 && year%100!=0))&& month == 2){
-                if(day<1 || day > 29) {
-                    System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
-                    return false;}
-            }else if(month == 2){
-                if(day<1 || day > 28) {
-                    System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
-                    return false;}
-            }else{
-                switch(month){
-                    case 1: case 3: case 5: case 7: case 8: case 10: case 12: if(day<1 || day>31) {
-                        System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
-                        return false;
-                    }break;
-                    default : if(day < 1 || day>30){
-                        System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
-                        return false;
-                    }break;
-
-                }
+    public boolean validateBirthday(String birthday) {
+        if (birthday.matches("^(19|20)\\d\\d(?:-|\\.|)\\d{1,2}(?:-|\\.|)\\d{1,2}$")) {
+            String[] formats = { "yyyyMMdd", "yyyy-M-d", "yyyy.M.d" };
+            for (String format : formats) {
+                DateValidatorUsingDateFormat validator = new DateValidatorUsingDateFormat(format);
+                if (validator.isValid(birthday)) return true;
             }
-            return true;
-        }catch(NumberFormatException e) {
-            System.out.println("옳지 않은 입력입니다. 다시 입력해주세요");
-            return false;
-        }catch(ArrayIndexOutOfBoundsException e){
-            System.out.println("옳지 않은 입력입니다. 다시 입력해주세요");
-            return false;
         }
 
-
+        System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
+        return false;
     }
 
     public String getPhone(){
