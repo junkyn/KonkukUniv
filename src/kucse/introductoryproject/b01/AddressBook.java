@@ -52,12 +52,16 @@ public class AddressBook {
         } else if (maxPage < page) {
             System.out.println("존재하지 않는 페이지입니다");
         } else {
-            System.out.println("---------------------");
+            System.out.println("\n---------------------");
             for (int i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++){
                 if (list.size() <= i)
                     break;
-                else
-                    System.out.println(list.get(i));
+                else {
+                    System.out.println(list.get(i).getName()+" "+list.get(i).getPhone());
+                    if ((i+1)%10 != 0 && list.size() > (i+1)) {
+                        System.out.print("\n");
+                    }
+                }
             }
             System.out.println("--------(" + page + "/" + maxPage + ")--------");
         }
@@ -134,12 +138,16 @@ public class AddressBook {
         } else if (maxPage < page) {
             System.out.println("존재하지 않는 페이지입니다.");
         } else {
-            System.out.println("---------------------");
+            System.out.println("\n---------------------");
             for (int i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++){
                 if (list.size() <= i)
                     break;
-                else
-                    System.out.println(list.get(i).getName()+" "+list.get(i).getPhone()+"\n");
+                else {
+                    System.out.println(list.get(i).getName()+" "+list.get(i).getPhone());
+                    if ((i+1)%10 != 0 && list.size() > (i+1)) {
+                        System.out.print("\n");
+                    }
+                }
             }
             System.out.println("--------(" + page + "/" + maxPage + ")--------");
         }
