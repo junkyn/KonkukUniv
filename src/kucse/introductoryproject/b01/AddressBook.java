@@ -49,7 +49,7 @@ public class AddressBook {
         if (list.isEmpty()) {
             System.out.println("주소록이 비어있습니다");
         } else if (maxPage < page) {
-            System.out.println("존재하지 않는 페이지 입니다");
+            System.out.println("존재하지 않는 페이지입니다");
         } else {
             System.out.println("---------------------");
             for (int i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++){

@@ -90,35 +90,32 @@ public class Contact {
         return true;
     }
     public boolean splitBirthday(String birth){
-        String check;
-        String tempMonth;
+        String[] birthsplitted;
         try{
-            year = Integer.parseInt(birth.substring(0,4));
+            System.out.println(birth.length());
+            if(birth.length()==8){
+                year = Integer.parseInt(birth.substring(0,4));
+                month = Integer.parseInt(birth.substring(4,6));
+                day = Integer.parseInt(birth.substring(6,8));
+            }
+            else if(birth.length()==10){
+                birthsplitted = birth.split("/|.|-");
+                // 이거 왜 안되는데!!!!!!!!!!!!!!!
+                year = Integer.parseInt(birthsplitted[0]);
+                month = Integer.parseInt(birthsplitted[1]);
+                day = Integer.parseInt(birthsplitted[2]);
+            }
+            else{
+                //throw(new Exception());
+            }
+
             if(year < 1000 || year > 2999){
                 System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
                 return false;}
-            check = birth.substring(4);
-            if(check.startsWith("/") || check.startsWith(".") || check.startsWith("-")){
-                tempMonth = check.substring(1,3);
-                if(tempMonth.contains("/")|| tempMonth.contains(".")||tempMonth.contains("-")){
-                    month = Integer.parseInt(tempMonth.substring(0,1));
-                    check = check.substring(2);
-                }else{
-                    month = Integer.parseInt(tempMonth);
-                    check = check.substring(3);
-                }
-            }else{
-                month = Integer.parseInt(check.substring(0,2));
-                check = check.substring(2);
-            }
+
             if(month< 1 || month > 12) {
                 System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
                 return false;}
-            if(check.startsWith("/") || check.startsWith(".") || check.startsWith("-")){
-                day = Integer.parseInt(check.substring(1));
-            }else{
-                day = Integer.parseInt(check);
-            }
             if((year % 400==0 || (year%4==0 && year%100!=0))&& month == 2){
                 if(day<1 || day > 29) {
                     System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
@@ -141,8 +138,12 @@ public class Contact {
                 }
             }
             return true;
-        }catch(NumberFormatException e){
-            System.out.println("옳지 않은 입력입니다. 다시 입력해주세요");return false;
+        }catch(NumberFormatException e) {
+            System.out.println("옳지 않은 입력입니다. 다시 입력해주세요");
+            return false;
+        }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("옳지 않은 입력입니다. 다시 입력해주세요");
+            return false;
         }
 
 
