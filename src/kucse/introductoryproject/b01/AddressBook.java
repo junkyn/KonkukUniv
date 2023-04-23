@@ -80,7 +80,7 @@ public class AddressBook {
             do {
                 System.out.println("수정할 부분을 입력해주세요");
                 System.out.println("(name : 이름, num : 전화번호, address : 주소, birth : 생년월일, memo : 메모, cancel : 취소");
-                System.out.println(onContact.getName()+">edit>");
+                System.out.print(onContact.getName()+">edit>");
                 order = scanner.nextLine();
                 if(order.equals("name")){
                     do System.out.println("수정할 내용을 입력해주세요\n"+onContact.getName()+">edit>name>");

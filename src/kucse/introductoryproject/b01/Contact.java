@@ -5,6 +5,7 @@ public class Contact {
     private String phone;
     private String address;
     private String birthday;
+    private int year,month,day;
     private String memo;
 
     public Contact() {
@@ -60,11 +61,24 @@ public class Contact {
     }
 
     public boolean setBirthday(String birthday) {
-        if (address.contains("\t"))
+        if (birthday.contains("\t"))
             System.out.println("탭(tab)은 사용하실 수 없습니다");
         else {
-            this.birthday = birthday;
-            return true;
+            if(splitBirthday(birthday)){
+                if(month>=10){
+                    if(day>=10) this.birthday = year+"-"+month+"-"+day;
+                    else this.birthday = year+"-"+month+"-0"+day;
+                }
+                else{
+                    if(day>=10) this.birthday = year+"-0"+month+"-"+day;
+                    else this.birthday = year+"-0"+month+"-0"+day;
+                }
+                return true;
+            }
+
+            else
+                return false;
+
         }
 
         return false;
@@ -74,6 +88,64 @@ public class Contact {
         this.memo = memo;
 
         return true;
+    }
+    public boolean splitBirthday(String birth){
+        String check;
+        String tempMonth;
+        try{
+            year = Integer.parseInt(birth.substring(0,4));
+            if(year < 1000 || year > 2999){
+                System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
+                return false;}
+            check = birth.substring(4);
+            if(check.startsWith("/") || check.startsWith(".") || check.startsWith("-")){
+                tempMonth = check.substring(1,3);
+                if(tempMonth.contains("/")|| tempMonth.contains(".")||tempMonth.contains("-")){
+                    month = Integer.parseInt(tempMonth.substring(0,1));
+                    check = check.substring(2);
+                }else{
+                    month = Integer.parseInt(tempMonth);
+                    check = check.substring(3);
+                }
+            }else{
+                month = Integer.parseInt(check.substring(0,2));
+                check = check.substring(2);
+            }
+            if(month< 1 || month > 12) {
+                System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
+                return false;}
+            if(check.startsWith("/") || check.startsWith(".") || check.startsWith("-")){
+                day = Integer.parseInt(check.substring(1));
+            }else{
+                day = Integer.parseInt(check);
+            }
+            if((year % 400==0 || (year%4==0 && year%100!=0))&& month == 2){
+                if(day<1 || day > 29) {
+                    System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
+                    return false;}
+            }else if(month == 2){
+                if(day<1 || day > 28) {
+                    System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
+                    return false;}
+            }else{
+                switch(month){
+                    case 1: case 3: case 5: case 7: case 8: case 10: case 12: if(day<1 || day>31) {
+                        System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
+                        return false;
+                    }break;
+                    default : if(day < 1 || day>30){
+                        System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
+                        return false;
+                    }break;
+
+                }
+            }
+            return true;
+        }catch(NumberFormatException e){
+            System.out.println("옳지 않은 입력입니다. 다시 입력해주세요");return false;
+        }
+
+
     }
 
     public String getPhone(){
