@@ -26,17 +26,7 @@ public class CommandExecutor {
                 }
                 case "exit" -> loop = false;
                 case "view" -> handleViewCommand(prompt.split(" "));
-                case "search" -> {
-                    if (prompt.split(" ")[1]==null) System.out.print("입력 오류\n>");
-                    else {
-                        if (prompt.split(" ")[2]==null) {
-                            addressBook.searchContact(prompt.split(" ")[1]);
-                        } else {
-                            int page = Integer.parseInt(prompt.split(" ")[2]);
-                            addressBook.searchContact(prompt.split(" ")[1], page);
-                        }
-                    }
-                }
+                case "search" -> handleSearchCommand(prompt.split(" "));
                 case "add" -> addressBook.addContact();
                 case "delete" -> addressBook.deleteContact();
                 case "edit" -> addressBook.editContact();
@@ -63,20 +53,36 @@ public class CommandExecutor {
         }
     }
 
+    private void handleSearchCommand(String[] input) {
+        if (input.length < 2)
+            System.out.println("입력 오류");
+        else if (input.length < 3) {
+            addressBook.searchContact(input[1]);
+        } else if (!StringUtil.isNumber(input[2])) {
+            System.out.println("입력 오류");
+        } else {
+            addressBook.searchContact(input[1], Integer.parseInt(input[2]));
+        }
+    }
+
     private void displayHelpList() {
-        System.out.println();
-        System.out.println("-- view <value> : 주소록 열람");
-        System.out.println("\t<value>가 페이지 수라면 그 페이지에 해당하는 주소록을 출력합니다");
-        System.out.println("\t<value>가 이름이라면 그 이름에 해당하는 연락처를 열람합니다");
-        System.out.println("-- search <value1><value2> : 주소록 검색");
-        System.out.println("\t<value1>의 내용을 포함하는 연락처들 중");
-        System.out.println("\t<value2>에 해당하는 페이지의 연락처들을 출력합니다");
-        System.out.println("-- add 주소록 추가");
-        System.out.println("-- edit : 열람하고 있는 연락처 수정");
-        System.out.println("-- delete : 열람하고 있는 연락처 삭제");
-        System.out.println("-- myprofile : 내 정보 수정");
-        System.out.println("-- logout : 로그아웃");
-        System.out.println("-- help : 도움말");
-        System.out.println("-- exit : 프로그램 종료");
+        System.out.println("""
+                ========================= 도 움 말 =========================
+                - view <value> : 주소록 열람
+                \t<value>가 페이지 수라면 그 페이지에 해당하는 주소록을 출력합니다
+                \t<value>가 이름이라면 그 이름에 해당하는 연락처를 열람합니다
+                - search <value1> <value2> : 주소록 검색
+                \t<value1>의 내용을 포함하는 연락처들 중
+                \t<value2>에 해당하는 페이지의 연락처들을 출력합니다
+                - add 주소록 추가
+                - edit : 열람하고 있는 연락처 수정
+                - delete : 열람하고 있는 연락처 삭제
+                - myprofile : 내 정보 수정
+                - logout : 로그아웃
+                - help : 도움말
+                - exit : 프로그램 종료
+                ===========================================================
+                """);
+
     }
 }

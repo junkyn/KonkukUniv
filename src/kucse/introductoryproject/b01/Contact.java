@@ -5,7 +5,7 @@ public class Contact {
     private String phone;
     private String address;
     private String birthday;
-    private int year,month,day;
+    private int year, month, day;
     private String memo;
 
     public Contact() {
@@ -112,5 +112,9 @@ public class Contact {
 
     public String toCsv() {
         return name + "\t" + phone + "\t" + address + "\t" + birthday + "\t" + memo + "\n";
+    }
+
+    public String toSearchableString() {
+        return toCsv() + StringUtil.toConsonants(toCsv());
     }
 }

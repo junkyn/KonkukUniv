@@ -7,15 +7,25 @@ public class StringUtil {
         return str.replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣]", "");
     }
 
+    public static boolean isHangul(char str) {
+        return '가' <= str && str <= '힣';
+    }
+
+    public static boolean isNumber(String str) {
+        return str.matches("[0-9]");
+    }
+
     public static String getNumbersOnly(String str) { // 정수만 추출
         return str.replaceAll("[^0-9]","");
     }
 
     public static String toConsonants(String str) {
         StringBuilder consonants = new StringBuilder();
-        str = getHangulOnly(str);
         for (int i = 0; i < str.length(); i++) {
-            consonants.append(CONSONANTS[((str.charAt(i) - 0XAC00) / 28 / 21)]);
+            if (isHangul(str.charAt(i)))
+                consonants.append(CONSONANTS[((str.charAt(i) - 0XAC00) / 28 / 21)]);
+            else
+                consonants.append(str.charAt(i));
         }
 
         return consonants.toString();

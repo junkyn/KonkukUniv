@@ -1,8 +1,9 @@
 package kucse.introductoryproject.b01;
 
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.lang.Math.min;
 
 public class AddressBook {
     private Contact onContact;
@@ -45,26 +46,7 @@ public class AddressBook {
     }
     public void viewAddressBook(int page) { // view (page)
         resetOnContact();
-        ArrayList<Contact> list = contactUtil.getContactList();
-        int maxPage = (list.size() - 1) / 10 + 1;
-        if (list.isEmpty()) {
-            System.out.println("주소록이 비어있습니다");
-        } else if (maxPage < page) {
-            System.out.println("존재하지 않는 페이지입니다");
-        } else {
-            System.out.println("\n---------------------");
-            for (int i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++){
-                if (list.size() <= i)
-                    break;
-                else {
-                    System.out.println(list.get(i).getName()+" "+list.get(i).getPhone());
-                    if ((i+1)%10 != 0 && list.size() > (i+1)) {
-                        System.out.print("\n");
-                    }
-                }
-            }
-            System.out.println("--------(" + page + "/" + maxPage + ")--------");
-        }
+        printList(contactUtil.getContactList(), page);
     }
     public void viewAddressBook(String name) {
         onContact = contactUtil.getContactByName(name);
@@ -77,81 +59,36 @@ public class AddressBook {
         }
 
     }
-    public void searchContact(String content) { searchContact(content, 1); }
-    public void searchContact(String content, int page) {
-        ArrayList<Contact> list = new ArrayList<>();
-        ArrayList<Contact> originalList = contactUtil.getContactList();
-        ArrayList<String> originalStringList = new ArrayList<>();
-        ArrayList<String> initialStringList = new ArrayList<>();
+    public void searchContact(String query) {
+        searchContact(query, 1);
+    }
+    public void searchContact(String query, int page) {
+        List<Contact> searchResult = contactUtil.getContactList()
+                .stream()
+                .filter(it -> it.toSearchableString().contains(query))
+                .toList();
 
-        int originalListSize = originalList.size();
+        printList(searchResult, page);
+    }
 
-        // Create originalStringList
-        for (int i = 0; i < originalListSize; i++) {
-            String str = "";
-            Contact c = originalList.get(i);
-            str = str.concat(c.getName());
-            str = str.concat("\t");
-            str = str.concat(c.getPhone());
-            str = str.concat("\t");
-            str = str.concat(c.getAddress());
-            str = str.concat("\t");
-            str = str.concat(c.getBirthday());
-            str = str.concat("\t");
-            str = str.concat(c.getMemo());
-
-            originalStringList.add(str);
-        }
-
-        // Create initialStringList
-        for (int i = 0; i < originalListSize; i++) {
-            String str = "";
-            Contact c = originalList.get(i);
-            str = str.concat(StringUtil.toConsonants(c.getName()));
-            str = str.concat("\t");
-            str = str.concat(c.getPhone());
-            str = str.concat("\t");
-            str = str.concat(StringUtil.toConsonants(c.getAddress()));
-            str = str.concat("\t");
-            str = str.concat(c.getBirthday());
-            str = str.concat("\t");
-            str = str.concat(StringUtil.toConsonants(c.getMemo()));
-
-            initialStringList.add(str);
-        }
-
-        //Create list
-        for (int i = 0; i < originalListSize; i++) {
-            if (originalStringList.get(i).contains(content)) {
-                list.add(originalList.get(i));
-            }
-        }
-        for (int i = 0; i < originalListSize; i++) {
-            if (initialStringList.get(i).contains(content)) {
-                list.add(originalList.get(i));
-            }
-        }
-
+    public void printList(List<Contact> list, int page) {
         int maxPage = (list.size() - 1) / 10 + 1;
         if (list.isEmpty()) {
-            System.out.println("주소록이 비어있습니다.");
-        } else if (maxPage < page) {
+            System.out.println("결과가 없습니다.");
+        } else if (page < 1 || maxPage < page) {
             System.out.println("존재하지 않는 페이지입니다.");
         } else {
             System.out.println("\n---------------------");
-            for (int i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++){
-                if (list.size() <= i)
-                    break;
-                else {
-                    System.out.println(list.get(i).getName()+" "+list.get(i).getPhone());
-                    if ((i+1)%10 != 0 && list.size() > (i+1)) {
-                        System.out.print("\n");
-                    }
-                }
+            List<Contact> pageList = list.subList((page - 1) * 10, min((page - 1) * 10 + 10, list.size()));
+            int maxNameLength = pageList.stream().mapToInt(it -> it.getName().length()).max().getAsInt();
+            for (Contact contact : pageList) {
+                System.out.printf("%-" + maxNameLength + "s\t%s\n", contact.getName(), contact.getPhone());
             }
+
             System.out.println("--------(" + page + "/" + maxPage + ")--------");
         }
     }
+
     public void editContact() {
         if (onContact == null) {
             System.out.println("수정할 연락처를 열람해주세요");
