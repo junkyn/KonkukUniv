@@ -109,11 +109,11 @@ public class AddressBook {
             Contact c = originalList.get(i);
             str = str.concat(StringUtil.toConsonants(c.getName()));
             str = str.concat("\t");
-            str = str.concat(StringUtil.toConsonants(c.getPhone()));
+            str = str.concat(c.getPhone());
             str = str.concat("\t");
             str = str.concat(StringUtil.toConsonants(c.getAddress()));
             str = str.concat("\t");
-            str = str.concat(StringUtil.toConsonants(c.getBirthday()));
+            str = str.concat(c.getBirthday());
             str = str.concat("\t");
             str = str.concat(StringUtil.toConsonants(c.getMemo()));
 
