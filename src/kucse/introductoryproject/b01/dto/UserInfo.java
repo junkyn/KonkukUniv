@@ -59,7 +59,7 @@ public class UserInfo extends UserData {
         else if (password.matches(".*\\s.*"))
             System.out.println("암호는 공백 또는 탭을 포함할 수 없습니다.");
         else if (!password.matches("^[A-Za-z0-9!@#$%^&*()_+\\-=,.<>/?]*$")) {
-            System.out.println("암호는 영문 대소문자, 숫자, 특수문자(! @ # $ % ^ & * ( ) _ + - = , . < > / ? ; :)만 사용할 수 있습니다.");
+            System.out.println("암호는 영문 대소문자, 숫자, 특수문자(! @ # $ % ^ & * ( ) _ + - = , . < > / ?)만 사용할 수 있습니다.");
         } else {
             this.password = password;
             return true;

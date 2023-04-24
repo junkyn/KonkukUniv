@@ -45,6 +45,8 @@ public class UserInfoHandler extends CsvHandler implements Observer {
                 UserInfo userInfo = new UserInfo();
 
                 try {
+                    if (userInfoHashMap.isIdPresent(userInfoStr[0].trim()))
+                        throw new IllegalArgumentException("중복된 아이디입니다.");
                     if (!userInfo.validateId(userInfoStr[0].trim()))
                         throw new IllegalArgumentException("아이디 형식이 올바르지 않습니다.");
                     if (!userInfo.validatePassword(userInfoStr[1].trim()))
