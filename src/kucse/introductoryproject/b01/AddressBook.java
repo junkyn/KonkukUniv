@@ -7,6 +7,7 @@ import kucse.introductoryproject.b01.observer.ObservableContactHashSet;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Stream;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.min;
@@ -59,19 +60,23 @@ public class AddressBook {
     }
 
     public void printBirthday() {
-
-        System.out.println("=============== 오늘 생일인 친구 ===============");
         String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-
-        contactHashSet.stream()
+        List<String> list = contactHashSet.stream()
                 .filter(it -> it.getBirthday().length() == 10)
                 .filter(it -> it.getBirthday().substring(5).equals(today.substring(5)))
                 .map(it -> it.getName() + "("
                         + (parseInt(today.substring(0, 4)) + 1 - parseInt(it.getBirthday().substring(0, 4)))
                         + "살)\t"
                         + it.getPhone() + '\t'
-                        )
-                .forEach(System.out::println);
+                ).toList();
+        if (list.isEmpty()) return;
+        System.out.println("""
+                                ┌ iii ┐
+                └ ( ˇ 3ˇ)┘     ┌       ┐    └ (^∀^*@)
+                             ┌─  [HBD]  ─┐
+                """);
+        System.out.println("=============== 오늘 생일인 친구 ===============");
+        list.forEach(System.out::println);
 
         System.out.println("=============================================");
     }
