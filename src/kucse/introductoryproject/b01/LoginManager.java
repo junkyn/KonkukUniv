@@ -14,7 +14,9 @@ public class LoginManager {
 
     public UserInfo show() {
         UserInfo signedInUser = null;
-
+        System.out.println("┌────────────────┐");
+        System.out.println("│  KUDRESS BOOK  │");
+        System.out.println("└────────────────┘");
         System.out.print("환영합니다. ");
         do {
             System.out.print("login이나 register를 통해 로그인이나 회원가입을 해주세요\n> ");
