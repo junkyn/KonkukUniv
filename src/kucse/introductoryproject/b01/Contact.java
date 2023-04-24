@@ -14,14 +14,8 @@ public class Contact extends UserData {
     }
 
     @Override
-    public void setName() {
-        do System.out.print("이름을 입력하세요\n> ");
-        while (!validateName(ContactUtil.getInstance().renameDuplicatedName(scanner.nextLine().trim())));
-    }
-
-    @Override
     protected boolean validatePhone(String phone) {
-        if (ContactUtil.getInstance().isPhoneDuplicated(phone))
+        if (ContactUtil.getInstance().contactHashSet.isPhoneDuplicated(phone))
             System.out.println("이미 존재하는 전화번호입니다");
         else {
             return super.validatePhone(phone);
@@ -33,6 +27,7 @@ public class Contact extends UserData {
     public void setMemo() {
         System.out.print("메모를 입력하세요\n> ");
         this.memo = scanner.nextLine().trim();
+        notifyObservers();
     }
     public String getMemo() { return memo; }
 
@@ -52,4 +47,5 @@ public class Contact extends UserData {
     public String toSearchableString() {
         return toCsv() + StringUtil.toConsonants(toCsv());
     }
+
 }

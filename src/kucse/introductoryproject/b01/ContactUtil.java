@@ -2,15 +2,12 @@ package kucse.introductoryproject.b01;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicInteger;
 
-public class ContactUtil extends CsvUtil {
+public class ContactUtil extends CsvUtil implements Observer {
     private static volatile ContactUtil instance = null;
-    private HashSet<Contact> contactHashSet;
+    public ObservableContactHashSet contactHashSet;
 
     private ContactUtil(String fileName) {
         super(fileName);
@@ -38,7 +35,7 @@ public class ContactUtil extends CsvUtil {
 
     @Override
     protected void parseDataFromCSV(File file) {
-        contactHashSet = new HashSet<>();
+        contactHashSet = new ObservableContactHashSet();
         try (Scanner fileScanner = new Scanner(file)){
             while(fileScanner.hasNextLine()) {
                 String str = fileScanner.nextLine();
@@ -56,37 +53,13 @@ public class ContactUtil extends CsvUtil {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        contactHashSet.addObserver(this);
     }
 
-    public void appendData(Contact contact) {
-        super.appendData(contact.toCsv());
-        contactHashSet.add(contact);
-    }
-
-    public ArrayList<Contact> getContactList() {
-        return new ArrayList<>(contactHashSet);
-    }
-
-    public Contact getContactByName(String name) {
-        return contactHashSet.stream().filter(it -> it.getName().equals(name)).findFirst().orElse(null);
-    }
-
-    public void removeContact(Contact contact) {
-        contactHashSet.remove(contact);
-    }
-
-    public boolean isPhoneDuplicated(String phone) {
-        return contactHashSet.stream().anyMatch(it -> StringUtil.getNumbersOnly(it.getPhone()).equals(StringUtil.getNumbersOnly(phone)));
-    }
-
-    public String renameDuplicatedName(String name) {
-        AtomicInteger count = new AtomicInteger();
-        if (contactHashSet.stream().anyMatch(it -> it.getName().equals(name)))
-            count.incrementAndGet();
-
-        while (count.get() > 0 && contactHashSet.stream().anyMatch(it -> it.getName().equals(name + "(" + count.get() + ")")))
-            count.incrementAndGet();
-
-        return count.get() == 0 ? name : name + "(" + count.get() + ")";
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println(arg);
+        System.out.println(contactHashSet);
+        super.writeData(contactHashSet.toString());
     }
 }

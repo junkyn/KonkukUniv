@@ -27,10 +27,11 @@ public class UserInfo extends UserData {
     public void setId() {
         do System.out.print("ID를 입력하세요\n> ");
         while (!validateId(scanner.nextLine().trim()));
+        notifyObservers();
     }
 
     private boolean validateId(String id) {
-        if (UserInfoUtil.getInstance().isIdPresent(id)) {
+        if (UserInfoUtil.getInstance().userInfoHashMap.isIdPresent(id)) {
             System.out.println("이미 존재하는 아이디입니다.");
         } else if (id.length() < 5)
             System.out.println("ID의 길이는 5 이상이어야 합니다.");
@@ -47,6 +48,7 @@ public class UserInfo extends UserData {
     public void setPassword() {
         do System.out.print("비밀번호를 입력하세요\n> ");
         while (!validatePassword(scanner.nextLine().trim()));
+        notifyObservers();
     }
 
     private boolean validatePassword(String password) {

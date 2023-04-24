@@ -2,13 +2,12 @@ package kucse.introductoryproject.b01;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class UserInfoUtil extends CsvUtil {
+public class UserInfoUtil extends CsvUtil implements Observer {
     private static volatile UserInfoUtil instance = null;
-    private HashMap<String, UserInfo> userInfoHashMap;
+    public ObservableUserInfoHashMap userInfoHashMap;
 
 
     protected UserInfoUtil(String fileName) {
@@ -30,26 +29,9 @@ public class UserInfoUtil extends CsvUtil {
         return instance;
     }
 
-    public void appendData(UserInfo userInfo) {
-        super.appendData(userInfo.toCsv());
-        userInfoHashMap.put(userInfo.getId(), userInfo);
-    }
-
-    public boolean isIdPresent(String id) {
-        return userInfoHashMap.containsKey(id);
-    }
-
-    public boolean isUserInfoValid(String id, String password) {
-        return userInfoHashMap.get(id).isMatchingPassword(password);
-    }
-
-    public UserInfo getUserInfoById(String id) {
-        return userInfoHashMap.get(id);
-    }
-
     @Override
     protected void parseDataFromCSV(File file) {
-        userInfoHashMap = new HashMap<>();
+        userInfoHashMap = new ObservableUserInfoHashMap();
         try (Scanner fileScanner = new Scanner(file)){
             while(fileScanner.hasNextLine()) {
                 String str = fileScanner.nextLine();
@@ -62,11 +44,16 @@ public class UserInfoUtil extends CsvUtil {
                 String address = userInfo.length < 5 ? "" : userInfo[4].trim();
                 String birthday = userInfo.length < 6 ? "" : userInfo[5].trim();
 
-                userInfoHashMap.put(id, new UserInfo(id, password, name, phone, address, birthday));
+                userInfoHashMap.append(new UserInfo(id, password, name, phone, address, birthday));
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        userInfoHashMap.addObserver(this);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        super.writeData(userInfoHashMap.toString());
     }
 }

@@ -3,23 +3,20 @@ package kucse.introductoryproject.b01;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.*;
 
 public abstract class CsvUtil {
-    protected FileWriter fileWriter;
     protected String fileName;
 
-    protected CsvUtil(String fileName) {
+    protected File originalFile;
+
+    public CsvUtil(String fileName) {
         this.fileName = fileName;
-        File csvFile;
         try {
-            csvFile = new File(fileName + ".csv");
+            originalFile = new File(fileName + ".csv");
+            if (!originalFile.exists()) originalFile.createNewFile();
 
-            if (!csvFile.exists()) csvFile.createNewFile();
-
-            fileWriter = new FileWriter(csvFile, true);
-
-            parseDataFromCSV(csvFile);
-
+            parseDataFromCSV(originalFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -27,18 +24,21 @@ public abstract class CsvUtil {
 
     protected abstract void parseDataFromCSV(File file);
 
-    protected void appendData(String csvString) {
+    protected synchronized void writeData(String data) {
         try {
-            fileWriter.write(csvString);
-            fileWriter.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+            Files.move(Path.of(fileName + ".csv"), Path.of(fileName + ".csv.tmp"));
 
-    public void closeWriterStream() {
-        try {
-            fileWriter.close();
+            File newFile = new File(fileName + ".csv");
+            if (!newFile.exists()) newFile.createNewFile();
+
+            FileWriter fileWriter1 = new FileWriter(newFile);
+            fileWriter1.write(data);
+            fileWriter1.flush();
+            fileWriter1.close();
+
+            Files.delete(Path.of(fileName + ".csv.tmp"));
+            originalFile = newFile;
+
         } catch (IOException e) {
             e.printStackTrace();
         }

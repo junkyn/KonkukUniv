@@ -7,12 +7,12 @@ import static kucse.introductoryproject.b01.Main.scanner;
 
 public class AddressBook {
     private Contact onContact;
-    private UserInfo userInfo;
-    private ContactUtil contactUtil;
+    private final UserInfo userInfo;
+    private final ObservableContactHashSet contactHashSet;
 
     public AddressBook(UserInfo signedInUserInfo) {
         userInfo = signedInUserInfo;
-        contactUtil = ContactUtil.getInstance(userInfo.getId());
+        contactHashSet = ContactUtil.getInstance(userInfo.getId()).contactHashSet;
     }
 
 
@@ -27,7 +27,7 @@ public class AddressBook {
         contact.setBirthday();
         contact.setMemo();
 
-        contactUtil.appendData(contact);
+        contactHashSet.add(contact);
         System.out.println("주소록에 추가되었습니다");
     }
 
@@ -36,10 +36,10 @@ public class AddressBook {
     }
     public void viewAddressBook(int page) { // view (page)
         onContact = null;
-        printList(contactUtil.getContactList(), page);
+        printList(contactHashSet.toArrayList(), page);
     }
     public void viewAddressBook(String name) {
-        onContact = contactUtil.getContactByName(name);
+        onContact = contactHashSet.getContactByName(name);
         if (onContact == null) {
             System.out.println("존재하지 않는 연락처입니다");
         } else {
@@ -53,7 +53,7 @@ public class AddressBook {
         searchContact(query, 1);
     }
     public void searchContact(String query, int page) {
-        List<Contact> searchResult = contactUtil.getContactList()
+        List<Contact> searchResult = contactHashSet.toArrayList()
                 .stream()
                 .filter(it -> it.toSearchableString().contains(query))
                 .toList();
@@ -119,7 +119,7 @@ public class AddressBook {
             System.out.print("정말 삭제하시겠습니까? 삭제를 원하시면 '삭제'를 입력해주세요\n" + onContact.getName() + " > delete > ");
             answer = scanner.nextLine();
             if (answer.equals("삭제")) {
-                contactUtil.removeContact(onContact);
+                contactHashSet.remove(onContact);
                 onContact = null;
                 System.out.println("삭제되었습니다.");
             } else {

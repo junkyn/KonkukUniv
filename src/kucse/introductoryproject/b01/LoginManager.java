@@ -3,9 +3,9 @@ package kucse.introductoryproject.b01;
 import static kucse.introductoryproject.b01.Main.scanner;
 
 public class LoginManager {
-    UserInfoUtil userInfoUtil;
+    ObservableUserInfoHashMap userInfoHashMap;
     public LoginManager() {
-        userInfoUtil = UserInfoUtil.getInstance();
+        userInfoHashMap = UserInfoUtil.getInstance().userInfoHashMap;
     }
 
     public UserInfo show() {
@@ -39,17 +39,17 @@ public class LoginManager {
         userInfo.setAddress();
         userInfo.setBirthday();
 
-        userInfoUtil.appendData(userInfo);
+        userInfoHashMap.append(userInfo);
     }
 
     public UserInfo login(String id, String pw) {
-        if (!userInfoUtil.isIdPresent(id)) {
+        if (!userInfoHashMap.isIdPresent(id)) {
             System.out.println("존재하지 않는 아이디입니다\n");
             return null;
         }
 
-        if (userInfoUtil.isUserInfoValid(id, pw)) {
-            UserInfo loggedInUser = userInfoUtil.getUserInfoById(id);
+        if (userInfoHashMap.isUserInfoValid(id, pw)) {
+            UserInfo loggedInUser = userInfoHashMap.getUserInfoById(id);
             System.out.println(loggedInUser.getName() + "님 환영합니다\n");
             return loggedInUser;
         } else {

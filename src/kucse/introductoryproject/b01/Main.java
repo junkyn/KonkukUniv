@@ -17,8 +17,6 @@ public class Main {
         } while (signedInUser == null);
 
         System.out.println("프로그램을 종료합니다. 이용해주셔서 감사합니다");
-        ContactUtil.getInstance().closeWriterStream();
-        userInfoUtil.closeWriterStream();
     }
 
     public static void showLoginManager() {

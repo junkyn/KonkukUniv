@@ -1,8 +1,12 @@
 package kucse.introductoryproject.b01;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static kucse.introductoryproject.b01.Main.scanner;
 
-public class UserData {
+public class UserData implements Observable {
+    private final List<Observer> observers = new ArrayList<>();
     private String name;
     private String phone;
     private String address;
@@ -23,6 +27,7 @@ public class UserData {
     public void setName() {
         do System.out.print("이름을 입력하세요\n> ");
         while (!validateName(scanner.nextLine().trim()));
+        notifyObservers();
     }
 
     protected boolean validateName(String name) {
@@ -43,6 +48,7 @@ public class UserData {
     public void setPhone() {
         do System.out.print("전화번호를 입력하세요\n> ");
         while (!validatePhone(scanner.nextLine().trim()));
+        notifyObservers();
     }
 
     protected boolean validatePhone(String phone) {
@@ -61,6 +67,7 @@ public class UserData {
     public void setAddress() {
         do System.out.print("주소를 입력하세요\n> ");
         while (!validateAddress(scanner.nextLine().trim()));
+        notifyObservers();
     }
 
     private boolean validateAddress(String address) {
@@ -77,6 +84,7 @@ public class UserData {
     public void setBirthday() {
         do System.out.print("생일을 입력하세요\n> ");
         while (!validateBirthday(scanner.nextLine().trim()));
+        notifyObservers();
     }
 
     private boolean validateBirthday(String birthday) {
@@ -129,4 +137,20 @@ public class UserData {
         return name + "\t" + phone + "\t" + address + "\t" + birthday;
     }
 
+    @Override
+    public void notifyObservers() {
+        for (Observer o : observers) {
+            o.update(this, null);
+        }
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void removeObserver(Object o) {
+        observers.remove(o);
+    }
 }
