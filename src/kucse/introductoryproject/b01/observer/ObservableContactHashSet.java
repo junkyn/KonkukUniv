@@ -14,7 +14,6 @@ public class ObservableContactHashSet extends HashSet<Contact> implements Observ
 
     @Override
     public boolean add(Contact contact) {
-        contact.validateName(renameDuplicatedName(contact.getName()));
         boolean isAdded = super.add(contact);
         contact.addObserver(this);
         notifyObservers();
@@ -57,7 +56,7 @@ public class ObservableContactHashSet extends HashSet<Contact> implements Observ
         return this.stream().anyMatch(it -> StringUtil.getNumbersOnly(it.getPhone()).equals(StringUtil.getNumbersOnly(phone)));
     }
 
-    private String renameDuplicatedName(String name) {
+    public String renameDuplicatedName(String name) {
         AtomicInteger count = new AtomicInteger();
         if (this.stream().anyMatch(it -> it.getName().equals(name)))
             count.incrementAndGet();

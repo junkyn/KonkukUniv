@@ -17,6 +17,13 @@ public class Contact extends UserData {
     }
 
     @Override
+    public void setName() {
+        do System.out.print("이름을 입력하세요\n> ");
+        while (!validateName(ContactHandler.getInstance().contactHashSet.renameDuplicatedName(scanner.nextLine().trim())));
+        notifyObservers();
+    }
+
+    @Override
     public boolean validatePhone(String phone) {
         if (ContactHandler.getInstance().contactHashSet.isPhoneDuplicated(phone))
             System.out.println("이미 존재하는 전화번호입니다");
