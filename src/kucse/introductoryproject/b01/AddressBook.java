@@ -5,8 +5,10 @@ import kucse.introductoryproject.b01.dto.Contact;
 import kucse.introductoryproject.b01.dto.UserInfo;
 import kucse.introductoryproject.b01.observer.ObservableContactHashSet;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static java.lang.Integer.parseInt;
 import static java.lang.Math.min;
 import static kucse.introductoryproject.b01.Main.scanner;
 
@@ -37,6 +39,7 @@ public class AddressBook {
     }
 
     public void viewAddressBook() { // view
+        printBirthday();
         viewAddressBook(1);
     }
     public void viewAddressBook(int page) { // view (page)
@@ -53,6 +56,23 @@ public class AddressBook {
         }
 
     }
+
+    public void printBirthday() {
+        System.out.println("=============== 오늘 생일인 놈 ===============");
+        String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+        contactHashSet.stream()
+                .filter(it -> it.getBirthday().substring(5).equals(today.substring(5)))
+                .map(it -> it.getName() + "("
+                        + (parseInt(today.substring(0, 4)) + 1 - parseInt(it.getBirthday().substring(0, 4)))
+                        + "살)\t"
+                        + it.getPhone() + '\t'
+                        )
+                .forEach(System.out::println);
+
+        System.out.println("============================================");
+    }
+
     public void searchContact(String query) {
         searchContact(query, 1);
     }

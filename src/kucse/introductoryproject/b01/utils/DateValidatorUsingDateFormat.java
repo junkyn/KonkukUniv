@@ -13,13 +13,18 @@ public class DateValidatorUsingDateFormat {
     }
 
     public boolean isValid(String dateStr) {
+        return getDate(dateStr) != null;
+    }
+
+    public Date getDate(String dateStr) {
         DateFormat simpleDateFormat = new SimpleDateFormat(this.dateFormat);
         simpleDateFormat.setLenient(false);
+        Date date;
         try {
-            Date date = simpleDateFormat.parse(dateStr);
+             date = simpleDateFormat.parse(dateStr);
         } catch (ParseException e) {
-            return false;
+            return null;
         }
-        return true;
+        return date;
     }
 }

@@ -4,8 +4,8 @@ import kucse.introductoryproject.b01.observer.Observable;
 import kucse.introductoryproject.b01.observer.Observer;
 import kucse.introductoryproject.b01.utils.DateValidatorUsingDateFormat;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static kucse.introductoryproject.b01.Main.scanner;
 
@@ -15,7 +15,7 @@ public abstract class UserData implements Observable {
     private String phone;
     private String address;
     private String birthday;
-    private int birthdayYear, birthdayMonth, birthdayDay;
+    private Date birthdayDate;
 
     public UserData() {
 
@@ -25,7 +25,7 @@ public abstract class UserData implements Observable {
         this.name = name;
         this.phone = phone;
         this.address = address;
-        this.birthday = birthday;
+        isBirthdayPresent(birthday);
     }
 
     public void setName() {
@@ -126,10 +126,10 @@ public abstract class UserData implements Observable {
     private boolean validateBirthday(String birthday) {
         if (birthday.contains("\t"))
             System.out.println("탭(tab)은 사용하실 수 없습니다");
-        else if (birthday.isBlank() || isBirthdayPresent(birthday)) {
+        else if (birthday.isBlank()) {
             this.birthday = birthday;
             return true;
-        }
+        } else return isBirthdayPresent(birthday);
 
         return false;
     }
@@ -139,7 +139,14 @@ public abstract class UserData implements Observable {
             String[] formats = { "yyyyMMdd", "yyyy-M-d", "yyyy.M.d" };
             for (String format : formats) {
                 DateValidatorUsingDateFormat validator = new DateValidatorUsingDateFormat(format);
-                if (validator.isValid(birthday)) return true;
+                if (validator.isValid(birthday)) {
+                    birthdayDate = validator.getDate(birthday);
+                    Calendar calendar = new GregorianCalendar();
+                    calendar.setTime(birthdayDate);
+
+                    this.birthday = new SimpleDateFormat("yyyy-MM-dd").format(birthdayDate);
+                    return true;
+                }
             }
         }
 
