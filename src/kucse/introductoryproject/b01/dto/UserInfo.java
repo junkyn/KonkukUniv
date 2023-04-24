@@ -32,8 +32,8 @@ public class UserInfo extends UserData {
         notifyObservers();
     }
 
-    private boolean validateId(String id) {
-        if (UserInfoHandler.getInstance().userInfoHashMap.isIdPresent(id)) {
+    public boolean validateId(String id) {
+        if (UserInfoHandler.getInstance() != null && UserInfoHandler.getInstance().userInfoHashMap.isIdPresent(id)) {
             System.out.println("이미 존재하는 아이디입니다.");
         } else if (id.length() < 5)
             System.out.println("ID의 길이는 5 이상이어야 합니다.");
@@ -53,7 +53,7 @@ public class UserInfo extends UserData {
         notifyObservers();
     }
 
-    private boolean validatePassword(String password) {
+    public boolean validatePassword(String password) {
         if (password.length() < 8)
             System.out.println("암호의 길이는 8 이상이어야 합니다.");
         else if (password.matches(".*\\s.*"))

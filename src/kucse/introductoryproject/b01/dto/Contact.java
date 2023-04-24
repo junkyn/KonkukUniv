@@ -25,7 +25,7 @@ public class Contact extends UserData {
 
     @Override
     public boolean validatePhone(String phone) {
-        if (ContactHandler.getInstance().contactHashSet.isPhoneDuplicated(phone))
+        if (ContactHandler.getInstance() != null && ContactHandler.getInstance().contactHashSet.isPhoneDuplicated(phone))
             System.out.println("이미 존재하는 전화번호입니다");
         else {
             return super.validatePhone(phone);
@@ -39,8 +39,8 @@ public class Contact extends UserData {
         while(!validateMemo(scanner.nextLine().trim()));
         notifyObservers();
     }
-    private boolean validateMemo(String memo){
-        if(memo.contains("\t")){
+    public boolean validateMemo(String memo){
+        if (memo.contains("\t")) {
             System.out.println("탭(tab)은 사용하실 수 없습니다");
             return false;
         }

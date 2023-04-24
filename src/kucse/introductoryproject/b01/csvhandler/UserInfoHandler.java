@@ -1,5 +1,6 @@
 package kucse.introductoryproject.b01.csvhandler;
 
+import kucse.introductoryproject.b01.dto.Contact;
 import kucse.introductoryproject.b01.dto.UserInfo;
 import kucse.introductoryproject.b01.observer.Observable;
 import kucse.introductoryproject.b01.observer.ObservableUserInfoHashMap;
@@ -40,16 +41,31 @@ public class UserInfoHandler extends CsvHandler implements Observer {
         try (Scanner fileScanner = new Scanner(file)){
             while(fileScanner.hasNextLine()) {
                 String str = fileScanner.nextLine();
-                String[] userInfo = str.split("\t");
+                String[] userInfoStr = str.split("\t");
 
-                String id = userInfo[0].trim();
-                String password = userInfo[1].trim();
-                String name = userInfo[2].trim();
-                String phone = userInfo[3].trim();
-                String address = userInfo.length < 5 ? "" : userInfo[4].trim();
-                String birthday = userInfo.length < 6 ? "" : userInfo[5].trim();
+                UserInfo userInfo = new UserInfo();
 
-                userInfoHashMap.append(new UserInfo(id, password, name, phone, address, birthday));
+                try {
+                    if (!userInfo.validateId(userInfoStr[0].trim()))
+                        throw new IllegalArgumentException("아이디 형식이 올바르지 않습니다.");
+                    if (!userInfo.validatePassword(userInfoStr[1].trim()))
+                        throw new IllegalArgumentException("비밀번호 형식이 올바르지 않습니다.");
+                    if (!userInfo.validateName(userInfoStr[2].trim()))
+                        throw new IllegalArgumentException("이름 형식이 올바르지 않습니다.");
+                    if (!userInfo.validatePhone(userInfoStr[3].trim()))
+                        throw new IllegalArgumentException("전화번호 형식이 올바르지 않습니다.");
+                    if (!userInfo.validateAddress(userInfoStr.length < 5 ? "" : userInfoStr[4].trim()))
+                        throw new IllegalArgumentException("주소 형식이 올바르지 않습니다.");
+                    if (!userInfo.validateBirthday(userInfoStr.length < 6 ? "" : userInfoStr[5].trim()))
+                        throw new IllegalArgumentException("생일 형식이 올바르지 않습니다.");
+
+                } catch (IllegalArgumentException e) {
+                    System.err.println(file.getName() + " 파일 무결성 에러: " + str);
+                    System.err.println(e.getMessage());
+                    System.exit(0);
+                }
+
+                userInfoHashMap.append(userInfo);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

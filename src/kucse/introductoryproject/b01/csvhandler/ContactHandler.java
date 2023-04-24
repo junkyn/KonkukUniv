@@ -46,13 +46,31 @@ public class ContactHandler extends CsvHandler implements Observer {
                 String str = fileScanner.nextLine();
                 String[] contactInfo = str.split("\t");
 
-                String name = contactInfo[0].trim();
-                String phone = contactInfo[1].trim();
-                String address = contactInfo.length < 3 ? "" : contactInfo[2].trim();
-                String birthday = contactInfo.length < 4 ? "" : contactInfo[3].trim();
-                String memo = contactInfo.length < 5 ? "" : contactInfo[4].trim();
+                Contact contact = new Contact();
 
-                contactHashSet.add(new Contact(name, phone, address, birthday, memo));
+                try {
+                    if (!contact.validateName(contactInfo[0].trim()))
+                        throw new IllegalArgumentException("이름 형식이 올바르지 않습니다.");
+                    if (contactHashSet.isNameDuplicated(contact.getName()))
+                        throw new IllegalArgumentException("중복된 이름입니다.");
+                    if (!contact.validatePhone(contactInfo[1].trim()))
+                        throw new IllegalArgumentException("전화번호 형식이 올바르지 않습니다.");
+                    if (contactHashSet.isPhoneDuplicated(contact.getPhone()))
+                        throw new IllegalArgumentException("중복된 전화번호입니다.");
+                    if (!contact.validateAddress(contactInfo.length < 3 ? "" : contactInfo[2].trim()))
+                        throw new IllegalArgumentException("주소 형식이 올바르지 않습니다.");
+                    if (!contact.validateBirthday(contactInfo.length < 4 ? "" : contactInfo[3].trim()))
+                        throw new IllegalArgumentException("생일 형식이 올바르지 않습니다.");
+                    if (!contact.validateMemo(contactInfo.length < 5 ? "" : contactInfo[4].trim()))
+                        throw new IllegalArgumentException("메모 형식이 올바르지 않습니다.");
+
+                } catch (IllegalArgumentException e) {
+                    System.err.println(file.getName() + " 파일 무결성 에러: " + str);
+                    System.err.println(e.getMessage());
+                    System.exit(0);
+                }
+
+                contactHashSet.add(contact);
             }
 
         } catch (FileNotFoundException e) {

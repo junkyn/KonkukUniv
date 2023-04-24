@@ -52,6 +52,10 @@ public class ObservableContactHashSet extends HashSet<Contact> implements Observ
         return this.stream().filter(it -> it.getName().equals(name)).findFirst().orElse(null);
     }
 
+    public boolean isNameDuplicated(String name) {
+        return this.stream().anyMatch(it -> it.getName().equals(name));
+    }
+
     public boolean isPhoneDuplicated(String phone) {
         return this.stream().anyMatch(it -> StringUtil.getNumbersOnly(it.getPhone()).equals(StringUtil.getNumbersOnly(phone)));
     }

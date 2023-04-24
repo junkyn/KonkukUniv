@@ -59,7 +59,7 @@ public abstract class UserData implements Observable {
         notifyObservers();
     }
 
-    protected boolean validatePhone(String phone) {
+    public boolean validatePhone(String phone) {
         if (phone.isBlank())
             System.out.println("전화번호는 필수 입력입니다");
         else if (phone.contains("\t"))
@@ -114,7 +114,7 @@ public abstract class UserData implements Observable {
         notifyObservers();
     }
 
-    private boolean validateAddress(String address) {
+    public boolean validateAddress(String address) {
         if (address.contains("\t"))
             System.out.println("탭(tab)은 사용하실 수 없습니다");
         else {
@@ -131,7 +131,7 @@ public abstract class UserData implements Observable {
         notifyObservers();
     }
 
-    private boolean validateBirthday(String birthday) {
+    public boolean validateBirthday(String birthday) {
         if (birthday.contains("\t"))
             System.out.println("탭(tab)은 사용하실 수 없습니다");
         else if (birthday.isBlank()) {
