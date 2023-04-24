@@ -140,7 +140,7 @@ public abstract class UserData implements Observable {
 
     private boolean isBirthdayPresent(String birthday) {
         if (8 <= birthday.length() && birthday.length() <= 10 && birthday.matches("^(19|20)\\d\\d[-./]?(0[1-9]|1[0-2]|[1-9])[-./]?(([0-2][1-9]|3[01]|[1-9])|(1[0-9]|2[0-8])|(29(?!-02-29|/02/29|\\.02\\.29)))$")) {
-            String[] formats = { "yyyyMMdd", "yyyy-M-d", "yyyy.M.d" };
+            String[] formats = { "yyyyMMdd", "yyyy-M-d", "yyyy.M.d", "yyyy/M/d" };
             for (String format : formats) {
                 DateValidatorUsingDateFormat validator = new DateValidatorUsingDateFormat(format);
                 if (validator.isValid(birthday)) {
