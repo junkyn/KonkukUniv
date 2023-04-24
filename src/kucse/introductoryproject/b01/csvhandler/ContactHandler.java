@@ -63,8 +63,6 @@ public class ContactHandler extends CsvHandler implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println(arg);
-        System.out.println(contactHashSet);
         super.writeData(contactHashSet.toString());
     }
 }
