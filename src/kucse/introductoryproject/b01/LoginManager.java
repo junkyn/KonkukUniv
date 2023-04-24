@@ -23,7 +23,12 @@ public class LoginManager {
             if (prompt.equals("register"))
                 register();
             else if (prompt.startsWith("login "))
-                signedInUser = login(prompt.split(" ")[1], prompt.split(" ")[2]);
+                try{
+                    signedInUser = login(prompt.split(" ")[1], prompt.split(" ")[2]);
+                }catch(ArrayIndexOutOfBoundsException e){
+                    System.out.print("비밀번호를 입력해주세요\n> ");
+                }
+
         } while (signedInUser == null);
 
         return signedInUser;
