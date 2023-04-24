@@ -30,6 +30,10 @@ public class LoginManager {
                 }catch(ArrayIndexOutOfBoundsException e){
                     System.out.print("비밀번호를 입력해주세요\n\n");
                 }
+            else if (prompt.startsWith("exit")) {
+                System.out.println("프로그램을 종료합니다. 이용해주셔서 감사합니다");
+                System.exit(0);
+            }
 
         } while (signedInUser == null);
 
