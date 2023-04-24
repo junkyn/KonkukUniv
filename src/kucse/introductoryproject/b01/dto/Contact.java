@@ -48,7 +48,14 @@ public class Contact extends UserData {
     }
 
     public String toSearchableString() {
-        return toCsv() + StringUtil.toConsonants(toCsv());
+        StringBuilder searchable = new StringBuilder();
+        searchable.append(getName().replaceAll(" ", "").toLowerCase()).append('\t');
+        searchable.append(StringUtil.toConsonants(searchable.toString()));
+        searchable.append(getPhone().replaceAll("-", "")).append('\t');
+        searchable.append(getAddress().replaceAll(" ", "")).append('\t');
+        searchable.append(getBirthday()).append('\t');
+        searchable.append(getMemo().replaceAll("[ \t]", ""));
+        return searchable.toString();
     }
 
 }

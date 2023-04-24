@@ -58,9 +58,10 @@ public class AddressBook {
         searchContact(query, 1);
     }
     public void searchContact(String query, int page) {
+        String finalQuery = query.toLowerCase();
         List<Contact> searchResult = contactHashSet.toArrayList()
                 .stream()
-                .filter(it -> it.toSearchableString().contains(query))
+                .filter(it -> it.toSearchableString().contains(finalQuery))
                 .toList();
 
         printList(searchResult, page);
