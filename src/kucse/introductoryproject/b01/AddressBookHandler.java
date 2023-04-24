@@ -19,6 +19,9 @@ public class AddressBookHandler {
         displayHelpList();
         boolean loop = true;
         while (loop) {
+            if (addressBook.getOnContact() != null) {
+                System.out.print(addressBook.getOnContact().getName() + " ");
+            }
             System.out.print("> ");
             String prompt = scanner.nextLine();
 

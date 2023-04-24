@@ -50,7 +50,6 @@ public class AddressBook {
         } else {
             System.out.println(onContact);
             System.out.println();
-            System.out.print(onContact.getName() + " ");
         }
 
     }
@@ -164,4 +163,7 @@ public class AddressBook {
         }
     }
 
+    public Contact getOnContact() {
+        return onContact;
+    }
 }
