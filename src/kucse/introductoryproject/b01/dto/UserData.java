@@ -25,7 +25,11 @@ public abstract class UserData implements Observable {
         this.name = name;
         this.phone = phone;
         this.address = address;
-        isBirthdayPresent(birthday);
+        if (birthday.isBlank()) {
+            this.birthday = birthday;
+        } else {
+            isBirthdayPresent(birthday);
+        }
     }
 
     public void setName() {

@@ -62,6 +62,7 @@ public class AddressBook {
         String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
         contactHashSet.stream()
+                .filter(it -> it.getBirthday().length() == 10)
                 .filter(it -> it.getBirthday().substring(5).equals(today.substring(5)))
                 .map(it -> it.getName() + "("
                         + (parseInt(today.substring(0, 4)) + 1 - parseInt(it.getBirthday().substring(0, 4)))
