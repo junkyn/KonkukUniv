@@ -87,6 +87,10 @@ public class AddressBook {
     public void searchContact(String query, int page) {
         this.onContact = null;
         String finalQuery = query.toLowerCase();
+        if (finalQuery.isEmpty()) {
+            System.out.println("입력 오류");
+            return;
+        }
         List<Contact> searchResult = contactHashSet.toArrayList()
                 .stream()
                 .filter(it -> it.toSearchableString().contains(finalQuery))
