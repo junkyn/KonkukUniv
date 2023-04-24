@@ -68,6 +68,7 @@ public class AddressBook {
     }
 
     public void printList(List<Contact> list, int page) {
+        list = list.stream().sorted(Comparator.comparing(Contact::getName)).toList();
         int maxPage = (list.size() - 1) / 10 + 1;
         if (list.isEmpty()) {
             System.out.println("결과가 없습니다.");
