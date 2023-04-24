@@ -35,9 +35,17 @@ public class Contact extends UserData {
     }
 
     public void setMemo() {
-        System.out.print("메모를 입력하세요\n> ");
-        this.memo = scanner.nextLine().trim();
+        do System.out.print("메모를 입력하세요\n> ");
+        while(!validateMemo(scanner.nextLine().trim()));
         notifyObservers();
+    }
+    private boolean validateMemo(String memo){
+        if(memo.contains("\t")){
+            System.out.println("탭(tab)은 사용하실 수 없습니다");
+            return false;
+        }
+        this.memo = memo;
+        return true;
     }
     public String getMemo() { return memo; }
 
