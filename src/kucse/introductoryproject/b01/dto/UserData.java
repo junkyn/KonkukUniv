@@ -99,8 +99,11 @@ public abstract class UserData implements Observable {
                 phone = check.substring(0,3)+"-"+check.substring(3,7)+"-"+check.substring(7,11);
                 return true;
             }
+            else{
+                phone = check;
+                return true;
+            }
 
-            return true;
         }
         else return false;
     }

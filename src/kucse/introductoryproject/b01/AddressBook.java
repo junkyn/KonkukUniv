@@ -44,6 +44,7 @@ public class AddressBook {
     }
     public void viewAddressBook(int page) { // view (page)
         onContact = null;
+        if(page == 1) printBirthday();
         printList(contactHashSet.toArrayList(), page);
     }
     public void viewAddressBook(String name) {
@@ -58,11 +59,7 @@ public class AddressBook {
     }
 
     public void printBirthday() {
-        System.out.println("""
-                                   ┌ iii ┐
-                   └ ( ˇ 3ˇ)┘     ┌       ┐    └ (^∀^*@)
-                                ┌─  [HBD]  ─┐
-                """);
+
         System.out.println("=============== 오늘 생일인 친구 ===============");
         String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
