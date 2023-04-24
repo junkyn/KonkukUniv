@@ -94,7 +94,7 @@ public abstract class UserData implements Observable {
     private boolean validateBirthday(String birthday) {
         if (birthday.contains("\t"))
             System.out.println("탭(tab)은 사용하실 수 없습니다");
-        else if (isBirthdayPresent(birthday)) {
+        else if (birthday.isBlank() || isBirthdayPresent(birthday)) {
             this.birthday = birthday;
             return true;
         }
