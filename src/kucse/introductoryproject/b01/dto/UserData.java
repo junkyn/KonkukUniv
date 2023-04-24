@@ -60,16 +60,46 @@ public abstract class UserData implements Observable {
             System.out.println("전화번호는 필수 입력입니다");
         else if (phone.contains("\t"))
             System.out.println("탭(tab)은 사용하실 수 없습니다");
-        else if(!phone.matches("^(010\\d{8}|01[1-9][1-9]\\d{7,8}|[2-9]\\d{1,8})$")){
+        else if(!checkPhoneFormat(phone)){
             System.out.println("올바른 전화번호가 아닙니다");
         }else{
-            this.phone = phone;
             return true;
         }
 
         return false;
     }
+    private boolean checkPhoneFormat(String number){
+        if(number.matches("^[0-9-]*$")){
+            if(number.contains("--"))return false;
+            String check = number.replaceAll("-","");
+            if(check.startsWith("010")){
+                if(check.length()==11) {
+                    phone = check.substring(0, 3) + "-" + check.substring(3, 7) + "-" + check.substring(7, 11);
+                    return true;
+                }
+                else return false;
+            }else if(check.startsWith("02")){
+                if(check.length()==9){
+                    phone = check.substring(0,2)+"-"+check.substring(2,5)+"-"+check.substring(5,9);
+                    return true;
+                }else if(check.length()==10){
+                    phone = check.substring(0,2)+"-"+check.substring(2,6)+"-"+check.substring(6,10);
+                    return true;
+                }else{
+                    return false;
+                }
+            }else if(check.length()==10){
+                phone = check.substring(0,3)+"-"+check.substring(3,6)+"-"+check.substring(6,10);
+                return true;
+            }else if(check.length()==11){
+                phone = check.substring(0,3)+"-"+check.substring(3,7)+"-"+check.substring(7,11);
+                return true;
+            }
 
+            return true;
+        }
+        else return false;
+    }
     public void setAddress() {
         do System.out.print("주소를 입력하세요\n> ");
         while (!validateAddress(scanner.nextLine().trim()));
