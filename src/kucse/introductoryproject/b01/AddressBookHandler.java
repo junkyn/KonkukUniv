@@ -23,7 +23,7 @@ public class AddressBookHandler {
                 System.out.print(addressBook.getOnContact().getName() + " ");
             }
             System.out.print("> ");
-            String prompt = scanner.nextLine();
+            String prompt = scanner.nextLine().trim();
 
             switch (prompt.split(" ")[0]) {
                 case "help" -> displayHelpList();
@@ -33,7 +33,7 @@ public class AddressBookHandler {
                     loop = false;
                 }
                 case "exit" -> loop = false;
-                case "view" -> handleViewCommand(prompt.split(" "));
+                case "view" -> handleViewCommand(prompt);
                 case "search" -> handleSearchCommand(prompt.split(" "));
                 case "add" -> addressBook.addContact();
                 case "delete" -> addressBook.deleteContact();
@@ -48,15 +48,16 @@ public class AddressBookHandler {
         return signedInUser;
     }
 
-    private void handleViewCommand(String[] input) {
-        if (input.length == 1) {
+    private void handleViewCommand(String input) {
+        if (input.equals("view")) {
             addressBook.viewAddressBook();
         } else {
+            String query = input.substring(5);
             try {
-                int page = Integer.parseInt(input[1]);
+                int page = Integer.parseInt(query);
                 addressBook.viewAddressBook(page);
             } catch (NumberFormatException e) {
-                addressBook.viewAddressBook(input[1]);
+                addressBook.viewAddressBook(query);
             }
         }
     }
