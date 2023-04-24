@@ -25,6 +25,7 @@ public class AddressBook {
 
 
     public void addContact() {
+        this.onContact = null;
         Contact contact = new Contact();
 
         System.out.println("(Skip을 원하시면 Enter을 눌러주세요. 단, 이름과 전화번호는 필수)");
@@ -85,6 +86,7 @@ public class AddressBook {
         searchContact(query, 1);
     }
     public void searchContact(String query, int page) {
+        this.onContact = null;
         String finalQuery = query.toLowerCase();
         List<Contact> searchResult = contactHashSet.toArrayList()
                 .stream()
@@ -165,6 +167,7 @@ public class AddressBook {
     }
 
     public void myProfile() {
+        this.onContact = null;
         String order = "";
         while (!order.equals("exit")) {
             System.out.println(userInfo);
