@@ -65,7 +65,7 @@ public class ContactHandler extends CsvHandler implements Observer {
                         throw new IllegalArgumentException("메모 형식이 올바르지 않습니다.");
 
                 } catch (IllegalArgumentException e) {
-                    System.err.println(file.getName() + " 파일 무결성 에러: " + str);
+                    System.err.println(file.getName() + " 파일 무결성 에러:\n" + str);
                     System.err.println(e.getMessage());
                     System.exit(0);
                 }
