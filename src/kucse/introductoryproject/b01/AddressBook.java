@@ -63,21 +63,22 @@ public class AddressBook {
         List<String> list = contactHashSet.stream()
                 .filter(it -> it.getBirthday().length() == 10)
                 .filter(it -> it.getBirthday().substring(5).equals(today.substring(5)))
-                .map(it -> it.getName() + "("
+                .map(it -> "- "+it.getName() + "("
                         + (parseInt(today.substring(0, 4)) + 1 - parseInt(it.getBirthday().substring(0, 4)))
                         + "살)\t"
                         + it.getPhone() + '\t'
                 ).toList();
         if (list.isEmpty()) return;
         System.out.println("""
-                                ┌ iii ┐
-                └ ( ˇ 3ˇ)┘     ┌       ┐    └ (^∀^*@)
-                             ┌─  [HBD]  ─┐
-                """);
-        System.out.println("=============== 오늘 생일인 친구 ===============");
+                 ┌───────────────────────────────────────┐                
+                 │                 ┌ iii ┐               │
+                 │ └ ( ˇ 3ˇ)┘     ┌       ┐    └ (^∀^*@) │
+                 │              ┌─  [HBD]  ─┐            │
+                 │              └───────────┘            │""");
+        System.out.println("├──────────── 오늘 생일인 친구 ────────────┤");
         list.forEach(System.out::println);
 
-        System.out.println("=============================================");
+        System.out.println("└───────────────────────────────────────┘");
     }
 
     public void searchContact(String query) {
