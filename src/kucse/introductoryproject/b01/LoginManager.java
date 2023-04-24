@@ -20,7 +20,7 @@ public class LoginManager {
         System.out.print("환영합니다. ");
         do {
             System.out.print("login이나 register를 통해 로그인이나 회원가입을 해주세요\n> ");
-            String prompt = scanner.nextLine();
+            String prompt = scanner.nextLine().trim();
 
             if (prompt.equals("register"))
                 register();

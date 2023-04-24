@@ -7,6 +7,7 @@ import kucse.introductoryproject.b01.observer.Observer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -61,13 +62,15 @@ public class ContactHandler extends CsvHandler implements Observer {
                         throw new IllegalArgumentException("주소 형식이 올바르지 않습니다.");
                     if (!contact.validateBirthday(contactInfo.length < 4 ? "" : contactInfo[3].trim()))
                         throw new IllegalArgumentException("생일 형식이 올바르지 않습니다.");
-                    if (!contact.validateMemo(contactInfo.length < 5 ? "" : contactInfo[4].trim()))
+                    if (!contact.validateMemo(contactInfo.length < 5 ? "" : contactInfo[4].trim()) || contactInfo[5]!=null)
                         throw new IllegalArgumentException("메모 형식이 올바르지 않습니다.");
 
                 } catch (IllegalArgumentException e) {
                     System.err.println(file.getName() + " 파일 무결성 에러:\n" + str);
                     System.err.println(e.getMessage());
                     System.exit(0);
+                }catch(ArrayIndexOutOfBoundsException e){
+
                 }
 
                 contactHashSet.add(contact);

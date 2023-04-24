@@ -80,7 +80,7 @@ public class Contact extends UserData {
         searchable.append(getPhone().replaceAll("-", "")).append('\t');
         searchable.append(getAddress().replaceAll(" ", "")).append('\t');
         searchable.append(getBirthday()).append('\t');
-        searchable.append(getMemo().replaceAll("[ \t]", ""));
+        searchable.append(getMemo().replaceAll(" ", ""));
         return searchable.toString();
     }
 
