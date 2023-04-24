@@ -1,11 +1,15 @@
-package kucse.introductoryproject.b01;
+package kucse.introductoryproject.b01.dto;
+
+import kucse.introductoryproject.b01.observer.Observable;
+import kucse.introductoryproject.b01.observer.Observer;
+import kucse.introductoryproject.b01.utils.DateValidatorUsingDateFormat;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static kucse.introductoryproject.b01.Main.scanner;
 
-public class UserData implements Observable {
+public abstract class UserData implements Observable {
     private final List<Observer> observers = new ArrayList<>();
     private String name;
     private String phone;
@@ -30,7 +34,7 @@ public class UserData implements Observable {
         notifyObservers();
     }
 
-    protected boolean validateName(String name) {
+    public boolean validateName(String name) {
         if (name.isBlank())
             System.out.println("이름은 필수 입력입니다");
         else if (name.chars().allMatch(Character::isDigit))

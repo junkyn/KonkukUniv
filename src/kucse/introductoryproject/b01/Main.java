@@ -1,15 +1,18 @@
 package kucse.introductoryproject.b01;
 
+import kucse.introductoryproject.b01.csvhandler.UserInfoHandler;
+import kucse.introductoryproject.b01.dto.UserInfo;
+
 import java.util.Scanner;
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
     public static UserInfo signedInUser = null;
     public static AddressBook addressBook = null;
-    public static UserInfoUtil userInfoUtil = null;
+    public static UserInfoHandler userInfoUtil = null;
 
     public static void main(String[] args) {
-        userInfoUtil = UserInfoUtil.getInstance("dummyUserData");
+        userInfoUtil = UserInfoHandler.getInstance("dummyUserData");
 
         do {
             showLoginManager();
@@ -30,8 +33,8 @@ public class Main {
     public static void executeCommand() {
         if (signedInUser == null) return;
 
-        CommandExecutor commandExecutor = new CommandExecutor(scanner, addressBook);
-        signedInUser = commandExecutor.executeCommands(signedInUser);
+        AddressBookHandler addressBookHandler = new AddressBookHandler(scanner, addressBook);
+        signedInUser = addressBookHandler.executeCommands(signedInUser);
     }
 
 }

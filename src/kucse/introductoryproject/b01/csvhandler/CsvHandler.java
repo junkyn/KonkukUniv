@@ -1,16 +1,16 @@
-package kucse.introductoryproject.b01;
+package kucse.introductoryproject.b01.csvhandler;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
 
-public abstract class CsvUtil {
+public abstract class CsvHandler {
     protected String fileName;
 
     protected File originalFile;
 
-    public CsvUtil(String fileName) {
+    public CsvHandler(String fileName) {
         this.fileName = fileName;
         try {
             originalFile = new File(fileName + ".csv");

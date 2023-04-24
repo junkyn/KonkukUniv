@@ -1,12 +1,16 @@
 package kucse.introductoryproject.b01;
 
+import kucse.introductoryproject.b01.csvhandler.ContactHandler;
+import kucse.introductoryproject.b01.dto.UserInfo;
+import kucse.introductoryproject.b01.utils.StringUtil;
+
 import java.util.Scanner;
 
-public class CommandExecutor {
+public class AddressBookHandler {
     private Scanner scanner;
     private AddressBook addressBook;
 
-    public CommandExecutor(Scanner scanner, AddressBook addressBook) {
+    public AddressBookHandler(Scanner scanner, AddressBook addressBook) {
         this.scanner = scanner;
         this.addressBook = addressBook;
     }
@@ -21,7 +25,7 @@ public class CommandExecutor {
             switch (prompt.split(" ")[0]) {
                 case "help" -> displayHelpList();
                 case "logout" -> {
-                    ContactUtil.destroyInstance();
+                    ContactHandler.destroyInstance();
                     signedInUser = null;
                     loop = false;
                 }

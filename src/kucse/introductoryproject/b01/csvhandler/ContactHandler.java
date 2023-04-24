@@ -1,23 +1,28 @@
-package kucse.introductoryproject.b01;
+package kucse.introductoryproject.b01.csvhandler;
+
+import kucse.introductoryproject.b01.dto.Contact;
+import kucse.introductoryproject.b01.observer.Observable;
+import kucse.introductoryproject.b01.observer.ObservableContactHashSet;
+import kucse.introductoryproject.b01.observer.Observer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class ContactUtil extends CsvUtil implements Observer {
-    private static volatile ContactUtil instance = null;
+public class ContactHandler extends CsvHandler implements Observer {
+    private static volatile ContactHandler instance = null;
     public ObservableContactHashSet contactHashSet;
 
-    private ContactUtil(String fileName) {
+    private ContactHandler(String fileName) {
         super(fileName);
     }
 
-    public static ContactUtil getInstance(String fileName) {
+    public static ContactHandler getInstance(String fileName) {
         if (Objects.isNull(instance)) {
-            synchronized (ContactUtil.class) {
+            synchronized (ContactHandler.class) {
                 if (Objects.isNull(instance)) {
-                    instance = new ContactUtil(fileName);
+                    instance = new ContactHandler(fileName);
                 }
             }
         }
@@ -25,7 +30,7 @@ public class ContactUtil extends CsvUtil implements Observer {
         return instance;
     }
 
-    public static ContactUtil getInstance() {
+    public static ContactHandler getInstance() {
         return instance;
     }
 

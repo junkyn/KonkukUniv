@@ -1,11 +1,15 @@
 package kucse.introductoryproject.b01;
 
+import kucse.introductoryproject.b01.csvhandler.UserInfoHandler;
+import kucse.introductoryproject.b01.dto.UserInfo;
+import kucse.introductoryproject.b01.observer.ObservableUserInfoHashMap;
+
 import static kucse.introductoryproject.b01.Main.scanner;
 
 public class LoginManager {
     ObservableUserInfoHashMap userInfoHashMap;
     public LoginManager() {
-        userInfoHashMap = UserInfoUtil.getInstance().userInfoHashMap;
+        userInfoHashMap = UserInfoHandler.getInstance().userInfoHashMap;
     }
 
     public UserInfo show() {

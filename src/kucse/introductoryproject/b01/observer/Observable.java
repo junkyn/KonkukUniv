@@ -1,4 +1,4 @@
-package kucse.introductoryproject.b01;
+package kucse.introductoryproject.b01.observer;
 
 public interface Observable {
     void notifyObservers();

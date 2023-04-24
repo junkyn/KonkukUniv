@@ -1,4 +1,7 @@
-package kucse.introductoryproject.b01;
+package kucse.introductoryproject.b01.observer;
+
+import kucse.introductoryproject.b01.dto.Contact;
+import kucse.introductoryproject.b01.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;

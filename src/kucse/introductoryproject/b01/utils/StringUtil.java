@@ -1,4 +1,4 @@
-package kucse.introductoryproject.b01;
+package kucse.introductoryproject.b01.utils;
 
 public class StringUtil {
     private static final String[] CONSONANTS = {"ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"};

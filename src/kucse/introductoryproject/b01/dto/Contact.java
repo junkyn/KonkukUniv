@@ -1,4 +1,7 @@
-package kucse.introductoryproject.b01;
+package kucse.introductoryproject.b01.dto;
+
+import kucse.introductoryproject.b01.csvhandler.ContactHandler;
+import kucse.introductoryproject.b01.utils.StringUtil;
 
 import static kucse.introductoryproject.b01.Main.scanner;
 
@@ -14,8 +17,8 @@ public class Contact extends UserData {
     }
 
     @Override
-    protected boolean validatePhone(String phone) {
-        if (ContactUtil.getInstance().contactHashSet.isPhoneDuplicated(phone))
+    public boolean validatePhone(String phone) {
+        if (ContactHandler.getInstance().contactHashSet.isPhoneDuplicated(phone))
             System.out.println("이미 존재하는 전화번호입니다");
         else {
             return super.validatePhone(phone);

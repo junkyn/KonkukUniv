@@ -1,5 +1,10 @@
 package kucse.introductoryproject.b01;
 
+import kucse.introductoryproject.b01.csvhandler.ContactHandler;
+import kucse.introductoryproject.b01.dto.Contact;
+import kucse.introductoryproject.b01.dto.UserInfo;
+import kucse.introductoryproject.b01.observer.ObservableContactHashSet;
+
 import java.util.*;
 
 import static java.lang.Math.min;
@@ -12,7 +17,7 @@ public class AddressBook {
 
     public AddressBook(UserInfo signedInUserInfo) {
         userInfo = signedInUserInfo;
-        contactHashSet = ContactUtil.getInstance(userInfo.getId()).contactHashSet;
+        contactHashSet = ContactHandler.getInstance(userInfo.getId()).contactHashSet;
     }
 
 

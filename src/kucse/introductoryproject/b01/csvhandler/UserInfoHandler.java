@@ -1,31 +1,36 @@
-package kucse.introductoryproject.b01;
+package kucse.introductoryproject.b01.csvhandler;
+
+import kucse.introductoryproject.b01.dto.UserInfo;
+import kucse.introductoryproject.b01.observer.Observable;
+import kucse.introductoryproject.b01.observer.ObservableUserInfoHashMap;
+import kucse.introductoryproject.b01.observer.Observer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class UserInfoUtil extends CsvUtil implements Observer {
-    private static volatile UserInfoUtil instance = null;
+public class UserInfoHandler extends CsvHandler implements Observer {
+    private static volatile UserInfoHandler instance = null;
     public ObservableUserInfoHashMap userInfoHashMap;
 
 
-    protected UserInfoUtil(String fileName) {
+    protected UserInfoHandler(String fileName) {
         super(fileName);
     }
 
-    public static UserInfoUtil getInstance(String fileName) {
+    public static UserInfoHandler getInstance(String fileName) {
         if (Objects.isNull(instance)) {
-            synchronized (UserInfoUtil.class) {
+            synchronized (UserInfoHandler.class) {
                 if (Objects.isNull(instance)) {
-                    instance = new UserInfoUtil(fileName);
+                    instance = new UserInfoHandler(fileName);
                 }
             }
         }
         return instance;
     }
 
-    public static UserInfoUtil getInstance() {
+    public static UserInfoHandler getInstance() {
         return instance;
     }
 
