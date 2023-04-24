@@ -39,11 +39,17 @@ public class Contact extends UserData {
         String str;
         str = "\n---------------------\n" +
                 "이름 : " + getName() + "\n" +
-                "전화번호 : " + getPhone() + "\n" +
-                "주소 : " + getAddress() + "\n" +
-                "생년월일 : " + getBirthday() + "\n" +
-                "메모 : " + memo + "\n" +
-                "---------------------";
+                "전화번호 : " + getPhone() + "\n";
+        if (!getAddress().isEmpty()) {
+            str += "주소 : " + getAddress() + "\n";
+        }
+        if (!getBirthday().isEmpty()) {
+            str += "생년월일 : " + getBirthday() + "\n";
+        }
+        if (!getMemo().isEmpty()) {
+            str += "메모 : " + memo + "\n";
+        }
+        str += "---------------------";
         return str;
     }
 
