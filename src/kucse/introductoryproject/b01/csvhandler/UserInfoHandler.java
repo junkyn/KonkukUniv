@@ -1,6 +1,5 @@
 package kucse.introductoryproject.b01.csvhandler;
 
-import kucse.introductoryproject.b01.dto.Contact;
 import kucse.introductoryproject.b01.dto.UserInfo;
 import kucse.introductoryproject.b01.observer.Observable;
 import kucse.introductoryproject.b01.observer.ObservableUserInfoHashMap;
