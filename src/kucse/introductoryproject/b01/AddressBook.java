@@ -40,7 +40,6 @@ public class AddressBook {
     }
 
     public void viewAddressBook() { // view
-        printBirthday();
         viewAddressBook(1);
     }
     public void viewAddressBook(int page) { // view (page)
