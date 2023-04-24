@@ -60,7 +60,9 @@ public abstract class UserData implements Observable {
             System.out.println("전화번호는 필수 입력입니다");
         else if (phone.contains("\t"))
             System.out.println("탭(tab)은 사용하실 수 없습니다");
-        else {
+        else if(!phone.matches("^(010\\d{8}|01[1-9][1-9]\\d{7,8}|[2-9]\\d{1,8})$")){
+            System.out.println("올바른 전화번호가 아닙니다");
+        }else{
             this.phone = phone;
             return true;
         }
@@ -114,7 +116,6 @@ public abstract class UserData implements Observable {
         System.out.println("존재하지 않는 날짜입니다. 다시 입력해주세요");
         return false;
     }
-
     public String getName(){
         return this.name;
     }
