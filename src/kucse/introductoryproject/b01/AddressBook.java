@@ -76,7 +76,7 @@ public class AddressBook {
                         )
                 .forEach(System.out::println);
 
-        System.out.println("============================================");
+        System.out.println("=============================================");
     }
 
     public void searchContact(String query) {
