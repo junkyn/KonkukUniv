@@ -36,14 +36,10 @@ public class Contact extends UserData {
 
     public void setMemo() {
         do System.out.print("메모를 입력하세요\n> ");
-        while(!validateMemo(scanner.nextLine().trim()));
+        while (!validateMemo(scanner.nextLine().trim()));
         notifyObservers();
     }
     public boolean validateMemo(String memo){
-        if (memo.contains("\t")) {
-            System.out.println("탭(tab)은 사용하실 수 없습니다");
-            return false;
-        }
         this.memo = memo;
         return true;
     }
@@ -80,7 +76,7 @@ public class Contact extends UserData {
         searchable.append(getPhone().replaceAll("-", "")).append('\t');
         searchable.append(getAddress().replaceAll(" ", "")).append('\t');
         searchable.append(getBirthday()).append('\t');
-        searchable.append(getMemo().replaceAll(" ", ""));
+        searchable.append(getMemo().replaceAll("[ \t]", ""));
         return searchable.toString();
     }
 

@@ -4,10 +4,10 @@ import kucse.introductoryproject.b01.dto.Contact;
 import kucse.introductoryproject.b01.observer.Observable;
 import kucse.introductoryproject.b01.observer.ObservableContactHashSet;
 import kucse.introductoryproject.b01.observer.Observer;
+import kucse.introductoryproject.b01.utils.StringUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -62,7 +62,7 @@ public class ContactHandler extends CsvHandler implements Observer {
                         throw new IllegalArgumentException("주소 형식이 올바르지 않습니다.");
                     if (!contact.validateBirthday(contactInfo.length < 4 ? "" : contactInfo[3].trim()))
                         throw new IllegalArgumentException("생일 형식이 올바르지 않습니다.");
-                    if (!contact.validateMemo(contactInfo.length < 5 ? "" : contactInfo[4].trim()) || contactInfo[5]!=null)
+                    if (!contact.validateMemo(contactInfo.length < 5 ? "" : str.substring(StringUtil.ordinalIndexOf(str, "\t", 4)).trim()))
                         throw new IllegalArgumentException("메모 형식이 올바르지 않습니다.");
 
                 } catch (IllegalArgumentException e) {
