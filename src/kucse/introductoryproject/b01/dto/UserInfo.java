@@ -68,11 +68,15 @@ public class UserInfo extends UserData {
 
     @Override
     public String toString() {
-        return "UserInfo{" +
-                "id='" + id + '\'' +
-                ", password='" + password + '\'' +
-                super.toString() +
-                '}';
+        String str;
+        str = "\n---------------------\n" +
+                "ID : " + getId() + "\n" +
+                "이름 : " + getName() + "\n" +
+                "전화번호 : " + getPhone() + "\n" +
+                "주소 : " + getAddress() + "\n" +
+                "생년월일 : " + getBirthday() + "\n" +
+                "---------------------\n";
+        return str;
     }
 
     @Override
