@@ -75,6 +75,7 @@ public abstract class UserData implements Observable {
     private boolean checkPhoneFormat(String number){
         if(number.matches("^[0-9-]*$")){
             if(number.contains("--"))return false;
+            if(number.startsWith("-") || number.endsWith("-")) return false;
             String check = number.replaceAll("-","");
             if(check.startsWith("010")){
                 if(check.length()==11) {
