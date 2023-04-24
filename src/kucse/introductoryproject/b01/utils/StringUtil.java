@@ -12,7 +12,7 @@ public class StringUtil {
     }
 
     public static boolean isNumber(String str) {
-        return str.matches("[0-9]");
+        return str.matches("^[0-9]+$");
     }
 
     public static String getNumbersOnly(String str) { // 정수만 추출

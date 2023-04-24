@@ -53,12 +53,13 @@ public class AddressBookHandler {
             addressBook.viewAddressBook();
         } else {
             String query = input.substring(5);
-            try {
-                int page = Integer.parseInt(query);
-                addressBook.viewAddressBook(page);
-            } catch (NumberFormatException e) {
+
+            if (StringUtil.isNumber(query)) {
+                addressBook.viewAddressBook(Integer.parseInt(query));
+            } else {
                 addressBook.viewAddressBook(query);
             }
+
         }
     }
 
