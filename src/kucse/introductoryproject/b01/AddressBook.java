@@ -62,12 +62,15 @@ public class AddressBook {
         String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         List<String> list = contactHashSet.stream()
                 .filter(it -> it.getBirthday().length() == 10)
+                .sorted(Comparator.comparing(Contact::getName))
                 .filter(it -> it.getBirthday().substring(5).equals(today.substring(5)))
+                .filter(it -> (parseInt(today.substring(0, 4)) + 1 - parseInt(it.getBirthday().substring(0, 4))) > 0)
                 .map(it -> "- "+it.getName() + "("
                         + (parseInt(today.substring(0, 4)) + 1 - parseInt(it.getBirthday().substring(0, 4)))
                         + "살)\t"
                         + it.getPhone() + '\t'
-                ).toList();
+                )
+                .toList();
         if (list.isEmpty()) return;
         System.out.println("""
                  ┌───────────────────────────────────────┐                
