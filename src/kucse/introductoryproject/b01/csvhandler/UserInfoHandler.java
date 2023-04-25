@@ -7,6 +7,8 @@ import kucse.introductoryproject.b01.observer.Observer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -37,7 +39,7 @@ public class UserInfoHandler extends CsvHandler implements Observer {
     @Override
     protected void parseDataFromCSV(File file) {
         userInfoHashMap = new ObservableUserInfoHashMap();
-        try (Scanner fileScanner = new Scanner(file)){
+        try (Scanner fileScanner = new Scanner(file, StandardCharsets.UTF_8)) {
             while(fileScanner.hasNextLine()) {
                 String str = fileScanner.nextLine();
                 String[] userInfoStr = str.split("\t");
@@ -68,7 +70,7 @@ public class UserInfoHandler extends CsvHandler implements Observer {
 
                 userInfoHashMap.append(userInfo);
             }
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         userInfoHashMap.addObserver(this);

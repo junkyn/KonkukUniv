@@ -1,8 +1,7 @@
 package kucse.introductoryproject.b01.csvhandler;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 
 public abstract class CsvHandler {
@@ -31,10 +30,15 @@ public abstract class CsvHandler {
             File newFile = new File(fileName + ".csv");
             if (!newFile.exists()) newFile.createNewFile();
 
-            FileWriter fileWriter1 = new FileWriter(newFile);
-            fileWriter1.write(data);
-            fileWriter1.flush();
-            fileWriter1.close();
+            try (FileOutputStream fos = new FileOutputStream(newFile);
+                 OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+                 BufferedWriter writer = new BufferedWriter(osw)) {
+                writer.write(data);
+                writer.flush();
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             Files.delete(Path.of(fileName + ".csv.tmp"));
             originalFile = newFile;

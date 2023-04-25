@@ -8,6 +8,8 @@ import kucse.introductoryproject.b01.utils.StringUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -42,7 +44,7 @@ public class ContactHandler extends CsvHandler implements Observer {
     @Override
     protected void parseDataFromCSV(File file) {
         contactHashSet = new ObservableContactHashSet();
-        try (Scanner fileScanner = new Scanner(file)){
+        try (Scanner fileScanner = new Scanner(file, StandardCharsets.UTF_8)) {
             while(fileScanner.hasNextLine()) {
                 String str = fileScanner.nextLine();
                 String[] contactInfo = str.split("\t");
@@ -76,7 +78,7 @@ public class ContactHandler extends CsvHandler implements Observer {
                 contactHashSet.add(contact);
             }
 
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         contactHashSet.addObserver(this);
