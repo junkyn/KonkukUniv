@@ -12,7 +12,7 @@ public class Main {
     public static UserInfoHandler userInfoUtil = null;
 
     public static void main(String[] args) {
-        userInfoUtil = UserInfoHandler.getInstance("dummyUserData");
+        userInfoUtil = UserInfoHandler.getInstance("userData");
 
         do {
             showLoginManager();
