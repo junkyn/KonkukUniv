@@ -60,7 +60,7 @@ public class ObservableContactHashSet extends HashSet<Contact> implements Observ
         return this.stream().anyMatch(it -> StringUtil.getNumbersOnly(it.getPhone()).equals(StringUtil.getNumbersOnly(phone)));
     }
 
-    public String renameDuplicatedName(String name) {
+    public String countName(String name) {
         AtomicInteger count = new AtomicInteger();
         if (this.stream().anyMatch(it -> it.getName().equals(name)))
             count.incrementAndGet();
@@ -69,6 +69,17 @@ public class ObservableContactHashSet extends HashSet<Contact> implements Observ
             count.incrementAndGet();
 
         return count.get() == 0 ? name : name + "(" + count.get() + ")";
+    }
+
+    public String renameFrom(String fromName, String toName) {
+        AtomicInteger count = new AtomicInteger();
+        if (this.stream().filter(it -> !it.getName().equals(fromName)).anyMatch(it -> it.getName().equals(toName)))
+            count.incrementAndGet();
+
+        while (count.get() > 0 && this.stream().filter(it -> !it.getName().equals(fromName)).anyMatch(it -> it.getName().equals(toName + "(" + count.get() + ")")))
+            count.incrementAndGet();
+
+        return count.get() == 0 ? toName : toName + "(" + count.get() + ")";
     }
 
     @Override

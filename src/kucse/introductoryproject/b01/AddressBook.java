@@ -135,7 +135,7 @@ public class AddressBook {
 
                 System.out.print(order.matches("name|num|address|birth|memo") ? "수정할 " : "");
                 switch (order) {
-                    case "name" -> onContact.setName();
+                    case "name" -> onContact.rename();
                     case "num" -> onContact.setPhone();
                     case "address" -> onContact.setAddress();
                     case "birth" -> onContact.setBirthday();

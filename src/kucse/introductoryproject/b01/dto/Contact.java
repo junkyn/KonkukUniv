@@ -19,7 +19,13 @@ public class Contact extends UserData {
     @Override
     public void setName() {
         do System.out.print("이름을 입력하세요\n> ");
-        while (!validateName(ContactHandler.getInstance().contactHashSet.renameDuplicatedName(scanner.nextLine().trim())));
+        while (!validateName(ContactHandler.getInstance().contactHashSet.countName(scanner.nextLine().trim())));
+        notifyObservers();
+    }
+
+    public void rename() {
+        do System.out.print("이름을 입력하세요\n> ");
+        while (!validateName(ContactHandler.getInstance().contactHashSet.renameFrom(getName(), scanner.nextLine().trim())));
         notifyObservers();
     }
 
