@@ -118,3 +118,8 @@ function updatePage(){
 	else if (clueStr.indexOf("_") < 0) guessstr.innerHTML = "You Win";
 	else guessstr.innerHTML = "Guesses: " + guesses;
 }
+
+function changeImage(){
+	document.getElementById("mygirl"안유진1.jpg";
+
+}
