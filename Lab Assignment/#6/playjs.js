@@ -118,8 +118,20 @@ function updatePage(){
 	else if (clueStr.indexOf("_") < 0) guessstr.innerHTML = "You Win";
 	else guessstr.innerHTML = "Guesses: " + guesses;
 }
-
 function changeImage(){
-	document.getElementById("mygirl"안유진1.jpg";
+	var bimg = document.getElementById("image");
+	var sarray = bimg.src.split('/');
+	var str = sarray[sarray.length-1];
+	if(str=="hannie.jpg")
+		bimg.src="yujin.jpg";
+	else
+		bimg.src="hannie.jpg";
+}
+var colorNames = ["maroon","red","orange","yellow","olive","purple","fuchsia","white","lime","green","navy","blue","aqua","teal","black","silver","gray"];
 
+function createColorTable(){
+
+}
+function removeColorTable(){
+	
 }

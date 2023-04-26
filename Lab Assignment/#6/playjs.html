@@ -75,9 +75,20 @@
 				<input type="text" id="result" size="16">
 				<input type="text" id="answer" size="16">
 			</form>
+			
+		</div>
+		<div class ="lab">
 			<h3>이미지 변경하기</h3>
-			<img id="mygirlfriend" src="하니1.jpg"><br></br><br></br>
+			<img id="image" src="hannie.jpg"><br></br><br></br>
 			<input type="button" onclick="changeImage()" value="눌러보세요"></button>
+		</div>
+		<div class="lab">
+			<h3>색상 테이블 출력하기</h3>
+			<input type="button" id="ctCreate" value="출력하기" onclick="createColorTable();"/>
+			<input type="button" id="ctRemove" value="없애기" onclick="removeColorTable();"/>
+			<div id="colorTable">
+				
+			</div>
 		</div>
 			<div id="hangman">
 				<div>
