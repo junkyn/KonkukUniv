@@ -130,8 +130,20 @@ function changeImage(){
 var colorNames = ["maroon","red","orange","yellow","olive","purple","fuchsia","white","lime","green","navy","blue","aqua","teal","black","silver","gray"];
 
 function createColorTable(){
-
+	for(var i = 0; i<colorNames.length;i++){
+		var ct = document.createElement("div");
+		ct.setAttribute("class","ctbox");
+		ct.style.display = "inline-block";
+		ct.style.width = "60px";
+		ct.style.padding = "10px";
+		ct.style.backgroundColor = colorNames[i];
+		ct.innerHTML = colorNames[i];
+		document.getElementById("colorTable").appendChild(ct);
+	}
 }
 function removeColorTable(){
-	
+	var parent = document.getElementById("colorTable");
+	while(parent.getElementsByClassName("ctbox").length>0){
+		parent.removeChild(parent.getElementsByClassName("ctbox")[0]);
+	}
 }
