@@ -1,4 +1,23 @@
-window.onload = setCTime;
+window.onload =function(){
+	setCTime();
+	changeColor();
+	var ipt = document.getElementsByTagName("input");
+	for(var i = 0; i<ipt.length;i++){
+		switch(ipt[i].value){
+			case "계산": ipt[i].onclick = calc; break;
+			case "확인": ipt[i].onclick = guess; break;
+			case "다시하기": ipt[i].onclick = replay; break;
+			case "눌러보세요": ipt[i].onclick = changeImage; break;
+			case "출력하기" : ipt[i].onclick = createColorTable; break;
+			case "없애기" : ipt[i].onclick = removeColorTable; break;
+		}
+	}
+	var btn = document.getElementsByTagName("button");
+	btn[0].onclick = stopTextColor;
+	btn[1].onclick = myMove;
+	btn[2].onclick = guessLetter;
+	btn[3].onclick = newGame;
+}
 
 function calc(){
 	var x = document.getElementById("x");
@@ -145,5 +164,43 @@ function removeColorTable(){
 	var parent = document.getElementById("colorTable");
 	while(parent.getElementsByClassName("ctbox").length>0){
 		parent.removeChild(parent.getElementsByClassName("ctbox")[0]);
+	}
+}
+var timer;
+function changeColor(){
+	target.style.backgroundColor = "green";
+	target.style.color = "red";
+	timer = setInterval(changeColormain,1000);
+}
+var changed = true;
+function changeColormain(){
+	var target = document.getElementById("target");
+	changed = !changed;
+	if(changed){
+		target.style.backgroundColor = "green";
+		target.style.color = "red";
+	}
+	else{
+		target.style.backgroundColor = "yellow";
+		target.style.color = "blue";
+	}
+}
+function stopTextColor(){
+	clearInterval(timer);
+}
+var boxtimer;
+var box,con;
+function myMove(){
+	var pos=0;
+	con = document.getElementById("container");
+	box = document.getElementById("animate");
+	boxtimer = setInterval(moveBox,5);
+	function moveBox(){
+		pos++;
+		box.style.top = pos+"px";
+		box.style.left = pos+"px";
+		if(pos>350){
+			clearInterval(boxtimer);
+		}
 	}
 }

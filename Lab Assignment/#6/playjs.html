@@ -38,7 +38,7 @@
 				<input id="y"/><br/>
 				합계:
 				<input id="sum"/><br/>
-				<input type="button" value="계산" onclick="calc();"/>
+				<input type="button" value="계산"/>
 			</form>
 			<h3>▶ 구구단 표</h3>
 			<table border="1">
@@ -66,8 +66,8 @@
 			<form>
 				숫자:
 				<input type="text" id="user" size="5">
-				<input type="button" value="확인" onclick="guess()";>
-				<input type="button" value="다시하기" onclick="replay()";>
+				<input type="button" value="확인">
+				<input type="button" value="다시하기">
 				<br><br>
 				추측횟수:
 				<input type="text" id="guesses" size="5">
@@ -80,15 +80,32 @@
 		<div class ="lab">
 			<h3>이미지 변경하기</h3>
 			<img id="image" src="hannie.jpg"><br></br><br></br>
-			<input type="button" onclick="changeImage()" value="눌러보세요"></button>
+			<input type="button" onclick="changeImage()" value="눌러보세요"/>
 		</div>
 		<div class="lab">
 			<h3>색상 테이블 출력하기</h3>
-			<input type="button" id="ctCreate" value="출력하기" onclick="createColorTable();"/>
-			<input type="button" id="ctRemove" value="없애기" onclick="removeColorTable();"/>
+			<input type="button" id="ctCreate" value="출력하기"/>
+			<input type="button" id="ctRemove" value="없애기"/>
 			<div id="colorTable">
 				
 			</div>
+		</div>
+		<div class="lab">
+			<div id="target">
+				This is a Text.
+			</div>
+			<button>중지</button>
+		<div class="lab">
+			<h3>상자 이동하기</h3>
+			<p>
+				<button>Click Me</button>
+			</p>
+			<div id = "container">
+				<div id="animate">
+
+				</div>
+			</div>
+		</div>
 		</div>
 			<div id="hangman">
 				<div>
@@ -97,11 +114,11 @@
 				<div id="clue">Press New Game to play!</div>
 				<div>
 					<input id="hguess" type="text" size="1" maxlength="1"/>
-					<button id="guessbutton" onclick="guessLetter();"
+					<button id="guessbutton";"
 						disabled="disabled">Guess</button>
 				</div>
 				<div id="newgamearea">
-					<button onclick="newGame()";>New Game</button>
+					<button>New Game</button>
 				</div>
 				<div id="guessstr"></div>
 			</div>
