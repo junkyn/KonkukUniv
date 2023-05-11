@@ -190,6 +190,7 @@ function stopTextColor(){
 }
 var boxtimer;
 var box,con;
+
 function myMove(){
 	var pos=0;
 	con = document.getElementById("container");
