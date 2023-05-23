@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Alkatra&display=swap" rel="stylesheet">
+	<link type="text/css"rel="stylesheet"href="jquery.css">
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="jquery.js"></script>
+</head>
+<body>
+	<header>
+	  <div id="title">
+		Play with JS!
+	  </div>
+	  <nav>
+		<ul>
+		  <li><a href="#" class="main-menu">Basic JS</a></li>
+		  <li><a href="#" class="main-menu">Hangman</a></li>
+		  <li><a href="#" class="main-menu">jQuery</a></li>
+		  <li><a href="#" class="main-menu">Advanced JS</a></li>
+		</ul>
+	  </nav>
+	</header>
+<div id="content">
+    <div class="lab">
+      <div class="out">
+        <p>마우스를 여기로 움직이세요</p>
+        <p>0</p>
+      </div>
+      <button id="b1">전체화면 보기</button>
+    </div>
+    <div class="lab">
+      <button id="theone">Does nothing...</button>
+      <button id="bind">Add Click</button>
+      <button id="unbind">Remove Click</button>
+      <div id="off_test" style="display:none;">Click!</div>
+    </div>
+    <div class="lab">
+      <div id="trigger_test">
+        <button>Button #1</button>
+        <button>Button #2</button>
+        <div><span>0</span> button #1 clicks</div>
+        <div><span>0</span> button #2 clicks</div>
+      </div>
+    </div>
+    <div class="lab">
+      <h3>이미지 변경하기</h3>
+      <div id="imageArea">
+        <img src="img1.jpg" alt="" id="image">
+      </div>
+    </div>
+    <div class="lab">
+      <h3>사진 앨범</h3>
+      <div>
+        <img id="imgAlbum" width="250" height="250">
+      </div>
+    </div>
+    <div class="lab" id="schedule">
+      <div id="schedule_header">
+        <h2>스케줄 노트</h2>
+        <div id="add_img">
+          <!-- <img src="plus_img.jpg" width="30"> -->
+          <h1>+</h1>
+        </div>
+      </div>
+      <div id="note_form">
+        <table>
+          <tr>
+            <td>제목: </td>
+            <td><input type="text" id="note_title"></td>
+          </tr>
+          <tr>
+            <td>날짜: </td>
+            <td><input type="date" id="note_date"></td>
+          </tr>
+          <tr>
+            <td>내용: </td>
+            <td><textarea id="note_content" rows="20" cols="50"></textarea></td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <button id="add_note">확인</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="note"></div>
+    </div>
+    <div class="lab">
+      <div id="animation_test">
+        <button id="moving_button">click</button>
+        <div id="moving_box"></div>
+      </div>
+    </div>
+    <div class="lab">
+      <dl class="accordion">
+        <dt>Item 1</dt>
+        <dd>some explanation here. some explanation here</dd>
+        <dt>Item 2</dt>
+        <dd>some explanation here. some explanation here</dd>
+        <dt>Item 3</dt>
+        <dd>some explanation here. some explanation here</dd>
+      </dl>
+      <dl class="accordion">
+        <dt>Item 1</dt>
+        <dd>some explanation here. some explanation here</dd>
+        <dt>Item 2</dt>
+        <dd>some explanation here. some explanation here</dd>
+        <dt>Item 3</dt>
+        <dd>some explanation here. some explanation here</dd>
+      </dl>
+    
+    </div>
+    <div class="lab">
+      <h1>slideshow</h1>
+      <div class="slideshow">
+        <img src="imgs/photo1-1.jpg" alt="" />
+        <img src="imgs/photo1-2.jpg" alt="" class="alt"/>
+        <img src="imgs/photo1-3.jpg" alt="" class="alt"/>
+        <img src="imgs/photo1-4.jpg" alt="" class="alt"/>
+        <img src="imgs/photo1-5.jpg" alt="" class="alt"/>
+      </div>
+      <div class="slideshow">
+        <img src="imgs/photo2-1.jpg" alt=""/>
+        <img src="imgs/photo2-2.jpg" alt="" class="alt"/>
+        <img src="imgs/photo2-3.jpg" alt="" class="alt"/>
+        <img src="imgs/photo2-4.jpg" alt="" class="alt"/>
+        <img src="imgs/photo2-5.jpg" alt="" class="alt"/>
+      </div>
+      <div class="slideshow">
+        <img src="imgs/photo4-1.jpg" alt=""/>
+        <img src="imgs/photo4-2.jpg" alt="" class="alt"/>
+        <img src="imgs/photo4-3.jpg" alt="" class="alt"/>
+        <img src="imgs/photo4-4.jpg" alt="" class="alt"/>
+        <img src="imgs/photo4-5.jpg" alt="" class="alt"/>
+      </div>
+      
+    </div>
+    <div class="lab">
+      <h2>JSON TEST</h2>
+      <div id="textbox"></div>
+      <button id="getText">data 가져오기</button>
+    </div>
+  </div>
+
+      <footer>
+         <p>Web Programming, Spring 2023</p>
+         <p>Created by Junkyu Choi</p>
+      </footer>
+   </body>
+   </html>
