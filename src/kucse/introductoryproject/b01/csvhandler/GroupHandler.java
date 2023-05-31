@@ -3,6 +3,7 @@ package kucse.introductoryproject.b01.csvhandler;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 import java.util.Scanner;
 import kucse.introductoryproject.b01.dto.Group;
 import kucse.introductoryproject.b01.observer.Observable;
@@ -11,10 +12,31 @@ import kucse.introductoryproject.b01.observer.Observer;
 
 public class GroupHandler extends CsvHandler implements Observer {
 
+    private static volatile GroupHandler instance = null;
     public ObservableGroupHashMap groupHashMap;
 
     protected GroupHandler(String fileName) {
         super(fileName);
+    }
+
+    public static GroupHandler getInstance(String fileName) {
+        if (Objects.isNull(instance)) {
+            synchronized (GroupHandler.class) {
+                if (Objects.isNull(instance)) {
+                    instance = new GroupHandler(fileName);
+                }
+            }
+        }
+
+        return instance;
+    }
+
+    public static GroupHandler getInstance() {
+        return instance;
+    }
+
+    public synchronized static void destroyInstance() {
+        instance = null;
     }
 
     @Override

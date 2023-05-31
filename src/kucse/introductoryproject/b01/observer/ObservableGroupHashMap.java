@@ -26,6 +26,10 @@ public class ObservableGroupHashMap extends HashMap<String, Group> implements Ob
             .anyMatch(it -> it.getName().equals(name) && it.getTag() == tag);
     }
 
+    public boolean isCodeDuplicated(String code) {
+        return this.values().stream().anyMatch(it -> it.getCode().equals(code));
+    }
+
     public Group getGroupByNameAndTag(String name, int tag) {
         return this.values().stream().filter(it -> it.getName().equals(name) && it.getTag() == tag)
             .findFirst().orElse(null);
@@ -33,6 +37,11 @@ public class ObservableGroupHashMap extends HashMap<String, Group> implements Ob
 
     public Group getGroupById(String id) {
         return this.get(id);
+    }
+
+    public Group getGroupByCode(String code) {
+        return this.values().stream().filter(it -> it.getCode().equals(code)).findFirst()
+            .orElse(null);
     }
 
     @Override

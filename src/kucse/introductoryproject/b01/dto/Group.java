@@ -5,6 +5,7 @@ import static kucse.introductoryproject.b01.Main.scanner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import kucse.introductoryproject.b01.csvhandler.GroupHandler;
 import kucse.introductoryproject.b01.observer.Observable;
 import kucse.introductoryproject.b01.observer.Observer;
 
@@ -27,7 +28,9 @@ public class Group implements Observable {
         this.name = name;
 
         // Generate Tag
-        this.tag = random.nextInt(1000, 10000);
+        do {
+            this.tag = random.nextInt(1000, 10000);
+        } while (!GroupHandler.getInstance().groupHashMap.isGroupPresent(this.name, this.tag));
 
         // Generate ID
         do {
@@ -36,7 +39,7 @@ public class Group implements Observable {
                 sb.append(ALPHANUMERICS.charAt(random.nextInt(ALPHANUMERICS.length())));
             }
             id = sb.toString();
-        } while (false);
+        } while (!GroupHandler.getInstance().groupHashMap.isGroupPresent(id));
 
         // Generate Code
         regenerateCode();
@@ -69,7 +72,7 @@ public class Group implements Observable {
                 sb.append(GENERATE_CODE_FROM.charAt(random.nextInt(GENERATE_CODE_FROM.length())));
             }
             code = sb.toString();
-        } while (false);
+        } while (!GroupHandler.getInstance().groupHashMap.isCodeDuplicated(code));
 
     }
 
