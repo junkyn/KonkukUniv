@@ -1,15 +1,15 @@
 package kucse.introductoryproject.b01.dto;
 
-import kucse.introductoryproject.b01.observer.Observable;
-import kucse.introductoryproject.b01.observer.Observer;
+import static kucse.introductoryproject.b01.Main.scanner;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import static kucse.introductoryproject.b01.Main.scanner;
+import kucse.introductoryproject.b01.observer.Observable;
+import kucse.introductoryproject.b01.observer.Observer;
 
 public class Group implements Observable {
+
     private static final String GENERATE_CODE_FROM = "23456789QWERTYUPASDFGHJKLZXCVBNM";
     private static final String ALPHANUMERICS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static final Random random = new Random();
@@ -42,13 +42,22 @@ public class Group implements Observable {
         regenerateCode();
     }
 
+    public Group(String name, int tag, String id, String code) {
+        this.name = name;
+        this.tag = tag;
+        this.id = id;
+        this.code = code;
+    }
+
     public void setName() {
-        do System.out.print("이름을 입력하세요\n> ");
+        do {
+            System.out.print("이름을 입력하세요\n> ");
+        }
         while (!validateName(scanner.nextLine().trim()));
         notifyObservers();
     }
 
-    public boolean validateName(String name) {
+    public static boolean validateName(String name) {
         return !name.contains("[\t\n]");
     }
 
@@ -81,7 +90,7 @@ public class Group implements Observable {
     }
 
     public String toCsv() {
-        return name + "\t" + tag + "\t" + id + "\t" + code;
+        return name + "\t" + tag + "\t" + id + "\t" + code + "\n";
     }
 
     @Override

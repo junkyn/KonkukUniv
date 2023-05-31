@@ -3,6 +3,7 @@ package kucse.introductoryproject.b01.observer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 import kucse.introductoryproject.b01.dto.Group;
 
 public class ObservableGroupHashMap extends HashMap<String, Group> implements Observable, Observer {
@@ -54,5 +55,10 @@ public class ObservableGroupHashMap extends HashMap<String, Group> implements Ob
     @Override
     public void update(Observable o, Object arg) {
         notifyObservers();
+    }
+
+    @Override
+    public String toString() {
+        return this.values().stream().map(Group::toCsv).collect(Collectors.joining());
     }
 }
