@@ -1,16 +1,16 @@
 package kucse.introductoryproject.b01;
 
+import java.util.Scanner;
 import kucse.introductoryproject.b01.csvhandler.ContactHandler;
 import kucse.introductoryproject.b01.dto.UserInfo;
 import kucse.introductoryproject.b01.utils.StringUtil;
 
-import java.util.Scanner;
+public class MainPrompt {
 
-public class AddressBookHandler {
     private Scanner scanner;
     private AddressBook addressBook;
 
-    public AddressBookHandler(Scanner scanner, AddressBook addressBook) {
+    public MainPrompt(Scanner scanner, AddressBook addressBook) {
         this.scanner = scanner;
         this.addressBook = addressBook;
     }
@@ -64,9 +64,9 @@ public class AddressBookHandler {
     }
 
     private void handleSearchCommand(String[] input) {
-        if (input.length < 2)
+        if (input.length < 2) {
             System.out.println("입력 오류");
-        else if (input.length < 3) {
+        } else if (input.length < 3) {
             addressBook.searchContact(input[1]);
         } else if (!StringUtil.isNumber(input[2])) {
             System.out.println("입력 오류");
@@ -77,22 +77,22 @@ public class AddressBookHandler {
 
     private void displayHelpList() {
         System.out.println("""
-                ========================= 도 움 말 =========================
-                - view <value> : 주소록 열람
-                \t<value>가 페이지 수라면 그 페이지에 해당하는 주소록을 출력합니다
-                \t<value>가 이름이라면 그 이름에 해당하는 연락처를 열람합니다
-                - search <value1> <value2> : 주소록 검색
-                \t<value1>의 내용을 포함하는 연락처들 중
-                \t<value2>에 해당하는 페이지의 연락처들을 출력합니다
-                - add 주소록 추가
-                - edit : 열람하고 있는 연락처 수정
-                - delete : 열람하고 있는 연락처 삭제
-                - myprofile : 내 정보 수정
-                - logout : 로그아웃
-                - help : 도움말
-                - exit : 프로그램 종료
-                ===========================================================
-                """);
+            ========================= 도 움 말 =========================
+            - view <value> : 주소록 열람
+            \t<value>가 페이지 수라면 그 페이지에 해당하는 주소록을 출력합니다
+            \t<value>가 이름이라면 그 이름에 해당하는 연락처를 열람합니다
+            - search <value1> <value2> : 주소록 검색
+            \t<value1>의 내용을 포함하는 연락처들 중
+            \t<value2>에 해당하는 페이지의 연락처들을 출력합니다
+            - add 주소록 추가
+            - edit : 열람하고 있는 연락처 수정
+            - delete : 열람하고 있는 연락처 삭제
+            - myprofile : 내 정보 수정
+            - logout : 로그아웃
+            - help : 도움말
+            - exit : 프로그램 종료
+            ===========================================================
+            """);
 
     }
 }

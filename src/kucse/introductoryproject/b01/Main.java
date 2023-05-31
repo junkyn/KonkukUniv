@@ -1,11 +1,11 @@
 package kucse.introductoryproject.b01;
 
+import java.util.Scanner;
 import kucse.introductoryproject.b01.csvhandler.UserInfoHandler;
 import kucse.introductoryproject.b01.dto.UserInfo;
 
-import java.util.Scanner;
-
 public class Main {
+
     public static Scanner scanner = new Scanner(System.in);
     public static UserInfo signedInUser = null;
     public static AddressBook addressBook = null;
@@ -31,10 +31,12 @@ public class Main {
     }
 
     public static void executeCommand() {
-        if (signedInUser == null) return;
+        if (signedInUser == null) {
+            return;
+        }
 
-        AddressBookHandler addressBookHandler = new AddressBookHandler(scanner, addressBook);
-        signedInUser = addressBookHandler.executeCommands(signedInUser);
+        MainPrompt mainPrompt = new MainPrompt(scanner, addressBook);
+        signedInUser = mainPrompt.executeCommands(signedInUser);
     }
 
 }
