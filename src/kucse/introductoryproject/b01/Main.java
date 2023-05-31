@@ -1,6 +1,7 @@
 package kucse.introductoryproject.b01;
 
 import java.util.Scanner;
+import kucse.introductoryproject.b01.csvhandler.ContactHandler;
 import kucse.introductoryproject.b01.csvhandler.UserInfoHandler;
 import kucse.introductoryproject.b01.dto.UserInfo;
 
@@ -26,7 +27,8 @@ public class Main {
         LoginManager loginManager = new LoginManager();
         signedInUser = loginManager.show();
         if (signedInUser != null) {
-            addressBook = new AddressBook(signedInUser);
+            addressBook = new AddressBook(
+                ContactHandler.getInstance(signedInUser.getId()).contactHashSet);
         }
     }
 

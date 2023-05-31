@@ -1,30 +1,28 @@
 package kucse.introductoryproject.b01;
 
-import kucse.introductoryproject.b01.csvhandler.ContactHandler;
-import kucse.introductoryproject.b01.dto.Contact;
-import kucse.introductoryproject.b01.dto.UserInfo;
-import kucse.introductoryproject.b01.observer.ObservableContactHashSet;
-
-import java.text.SimpleDateFormat;
-import java.util.*;
-
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.min;
 import static kucse.introductoryproject.b01.Main.scanner;
 
-public class AddressBook {
-    private Contact onContact;
-    private final UserInfo userInfo;
-    private final ObservableContactHashSet contactHashSet;
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import kucse.introductoryproject.b01.dto.Contact;
+import kucse.introductoryproject.b01.observer.ObservableContactHashSet;
 
-    public AddressBook(UserInfo signedInUserInfo) {
-        userInfo = signedInUserInfo;
-        contactHashSet = ContactHandler.getInstance(userInfo.getId()).contactHashSet;
+public class AddressBook {
+
+    private Contact onContact;
+    private ObservableContactHashSet contactHashSet;
+
+    public AddressBook(ObservableContactHashSet contactHashSet) {
+        this.contactHashSet = contactHashSet;
     }
 
 
     public void addContact() {
-        this.onContact = null;
+        this.clearOnContact();
         Contact contact = new Contact();
 
         System.out.println("(Skip을 원하시면 Enter을 눌러주세요. 단, 이름과 전화번호는 필수)");
@@ -42,11 +40,15 @@ public class AddressBook {
     public void viewAddressBook() { // view
         viewAddressBook(1);
     }
+
     public void viewAddressBook(int page) { // view (page)
-        onContact = null;
-        if(page == 1) printBirthday();
+        clearOnContact();
+        if (page == 1) {
+            printBirthday();
+        }
         printList(contactHashSet.toArrayList(), page);
     }
+
     public void viewAddressBook(String name) {
         onContact = contactHashSet.getContactByName(name);
         if (onContact == null) {
@@ -61,23 +63,27 @@ public class AddressBook {
     public void printBirthday() {
         String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         List<String> list = contactHashSet.stream()
-                .filter(it -> it.getBirthday().length() == 10)
-                .sorted(Comparator.comparing(Contact::getName))
-                .filter(it -> it.getBirthday().substring(5).equals(today.substring(5)))
-                .filter(it -> (parseInt(today.substring(0, 4)) + 1 - parseInt(it.getBirthday().substring(0, 4))) > 0)
-                .map(it -> "- "+it.getName() + "("
-                        + (parseInt(today.substring(0, 4)) + 1 - parseInt(it.getBirthday().substring(0, 4)))
-                        + "살)\t"
-                        + it.getPhone() + '\t'
-                )
-                .toList();
-        if (list.isEmpty()) return;
+            .filter(it -> it.getBirthday().length() == 10)
+            .sorted(Comparator.comparing(Contact::getName))
+            .filter(it -> it.getBirthday().substring(5).equals(today.substring(5)))
+            .filter(it ->
+                (parseInt(today.substring(0, 4)) + 1 - parseInt(it.getBirthday().substring(0, 4)))
+                    > 0)
+            .map(it -> "- " + it.getName() + "("
+                + (parseInt(today.substring(0, 4)) + 1 - parseInt(it.getBirthday().substring(0, 4)))
+                + "살)\t"
+                + it.getPhone() + '\t'
+            )
+            .toList();
+        if (list.isEmpty()) {
+            return;
+        }
         System.out.println("""
-                 ┌───────────────────────────────────────┐                
-                 │                 ┌ iii ┐               │
-                 │ └ ( ˇ 3ˇ)┘     ┌       ┐    └ (^∀^*@) │
-                 │              ┌─  [HBD]  ─┐            │
-                 │              └───────────┘            │""");
+            ┌───────────────────────────────────────┐                
+            │                 ┌ iii ┐               │
+            │ └ ( ˇ 3ˇ)┘     ┌       ┐    └ (^∀^*@) │
+            │              ┌─  [HBD]  ─┐            │
+            │              └───────────┘            │""");
         System.out.println("├──────────── 오늘 생일인 친구 ────────────┤");
         list.forEach(System.out::println);
 
@@ -87,17 +93,18 @@ public class AddressBook {
     public void searchContact(String query) {
         searchContact(query, 1);
     }
+
     public void searchContact(String query, int page) {
-        this.onContact = null;
+        this.clearOnContact();
         String finalQuery = query.toLowerCase();
         if (finalQuery.isEmpty()) {
             System.out.println("입력 오류");
             return;
         }
         List<Contact> searchResult = contactHashSet.toArrayList()
-                .stream()
-                .filter(it -> it.toSearchableString().contains(finalQuery))
-                .toList();
+            .stream()
+            .filter(it -> it.toSearchableString().contains(finalQuery))
+            .toList();
 
         printList(searchResult, page);
     }
@@ -111,10 +118,13 @@ public class AddressBook {
             System.out.println("존재하지 않는 페이지입니다.");
         } else {
             System.out.println("\n---------------------");
-            List<Contact> pageList = list.subList((page - 1) * 10, min((page - 1) * 10 + 10, list.size()));
-            int maxNameLength = pageList.stream().mapToInt(it -> it.getName().length()).max().getAsInt();
+            List<Contact> pageList = list.subList((page - 1) * 10,
+                min((page - 1) * 10 + 10, list.size()));
+            int maxNameLength = pageList.stream().mapToInt(it -> it.getName().length()).max()
+                .getAsInt();
             for (Contact contact : pageList) {
-                System.out.printf("%-" + maxNameLength + "s\t%s\n", contact.getName(), contact.getPhone());
+                System.out.printf("%-" + maxNameLength + "s\t%s\n", contact.getName(),
+                    contact.getPhone());
             }
 
             System.out.println("--------(" + page + "/" + maxPage + ")--------");
@@ -126,10 +136,11 @@ public class AddressBook {
             System.out.println("수정할 연락처를 열람해주세요.");
         } else {
             String order = "";
-            while(!order.equals("exit")) {
+            while (!order.equals("exit")) {
                 System.out.println(onContact);
                 System.out.println("수정할 항목을 선택해주세요.");
-                System.out.println("(name : 이름, num : 전화번호, address : 주소, birth : 생년월일, memo : 메모, exit : 나가기)\n");
+                System.out.println(
+                    "(name : 이름, num : 전화번호, address : 주소, birth : 생년월일, memo : 메모, exit : 나가기)\n");
                 System.out.print(onContact.getName() + " > edit > ");
                 order = scanner.nextLine().trim();
 
@@ -158,11 +169,12 @@ public class AddressBook {
             System.out.println("삭제할 연락처를 열람해주세요");
         } else {
             String answer;
-            System.out.print("정말 삭제하시겠습니까? 삭제를 원하시면 '삭제'를 입력해주세요\n" + onContact.getName() + " > delete > ");
+            System.out.print(
+                "정말 삭제하시겠습니까? 삭제를 원하시면 '삭제'를 입력해주세요\n" + onContact.getName() + " > delete > ");
             answer = scanner.nextLine();
             if (answer.equals("삭제")) {
                 contactHashSet.remove(onContact);
-                onContact = null;
+                clearOnContact();
                 System.out.println("삭제되었습니다.");
             } else {
                 System.out.println("삭제되지 않았습니다");
@@ -172,35 +184,11 @@ public class AddressBook {
 
     }
 
-    public void myProfile() {
-        this.onContact = null;
-        String order = "";
-        while (!order.equals("exit")) {
-            System.out.println(userInfo);
-            System.out.println("수정할 항목을 선택해주세요");
-            System.out.println("(name : 이름, num : 전화번호, address : 주소, birth : 생년월일, exit : 나가기)");
-            System.out.print(userInfo.getName() + " > edit > ");
-            order = scanner.nextLine().trim();
-
-            System.out.print(order.matches("name|num|address|birth") ? "수정할 " : "");
-            switch (order) {
-                case "name" -> userInfo.setName();
-                case "num" -> userInfo.setPhone();
-                case "address" -> userInfo.setAddress();
-                case "birth" -> userInfo.setBirthday();
-                case "exit" -> {
-                    continue;
-                }
-                default -> {
-                    System.out.println("잘못된 입력입니다.");
-                    continue;
-                }
-            }
-            System.out.println("수정되었습니다.");
-        }
-    }
-
     public Contact getOnContact() {
         return onContact;
+    }
+
+    public void clearOnContact() {
+        onContact = null;
     }
 }

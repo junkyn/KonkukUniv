@@ -38,7 +38,7 @@ public class MainPrompt {
                 case "add" -> addressBook.addContact();
                 case "delete" -> addressBook.deleteContact();
                 case "edit" -> addressBook.editContact();
-                case "myprofile" -> addressBook.myProfile();
+                case "myprofile" -> myProfile(signedInUser);
                 default -> {
                     System.out.println("잘못된 입력입니다");
                     displayHelpList();
@@ -46,6 +46,34 @@ public class MainPrompt {
             }
         }
         return signedInUser;
+    }
+
+    public void myProfile(UserInfo signedInUser) {
+        addressBook.clearOnContact();
+        String order = "";
+        while (!order.equals("exit")) {
+            System.out.println(signedInUser);
+            System.out.println("수정할 항목을 선택해주세요");
+            System.out.println("(name : 이름, num : 전화번호, address : 주소, birth : 생년월일, exit : 나가기)");
+            System.out.print(signedInUser.getName() + " > edit > ");
+            order = scanner.nextLine().trim();
+
+            System.out.print(order.matches("name|num|address|birth") ? "수정할 " : "");
+            switch (order) {
+                case "name" -> signedInUser.setName();
+                case "num" -> signedInUser.setPhone();
+                case "address" -> signedInUser.setAddress();
+                case "birth" -> signedInUser.setBirthday();
+                case "exit" -> {
+                    continue;
+                }
+                default -> {
+                    System.out.println("잘못된 입력입니다.");
+                    continue;
+                }
+            }
+            System.out.println("수정되었습니다.");
+        }
     }
 
     private void handleViewCommand(String input) {
