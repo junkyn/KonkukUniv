@@ -1,6 +1,7 @@
 package kucse.introductoryproject.b01;
 
 import java.util.Scanner;
+import kucse.introductoryproject.b01.dto.Contact;
 import kucse.introductoryproject.b01.dto.Group;
 import kucse.introductoryproject.b01.dto.UserInfo;
 import kucse.introductoryproject.b01.utils.StringUtil;
@@ -72,7 +73,22 @@ public class GroupPrompt {
             if (StringUtil.isNumber(query)) {
                 addressBook.viewAddressBook(Integer.parseInt(query));
             } else {
-                addressBook.viewAddressBook(query);
+                Contact contact = addressBook.viewAddressBook(query);
+                var loop = true;
+                while (loop) {
+                    System.out.print(contact.getName() + " > ");
+
+                    String command = scanner.nextLine().trim();
+                    switch (command) {
+                        case "edit" -> addressBook.editContact(contact);
+                        case "delete" -> {
+                            addressBook.deleteContact(contact);
+                            loop = false;
+                        }
+                        case "exit" -> loop = false;
+                        default -> System.out.println("잘못된 입력입니다.");
+                    }
+                }
             }
 
         }
