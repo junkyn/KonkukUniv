@@ -1,39 +1,51 @@
 package kucse.introductoryproject.b01.dto;
 
-import kucse.introductoryproject.b01.csvhandler.ContactHandler;
-import kucse.introductoryproject.b01.utils.StringUtil;
-
 import static kucse.introductoryproject.b01.Main.scanner;
 
+import kucse.introductoryproject.b01.observer.ObservableContactHashSet;
+import kucse.introductoryproject.b01.utils.StringUtil;
+
 public class Contact extends UserData {
+
     private String memo;
 
     public Contact() {
 
     }
+
     public Contact(String name, String phone, String address, String birthday, String memo) {
         super(name, phone, address, birthday);
         this.memo = memo;
     }
 
-    @Override
-    public void setName() {
-        do System.out.print("이름을 입력하세요\n> ");
-        while (!validateName(ContactHandler.getInstance().contactHashSet.countName(scanner.nextLine().trim())));
+    public void setName(ObservableContactHashSet contactHashSet) {
+        do {
+            System.out.print("이름을 입력하세요\n> ");
+        }
+        while (!validateName(contactHashSet.countName(scanner.nextLine().trim())));
         notifyObservers();
     }
 
-    public void rename() {
-        do System.out.print("이름을 입력하세요\n> ");
-        while (!validateName(ContactHandler.getInstance().contactHashSet.renameFrom(getName(), scanner.nextLine().trim())));
+    public void rename(ObservableContactHashSet contactHashSet) {
+        do {
+            System.out.print("이름을 입력하세요\n> ");
+        }
+        while (!validateName(contactHashSet.renameFrom(getName(), scanner.nextLine().trim())));
         notifyObservers();
     }
 
-    @Override
-    public boolean validatePhone(String phone) {
-        if (ContactHandler.getInstance() != null && ContactHandler.getInstance().contactHashSet.isPhoneDuplicated(phone))
+    public void setPhone(ObservableContactHashSet contactHashSet) {
+        do {
+            System.out.print("전화번호를 입력하세요\n> ");
+        }
+        while (!validatePhone(contactHashSet, scanner.nextLine().trim()));
+        notifyObservers();
+    }
+
+    public boolean validatePhone(ObservableContactHashSet contactHashSet, String phone) {
+        if (contactHashSet.isPhoneDuplicated(phone)) {
             System.out.println("이미 존재하는 전화번호입니다");
-        else {
+        } else {
             return super.validatePhone(phone);
         }
 
@@ -41,22 +53,28 @@ public class Contact extends UserData {
     }
 
     public void setMemo() {
-        do System.out.print("메모를 입력하세요\n> ");
+        do {
+            System.out.print("메모를 입력하세요\n> ");
+        }
         while (!validateMemo(scanner.nextLine().trim()));
         notifyObservers();
     }
-    public boolean validateMemo(String memo){
+
+    public boolean validateMemo(String memo) {
         this.memo = memo;
         return true;
     }
-    public String getMemo() { return memo; }
+
+    public String getMemo() {
+        return memo;
+    }
 
     @Override
     public String toString() {
         String str;
         str = "\n---------------------\n" +
-                "이름 : " + getName() + "\n" +
-                "전화번호 : " + getPhone() + "\n";
+            "이름 : " + getName() + "\n" +
+            "전화번호 : " + getPhone() + "\n";
         if (!getAddress().isEmpty()) {
             str += "주소 : " + getAddress() + "\n";
         }

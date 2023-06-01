@@ -1,7 +1,6 @@
 package kucse.introductoryproject.b01;
 
 import java.util.Scanner;
-import kucse.introductoryproject.b01.csvhandler.ContactHandler;
 import kucse.introductoryproject.b01.csvhandler.GroupHandler;
 import kucse.introductoryproject.b01.dto.Group;
 import kucse.introductoryproject.b01.dto.UserInfo;
@@ -30,7 +29,6 @@ public class MainPrompt {
             switch (prompt.split(" ")[0]) {
                 case "help" -> displayHelpList();
                 case "logout" -> {
-                    ContactHandler.destroyInstance();
                     signedInUser = null;
                     loop = false;
                 }
@@ -147,6 +145,9 @@ public class MainPrompt {
         }
 
         Group group = GroupHandler.getInstance().groupHashMap.getGroupByNameAndTag(name, tag);
+
+//        addressBook = new AddressBook(
+//            ContactHandler.getInstance(signedInUser.getId()).contactHashSet);
     }
 
     private void joinGroup(UserInfo signedInUser, String code) {

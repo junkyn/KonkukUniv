@@ -72,6 +72,22 @@ public class UserInfo extends UserData {
         return false;
     }
 
+    public void setName() {
+        do {
+            System.out.print("이름을 입력하세요\n> ");
+        }
+        while (!validateName(scanner.nextLine().trim()));
+        notifyObservers();
+    }
+
+    public void setPhone() {
+        do {
+            System.out.print("전화번호를 입력하세요\n> ");
+        }
+        while (!validatePhone(scanner.nextLine().trim()));
+        notifyObservers();
+    }
+
     @Override
     public String toString() {
         String str;

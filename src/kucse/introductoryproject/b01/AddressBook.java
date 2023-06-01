@@ -27,8 +27,8 @@ public class AddressBook {
 
         System.out.println("(Skip을 원하시면 Enter을 눌러주세요. 단, 이름과 전화번호는 필수)");
 
-        contact.setName();
-        contact.setPhone();
+        contact.setName(contactHashSet);
+        contact.setPhone(contactHashSet);
         contact.setAddress();
         contact.setBirthday();
         contact.setMemo();
@@ -146,8 +146,8 @@ public class AddressBook {
 
                 System.out.print(order.matches("name|num|address|birth|memo") ? "수정할 " : "");
                 switch (order) {
-                    case "name" -> onContact.rename();
-                    case "num" -> onContact.setPhone();
+                    case "name" -> onContact.rename(contactHashSet);
+                    case "num" -> onContact.setPhone(contactHashSet);
                     case "address" -> onContact.setAddress();
                     case "birth" -> onContact.setBirthday();
                     case "memo" -> onContact.setMemo();

@@ -30,8 +30,8 @@ public class Main {
         LoginManager loginManager = new LoginManager();
         signedInUser = loginManager.show();
         if (signedInUser != null) {
-            addressBook = new AddressBook(
-                ContactHandler.getInstance(signedInUser.getId()).contactHashSet);
+            ContactHandler contactHandler = new ContactHandler(signedInUser.getId());
+            addressBook = new AddressBook(contactHandler.contactHashSet);
         }
     }
 
