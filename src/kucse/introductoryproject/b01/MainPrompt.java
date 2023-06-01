@@ -3,6 +3,7 @@ package kucse.introductoryproject.b01;
 import java.util.Scanner;
 import kucse.introductoryproject.b01.csvhandler.ContactHandler;
 import kucse.introductoryproject.b01.csvhandler.GroupHandler;
+import kucse.introductoryproject.b01.dto.Contact;
 import kucse.introductoryproject.b01.dto.Group;
 import kucse.introductoryproject.b01.dto.UserInfo;
 import kucse.introductoryproject.b01.utils.StringUtil;
@@ -21,9 +22,6 @@ public class MainPrompt {
         displayHelpList();
         boolean loop = true;
         while (loop) {
-            if (addressBook.getOnContact() != null) {
-                System.out.print(addressBook.getOnContact().getName() + " ");
-            }
             System.out.print("> ");
             String prompt = scanner.nextLine().trim();
 
@@ -37,8 +35,6 @@ public class MainPrompt {
                 case "view" -> handleViewCommand(prompt);
                 case "search" -> handleSearchCommand(prompt.split(" "));
                 case "add" -> addressBook.addContact();
-                case "delete" -> addressBook.deleteContact();
-                case "edit" -> addressBook.editContact();
                 case "myprofile" -> myProfile(signedInUser);
                 case "group" -> handleGroupCommand(signedInUser);
                 default -> {
@@ -51,7 +47,6 @@ public class MainPrompt {
     }
 
     public void myProfile(UserInfo signedInUser) {
-        addressBook.clearOnContact();
         String order = "";
         while (!order.equals("exit")) {
             System.out.println(signedInUser);
@@ -87,7 +82,22 @@ public class MainPrompt {
             if (StringUtil.isNumber(query)) {
                 addressBook.viewAddressBook(Integer.parseInt(query));
             } else {
-                addressBook.viewAddressBook(query);
+                Contact contact = addressBook.viewAddressBook(query);
+                var loop = true;
+                while (loop) {
+                    System.out.print(contact.getName() + " > ");
+
+                    String command = scanner.nextLine().trim();
+                    switch (command) {
+                        case "edit" -> addressBook.editContact(contact);
+                        case "delete" -> {
+                            addressBook.deleteContact(contact);
+                            loop = false;
+                        }
+                        case "exit" -> loop = false;
+                        default -> System.out.println("잘못된 입력입니다.");
+                    }
+                }
             }
 
         }
@@ -106,7 +116,6 @@ public class MainPrompt {
     }
 
     private void handleGroupCommand(UserInfo signedInUser) {
-        addressBook.clearOnContact();
         while (true) {
             System.out.println("========== 그룹 못록 ==========");
             signedInUser.getGroupList().stream().map(it -> it.getName() + "#" + it.getTag())

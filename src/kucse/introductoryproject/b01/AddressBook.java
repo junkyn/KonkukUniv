@@ -13,7 +13,6 @@ import kucse.introductoryproject.b01.observer.ObservableContactHashSet;
 
 public class AddressBook {
 
-    private Contact onContact;
     private ObservableContactHashSet contactHashSet;
 
     public AddressBook(ObservableContactHashSet contactHashSet) {
@@ -22,7 +21,6 @@ public class AddressBook {
 
 
     public void addContact() {
-        this.clearOnContact();
         Contact contact = new Contact();
 
         System.out.println("(Skip을 원하시면 Enter을 눌러주세요. 단, 이름과 전화번호는 필수)");
@@ -42,22 +40,22 @@ public class AddressBook {
     }
 
     public void viewAddressBook(int page) { // view (page)
-        clearOnContact();
         if (page == 1) {
             printBirthday();
         }
         printList(contactHashSet.toArrayList(), page);
     }
 
-    public void viewAddressBook(String name) {
-        onContact = contactHashSet.getContactByName(name);
-        if (onContact == null) {
+    public Contact viewAddressBook(String name) {
+        Contact contact = contactHashSet.getContactByName(name);
+        if (contact == null) {
             System.out.println("존재하지 않는 연락처입니다");
         } else {
-            System.out.println(onContact);
+            System.out.println(contact);
             System.out.println();
         }
 
+        return contact;
     }
 
     public void printBirthday() {
@@ -95,7 +93,6 @@ public class AddressBook {
     }
 
     public void searchContact(String query, int page) {
-        this.clearOnContact();
         String finalQuery = query.toLowerCase();
         if (finalQuery.isEmpty()) {
             System.out.println("입력 오류");
@@ -131,64 +128,47 @@ public class AddressBook {
         }
     }
 
-    public void editContact() {
-        if (onContact == null) {
-            System.out.println("수정할 연락처를 열람해주세요.");
-        } else {
-            String order = "";
-            while (!order.equals("exit")) {
-                System.out.println(onContact);
-                System.out.println("수정할 항목을 선택해주세요.");
-                System.out.println(
-                    "(name : 이름, num : 전화번호, address : 주소, birth : 생년월일, memo : 메모, exit : 나가기)\n");
-                System.out.print(onContact.getName() + " > edit > ");
-                order = scanner.nextLine().trim();
+    public void editContact(Contact contact) {
+        String order = "";
+        while (!order.equals("exit")) {
+            System.out.println(contact);
+            System.out.println("수정할 항목을 선택해주세요.");
+            System.out.println(
+                "(name : 이름, num : 전화번호, address : 주소, birth : 생년월일, memo : 메모, exit : 나가기)\n");
+            System.out.print(contact.getName() + " > edit > ");
+            order = scanner.nextLine().trim();
 
-                System.out.print(order.matches("name|num|address|birth|memo") ? "수정할 " : "");
-                switch (order) {
-                    case "name" -> onContact.rename(contactHashSet);
-                    case "num" -> onContact.setPhone(contactHashSet);
-                    case "address" -> onContact.setAddress();
-                    case "birth" -> onContact.setBirthday();
-                    case "memo" -> onContact.setMemo();
-                    case "exit" -> {
-                        continue;
-                    }
-                    default -> {
-                        System.out.println("잘못된 입력입니다.");
-                        continue;
-                    }
+            System.out.print(order.matches("name|num|address|birth|memo") ? "수정할 " : "");
+            switch (order) {
+                case "name" -> contact.rename(contactHashSet);
+                case "num" -> contact.setPhone(contactHashSet);
+                case "address" -> contact.setAddress();
+                case "birth" -> contact.setBirthday();
+                case "memo" -> contact.setMemo();
+                case "exit" -> {
+                    continue;
                 }
-                System.out.println("수정되었습니다.");
+                default -> {
+                    System.out.println("잘못된 입력입니다.");
+                    continue;
+                }
             }
+            System.out.println("수정되었습니다.");
         }
     }
 
-    public void deleteContact() {
-        if (onContact == null) {
-            System.out.println("삭제할 연락처를 열람해주세요");
+    public void deleteContact(Contact contact) {
+        String answer;
+        System.out.print(
+            "정말 삭제하시겠습니까? 삭제를 원하시면 '삭제'를 입력해주세요\n" + contact.getName() + " > delete > ");
+        answer = scanner.nextLine();
+        if (answer.equals("삭제")) {
+            contactHashSet.remove(contact);
+            System.out.println("삭제되었습니다.");
         } else {
-            String answer;
-            System.out.print(
-                "정말 삭제하시겠습니까? 삭제를 원하시면 '삭제'를 입력해주세요\n" + onContact.getName() + " > delete > ");
-            answer = scanner.nextLine();
-            if (answer.equals("삭제")) {
-                contactHashSet.remove(onContact);
-                clearOnContact();
-                System.out.println("삭제되었습니다.");
-            } else {
-                System.out.println("삭제되지 않았습니다");
-            }
-            System.out.println();
+            System.out.println("삭제되지 않았습니다");
         }
-
+        System.out.println();
     }
 
-    public Contact getOnContact() {
-        return onContact;
-    }
-
-    public void clearOnContact() {
-        onContact = null;
-    }
 }
