@@ -3,24 +3,17 @@ package kucse.introductoryproject.b01.dto;
 import static kucse.introductoryproject.b01.Main.scanner;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 import kucse.introductoryproject.b01.csvhandler.UserInfoHandler;
 
 public class UserInfo extends UserData {
 
     private String id;
     private String password;
-    private ArrayList<String> groupList;
+    private ArrayList<Group> groupList;
 
     public UserInfo() {
 
-    }
-
-    public UserInfo(String id, String password, String name, String phone, String address,
-        String birthday, ArrayList<String> groupList) {
-        super(name, phone, address, birthday);
-        this.id = id;
-        this.password = password;
-        this.groupList = groupList;
     }
 
     public boolean isMatchingPassword(String password) {
@@ -88,6 +81,8 @@ public class UserInfo extends UserData {
             "전화번호 : " + getPhone() + "\n" +
             "주소 : " + getAddress() + "\n" +
             "생년월일 : " + getBirthday() + "\n" +
+            "가입된 그룹 : " + getGroupList().stream().map(it -> it.getName() + "#" + it.getTag())
+            .collect(Collectors.joining(", ")) + "\n" +
             "---------------------\n";
         return str;
     }
@@ -97,11 +92,11 @@ public class UserInfo extends UserData {
         return id + "\t" + password + "\t" + super.toCsv() + "\n";
     }
 
-    public void setGroupList(ArrayList<String> groupList) {
+    public void setGroupList(ArrayList<Group> groupList) {
         this.groupList = groupList;
     }
 
-    public ArrayList<String> getGroupList() {
+    public ArrayList<Group> getGroupList() {
         return groupList;
     }
 

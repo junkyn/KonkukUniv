@@ -74,14 +74,16 @@ public class UserInfoHandler extends CsvHandler implements Observer {
                         throw new IllegalArgumentException("생일 형식이 올바르지 않습니다.");
                     }
 
-                    ArrayList<String> groupList = new ArrayList<>();
+                    ArrayList<Group> groupList = new ArrayList<>();
                     if (userInfoStr.length == 7) {
                         List<String> idList = Arrays.asList(userInfoStr[6].trim().split(" "));
                         if (idList.stream().anyMatch(it -> !Group.isIdValid(it)
                             || !GroupHandler.getInstance().groupHashMap.isGroupPresent(it))) {
                             throw new IllegalArgumentException("그룹 ID 형식이 올바르지 않거나, 존재하지 않습니다.");
                         }
-                        groupList.addAll(idList);
+                        groupList.addAll(idList.stream()
+                            .map(it -> GroupHandler.getInstance().groupHashMap.getGroupById(it))
+                            .toList());
                     }
                     userInfo.setGroupList(groupList);
 
