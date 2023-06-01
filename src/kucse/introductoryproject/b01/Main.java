@@ -2,6 +2,7 @@ package kucse.introductoryproject.b01;
 
 import java.util.Scanner;
 import kucse.introductoryproject.b01.csvhandler.ContactHandler;
+import kucse.introductoryproject.b01.csvhandler.GroupHandler;
 import kucse.introductoryproject.b01.csvhandler.UserInfoHandler;
 import kucse.introductoryproject.b01.dto.UserInfo;
 
@@ -10,9 +11,11 @@ public class Main {
     public static Scanner scanner = new Scanner(System.in);
     public static UserInfo signedInUser = null;
     public static AddressBook addressBook = null;
+    public static GroupHandler groupHandler = null;
     public static UserInfoHandler userInfoUtil = null;
 
     public static void main(String[] args) {
+        groupHandler = GroupHandler.getInstance("$groupData");
         userInfoUtil = UserInfoHandler.getInstance("userData");
 
         do {
