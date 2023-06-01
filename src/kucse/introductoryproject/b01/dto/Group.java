@@ -1,6 +1,8 @@
 package kucse.introductoryproject.b01.dto;
 
 import static kucse.introductoryproject.b01.Main.scanner;
+import static kucse.introductoryproject.b01.utils.StringUtil.ALPHANUMERICS;
+import static kucse.introductoryproject.b01.utils.StringUtil.GENERATE_CODE_FROM;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +10,10 @@ import java.util.Random;
 import kucse.introductoryproject.b01.csvhandler.GroupHandler;
 import kucse.introductoryproject.b01.observer.Observable;
 import kucse.introductoryproject.b01.observer.Observer;
+import kucse.introductoryproject.b01.utils.StringUtil;
 
 public class Group implements Observable {
 
-    private static final String GENERATE_CODE_FROM = "23456789QWERTYUPASDFGHJKLZXCVBNM";
-    private static final String ALPHANUMERICS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static final Random random = new Random();
     private final List<Observer> observers = new ArrayList<>();
     private String name;
@@ -90,6 +91,31 @@ public class Group implements Observable {
 
     public String getCode() {
         return code;
+    }
+
+    public static boolean isTagValid(int tag) {
+        return 1000 <= tag && tag < 10000;
+    }
+
+    public static boolean isIdValid(String id) {
+        if (id.length() != 9) {
+            return false;
+        }
+
+        if (id.charAt(0) != '$') {
+            return false;
+        }
+
+        return StringUtil.isAlphanumeric(id.substring(1));
+    }
+
+    public static boolean isCodeValid(String code) {
+        if (code.length() != 5) {
+            return false;
+        }
+
+        return code.matches("^[2-9A-HJ-NP-Z]+$");
+
     }
 
     public String toCsv() {

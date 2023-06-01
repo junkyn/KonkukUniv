@@ -53,16 +53,16 @@ public class GroupHandler extends CsvHandler implements Observer {
                 String code = groupStr[3].trim();
 
                 try {
-                    if (1000 <= tag && tag < 10000) {
+                    if (Group.isTagValid(tag)) {
                         throw new IllegalArgumentException("태그 형식이 올바르지 않습니다.");
                     }
                     if (groupHashMap.isGroupPresent(id)) {
                         throw new IllegalArgumentException("중복된 아이디입니다.");
                     }
-                    if (false) {
+                    if (Group.isIdValid(id)) {
                         throw new IllegalArgumentException("아이디 형식이 올바르지 않습니다.");
                     }
-                    if (false) {
+                    if (Group.isCodeValid(code)) {
                         throw new IllegalArgumentException("초대코드 형식이 올바르지 않습니다.");
                     }
                 } catch (IllegalArgumentException e) {
