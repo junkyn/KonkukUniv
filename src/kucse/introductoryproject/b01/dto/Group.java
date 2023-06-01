@@ -31,7 +31,7 @@ public class Group implements Observable {
         // Generate Tag
         do {
             this.tag = random.nextInt(1000, 10000);
-        } while (!GroupHandler.getInstance().groupHashMap.isGroupPresent(this.name, this.tag));
+        } while (GroupHandler.getInstance().groupHashMap.isGroupPresent(this.name, this.tag));
 
         // Generate ID
         do {
@@ -40,7 +40,7 @@ public class Group implements Observable {
                 sb.append(ALPHANUMERICS.charAt(random.nextInt(ALPHANUMERICS.length())));
             }
             id = sb.toString();
-        } while (!GroupHandler.getInstance().groupHashMap.isGroupPresent(id));
+        } while (GroupHandler.getInstance().groupHashMap.isGroupPresent(id));
 
         // Generate Code
         regenerateCode();
@@ -61,8 +61,12 @@ public class Group implements Observable {
         notifyObservers();
     }
 
-    public static boolean validateName(String name) {
-        return !name.contains("[\t\n]");
+    public boolean validateName(String name) {
+        if (name.contains("[\t\n]")) {
+            return false;
+        }
+        this.name = name;
+        return true;
     }
 
     public void regenerateCode() {
@@ -73,7 +77,7 @@ public class Group implements Observable {
                 sb.append(GENERATE_CODE_FROM.charAt(random.nextInt(GENERATE_CODE_FROM.length())));
             }
             code = sb.toString();
-        } while (!GroupHandler.getInstance().groupHashMap.isCodeDuplicated(code));
+        } while (GroupHandler.getInstance().groupHashMap.isCodeDuplicated(code));
 
     }
 
