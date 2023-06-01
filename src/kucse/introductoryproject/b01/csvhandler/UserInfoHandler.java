@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.Set;
 import kucse.introductoryproject.b01.dto.Group;
 import kucse.introductoryproject.b01.dto.UserInfo;
 import kucse.introductoryproject.b01.observer.Observable;
@@ -76,7 +76,8 @@ public class UserInfoHandler extends CsvHandler implements Observer {
 
                     ArrayList<Group> groupList = new ArrayList<>();
                     if (userInfoStr.length == 7) {
-                        List<String> idList = Arrays.asList(userInfoStr[6].trim().split(" "));
+                        List<String> idList = new ArrayList<>(
+                            Set.of(userInfoStr[6].trim().split(" ")));
                         if (idList.stream().anyMatch(it -> !Group.isIdValid(it)
                             || !GroupHandler.getInstance().groupHashMap.isGroupPresent(it))) {
                             throw new IllegalArgumentException("그룹 ID 형식이 올바르지 않거나, 존재하지 않습니다.");

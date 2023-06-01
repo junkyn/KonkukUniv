@@ -89,7 +89,8 @@ public class UserInfo extends UserData {
 
     @Override
     public String toCsv() {
-        return id + "\t" + password + "\t" + super.toCsv() + "\n";
+        return id + "\t" + password + "\t" + super.toCsv() + "\t" + getGroupList().stream()
+            .map(Group::getId).collect(Collectors.joining(" ")) + "\n";
     }
 
     public void setGroupList(ArrayList<Group> groupList) {
@@ -98,6 +99,11 @@ public class UserInfo extends UserData {
 
     public ArrayList<Group> getGroupList() {
         return groupList;
+    }
+
+    public void joinGroup(Group group) {
+        groupList.add(group);
+        notifyObservers();
     }
 
 }

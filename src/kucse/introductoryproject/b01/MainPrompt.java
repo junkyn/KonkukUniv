@@ -2,6 +2,8 @@ package kucse.introductoryproject.b01;
 
 import java.util.Scanner;
 import kucse.introductoryproject.b01.csvhandler.ContactHandler;
+import kucse.introductoryproject.b01.csvhandler.GroupHandler;
+import kucse.introductoryproject.b01.dto.Group;
 import kucse.introductoryproject.b01.dto.UserInfo;
 import kucse.introductoryproject.b01.utils.StringUtil;
 
@@ -39,6 +41,7 @@ public class MainPrompt {
                 case "delete" -> addressBook.deleteContact();
                 case "edit" -> addressBook.editContact();
                 case "myprofile" -> myProfile(signedInUser);
+                case "group" -> handleGroupCommand(signedInUser);
                 default -> {
                     System.out.println("잘못된 입력입니다");
                     displayHelpList();
@@ -103,6 +106,75 @@ public class MainPrompt {
         }
     }
 
+    private void handleGroupCommand(UserInfo signedInUser) {
+        addressBook.clearOnContact();
+        while (true) {
+            System.out.println("========== 그룹 못록 ==========");
+            signedInUser.getGroupList().stream().map(it -> it.getName() + "#" + it.getTag())
+                .forEach(System.out::println);
+            System.out.println("=============================");
+            System.out.print("group > ");
+            String[] commands = scanner.nextLine().trim().split(" ");
+
+            if (commands[0].equals("exit")) {
+                break;
+            }
+
+            if (commands.length > 1) {
+                switch (commands[0]) {
+                    case "open" -> openGroup(commands[1]);
+                    case "join" -> joinGroup(signedInUser, commands[1]);
+                    case "create" -> createGroup(signedInUser, commands[1]);
+                    default -> System.out.println("잘못된 입력입니다.");
+                }
+            } else {
+                System.out.println("잘못된 입력입니다.");
+            }
+        }
+    }
+
+    private void openGroup(String nameAndTag) {
+        if (!nameAndTag.contains("#")) {
+            System.out.println("그룹이름#그룹태그 형식으로 입력해주세요");
+            return;
+        }
+        String name = nameAndTag.substring(0, nameAndTag.indexOf('#'));
+        int tag = Integer.parseInt("0" + nameAndTag.substring(nameAndTag.indexOf('#') + 1));
+
+        if (!GroupHandler.getInstance().groupHashMap.isGroupPresent(name, tag)) {
+            System.out.println("그런 그룹은 없습니다..");
+            return;
+        }
+
+        Group group = GroupHandler.getInstance().groupHashMap.getGroupByNameAndTag(name, tag);
+    }
+
+    private void joinGroup(UserInfo signedInUser, String code) {
+        if (!GroupHandler.getInstance().groupHashMap.isCodeDuplicated(code)) {
+            System.out.println("유효하지 않은 초대코드입니다.");
+            return;
+        }
+
+        Group group = GroupHandler.getInstance().groupHashMap.getGroupByCode(code);
+
+        if (signedInUser.getGroupList().contains(group)) {
+            System.out.println("이미 가입된 그룹입니다.");
+            return;
+        }
+
+        signedInUser.joinGroup(group);
+
+        System.out.println(group.getName() + "#" + group.getTag() + "에 가입되었습니다.");
+    }
+
+    private void createGroup(UserInfo signedInUser, String name) {
+        Group group = new Group(name);
+        GroupHandler.getInstance().groupHashMap.append(group);
+        signedInUser.joinGroup(group);
+
+        System.out.println(group.getName() + "#" + group.getTag() + "이 생성되었습니다.");
+    }
+
     private void displayHelpList() {
         System.out.println("""
             ========================= 도 움 말 =========================
@@ -119,6 +191,7 @@ public class MainPrompt {
             - logout : 로그아웃
             - help : 도움말
             - exit : 프로그램 종료
+            - group: 그룹 뭐시기
             ===========================================================
             """);
 
