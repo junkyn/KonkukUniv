@@ -43,7 +43,7 @@ public class Group implements Observable {
         } while (GroupHandler.getInstance().groupHashMap.isGroupPresent(id));
 
         // Generate Code
-        regenerateCode();
+        generateCode();
     }
 
     public Group(String name, int tag, String id, String code) {
@@ -69,16 +69,22 @@ public class Group implements Observable {
         return true;
     }
 
-    public void regenerateCode() {
+    private void generateCode() {
         Random random = new Random();
+        StringBuilder sb;
         do {
-            StringBuilder sb = new StringBuilder();
+            sb = new StringBuilder();
+            System.out.println(code + "::모에모에뀽");
             while (sb.length() < 5) {
                 sb.append(GENERATE_CODE_FROM.charAt(random.nextInt(GENERATE_CODE_FROM.length())));
             }
-            code = sb.toString();
-        } while (GroupHandler.getInstance().groupHashMap.isCodeDuplicated(code));
+        } while (GroupHandler.getInstance().groupHashMap.isCodeDuplicated(sb.toString()));
+        code = sb.toString();
+    }
 
+    public void regenerateCode() {
+        generateCode();
+        notifyObservers();
     }
 
     public String getName() {

@@ -122,5 +122,10 @@ public class UserInfo extends UserData {
         notifyObservers();
     }
 
+    public void leaveGroup(Group group) {
+        groupList.remove(group);
+        notifyObservers();
+    }
+
 }
 

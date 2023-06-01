@@ -1,6 +1,7 @@
 package kucse.introductoryproject.b01;
 
 import java.util.Scanner;
+import kucse.introductoryproject.b01.csvhandler.ContactHandler;
 import kucse.introductoryproject.b01.csvhandler.GroupHandler;
 import kucse.introductoryproject.b01.dto.Group;
 import kucse.introductoryproject.b01.dto.UserInfo;
@@ -120,7 +121,7 @@ public class MainPrompt {
 
             if (commands.length > 1) {
                 switch (commands[0]) {
-                    case "open" -> openGroup(commands[1]);
+                    case "open" -> openGroup(signedInUser, commands[1]);
                     case "join" -> joinGroup(signedInUser, commands[1]);
                     case "create" -> createGroup(signedInUser, commands[1]);
                     default -> System.out.println("잘못된 입력입니다.");
@@ -131,7 +132,7 @@ public class MainPrompt {
         }
     }
 
-    private void openGroup(String nameAndTag) {
+    private void openGroup(UserInfo signedInUser, String nameAndTag) {
         if (!nameAndTag.contains("#")) {
             System.out.println("그룹이름#그룹태그 형식으로 입력해주세요");
             return;
@@ -146,8 +147,11 @@ public class MainPrompt {
 
         Group group = GroupHandler.getInstance().groupHashMap.getGroupByNameAndTag(name, tag);
 
-//        addressBook = new AddressBook(
-//            ContactHandler.getInstance(signedInUser.getId()).contactHashSet);
+        ContactHandler contactHandler = new ContactHandler(group.getId());
+        AddressBook groupAddressBook = new AddressBook(contactHandler.contactHashSet);
+
+        GroupPrompt groupPrompt = new GroupPrompt(scanner, group, groupAddressBook, signedInUser);
+        groupPrompt.executeCommands();
     }
 
     private void joinGroup(UserInfo signedInUser, String code) {
