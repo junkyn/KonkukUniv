@@ -126,6 +126,7 @@ public class MainPrompt {
             String[] commands = scanner.nextLine().trim().split(" ");
 
             if (commands[0].equals("exit")) {
+                displayHelpList();
                 break;
             }
 
