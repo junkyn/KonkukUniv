@@ -68,7 +68,7 @@ public class ObservableContactHashSet extends HashSet<Contact> implements Observ
         while (count.get() > 0 && this.stream().anyMatch(it -> it.getName().equals(name + "(" + count.get() + ")")))
             count.incrementAndGet();
 
-        return count.get() == 0 ? name : name + "(" + count.get() + ")";
+        return count.get() == 0 ? name : name + "[" + count.get() + "]";
     }
 
     public String renameFrom(String fromName, String toName) {

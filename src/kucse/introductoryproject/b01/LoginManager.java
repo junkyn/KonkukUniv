@@ -4,6 +4,8 @@ import kucse.introductoryproject.b01.csvhandler.UserInfoHandler;
 import kucse.introductoryproject.b01.dto.UserInfo;
 import kucse.introductoryproject.b01.observer.ObservableUserInfoHashMap;
 
+import java.util.ArrayList;
+
 import static kucse.introductoryproject.b01.Main.scanner;
 
 public class LoginManager {
@@ -52,7 +54,7 @@ public class LoginManager {
         userInfo.setName();
         userInfo.setPhone();
         userInfo.setAddress();
-        userInfo.setBirthday();
+        userInfo.setGroupList(new ArrayList<>());
 
         userInfoHashMap.append(userInfo);
     }

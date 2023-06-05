@@ -117,7 +117,8 @@ public class MainPrompt {
 
     private void handleGroupCommand(UserInfo signedInUser) {
         while (true) {
-            System.out.println("========== 그룹 못록 ==========");
+            displayGroupHelpList();
+            System.out.println("========== 그룹 목록 ==========");
             signedInUser.getGroupList().stream().map(it -> it.getName() + "#" + it.getTag())
                 .forEach(System.out::println);
             System.out.println("=============================");
@@ -205,9 +206,18 @@ public class MainPrompt {
             - logout : 로그아웃
             - help : 도움말
             - exit : 프로그램 종료
-            - group: 그룹 뭐시기
+            - group: 그룹 프롬프트로 이동
             ===========================================================
             """);
-
+    }
+    private void displayGroupHelpList(){
+        System.out.println("""
+            ========================= 도 움 말 =========================
+            - open <value> : <value>에 해당하는 그룹 접속
+            - join <value> : <value>의 초대 코드를 가진 그룹 가입
+            - create <value> : <value>의 이름을 가진 그룹 생성
+            - exit : 그룹 프롬프트 나가기           
+            ===========================================================    
+            """);
     }
 }
