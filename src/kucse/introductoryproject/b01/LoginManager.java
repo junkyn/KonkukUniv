@@ -54,6 +54,7 @@ public class LoginManager {
         userInfo.setName();
         userInfo.setPhone();
         userInfo.setAddress();
+        userInfo.setBirthday();
         userInfo.setGroupList(new ArrayList<>());
 
         userInfoHashMap.append(userInfo);
