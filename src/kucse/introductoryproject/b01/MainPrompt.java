@@ -135,10 +135,16 @@ public class MainPrompt {
                     case "open" -> openGroup(signedInUser, commands[1]);
                     case "join" -> joinGroup(signedInUser, commands[1]);
                     case "create" -> createGroup(signedInUser, commands[1]);
+
                     default -> System.out.println("잘못된 입력입니다.");
                 }
             } else {
-                System.out.println("잘못된 입력입니다.");
+                if(commands[0].equals("create")){
+                    System.out.println("생성할 그룹의 이름을 입력해주세요");
+                }
+                else {
+                    System.out.println("잘못된 입력입니다.");
+                }
             }
         }
     }
