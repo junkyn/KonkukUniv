@@ -142,6 +142,9 @@ public class MainPrompt {
                 if(commands[0].equals("create")){
                     System.out.println("생성할 그룹의 이름을 입력해주세요");
                 }
+                else if(commands[0].equals("join")){
+                    System.out.println("초대코드를 입력해주세요");
+                }
                 else {
                     System.out.println("잘못된 입력입니다.");
                 }
