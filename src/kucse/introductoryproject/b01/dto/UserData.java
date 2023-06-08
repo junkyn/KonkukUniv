@@ -43,6 +43,8 @@ public abstract class UserData implements Observable {
             System.out.println("정수로만 이루어진 이름은 사용할 수 없습니다");
         } else if (name.contains("\t")) {
             System.out.println("탭(tab)은 사용하실 수 없습니다");
+        } else if (name.contains("[") || name.contains("]")) {
+            System.out.println("[ 또는 ]는 이름에 사용할 수 없습니다");
         } else {
             this.name = name;
             return true;
