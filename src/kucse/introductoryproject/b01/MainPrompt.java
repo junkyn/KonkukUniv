@@ -1,5 +1,6 @@
 package kucse.introductoryproject.b01;
 
+import java.util.List;
 import java.util.Scanner;
 import kucse.introductoryproject.b01.csvhandler.ContactHandler;
 import kucse.introductoryproject.b01.csvhandler.GroupHandler;
@@ -119,8 +120,13 @@ public class MainPrompt {
         while (true) {
             displayGroupHelpList();
             System.out.println("========== 그룹 목록 ==========");
-            signedInUser.getGroupList().stream().map(it -> it.getName() + "#" + it.getTag())
-                .forEach(System.out::println);
+            List<String> groupList = signedInUser.getGroupList().stream()
+                .map(it -> it.getName() + "#" + it.getTag()).toList();
+
+            for (int i = 1; i <= groupList.size(); i++) {
+                System.out.println("[" + i + "] " + groupList.get(i - 1));
+            }
+
             System.out.println("=============================");
             System.out.print("group > ");
             String[] commands = scanner.nextLine().trim().split(" ");
@@ -132,33 +138,42 @@ public class MainPrompt {
 
             if (commands.length > 1) {
                 switch (commands[0]) {
-                    case "open" -> openGroup(signedInUser, commands[1]);
+                    case "open" -> openGroup(signedInUser, commands[1], groupList);
                     case "join" -> joinGroup(signedInUser, commands[1]);
                     case "create" -> createGroup(signedInUser, commands[1]);
 
                     default -> System.out.println("잘못된 입력입니다.");
                 }
             } else {
-                if(commands[0].equals("create")){
+                if (commands[0].equals("create")) {
                     System.out.println("생성할 그룹의 이름을 입력해주세요");
-                }
-                else if(commands[0].equals("join")){
+                } else if (commands[0].equals("join")) {
                     System.out.println("초대코드를 입력해주세요");
-                }
-                else {
+                } else {
                     System.out.println("잘못된 입력입니다.");
                 }
             }
         }
     }
 
-    private void openGroup(UserInfo signedInUser, String nameAndTag) {
-        if (!nameAndTag.contains("#")) {
-            System.out.println("그룹이름#그룹태그 형식으로 입력해주세요");
+    private void openGroup(UserInfo signedInUser, String index, List<String> groupList) {
+        if (!StringUtil.isNumber(index)) {
+            System.out.println("그룹 숫자를 입력하세용");
             return;
         }
-        String name = nameAndTag.substring(0, nameAndTag.indexOf('#'));
-        int tag = Integer.parseInt("0" + nameAndTag.substring(nameAndTag.indexOf('#') + 1));
+        int i = Integer.parseInt(index);
+        if (i > groupList.size() || i <= 0) {
+            System.out.println("그런 그룹은 없습니다..");
+            return;
+        }
+
+        System.out.println("***********************");
+        System.out.println(groupList.get(i - 1));
+        System.out.println("***********************");
+
+        String name = groupList.get(i - 1).substring(0, groupList.get(i - 1).indexOf('#'));
+        int tag = Integer.parseInt(
+            "0" + groupList.get(i - 1).substring(groupList.get(i - 1).indexOf('#') + 1));
 
         if (!GroupHandler.getInstance().groupHashMap.isGroupPresent(name, tag)) {
             System.out.println("그런 그룹은 없습니다..");
@@ -220,7 +235,8 @@ public class MainPrompt {
             ===========================================================
             """);
     }
-    private void displayGroupHelpList(){
+
+    private void displayGroupHelpList() {
         System.out.println("""
             ========================= 도 움 말 =========================
             - open <value> : <value>에 해당하는 그룹 접속
