@@ -1,17 +1,17 @@
 package kucse.introductoryproject.b01;
 
-import kucse.introductoryproject.b01.csvhandler.UserInfoHandler;
+import static kucse.introductoryproject.b01.Main.scanner;
+
+import java.util.ArrayList;
 import kucse.introductoryproject.b01.dto.UserInfo;
 import kucse.introductoryproject.b01.observer.ObservableUserInfoHashMap;
 
-import java.util.ArrayList;
-
-import static kucse.introductoryproject.b01.Main.scanner;
-
 public class LoginManager {
+
     ObservableUserInfoHashMap userInfoHashMap;
-    public LoginManager() {
-        userInfoHashMap = UserInfoHandler.getInstance().userInfoHashMap;
+
+    public LoginManager(ObservableUserInfoHashMap userInfoHashMap) {
+        this.userInfoHashMap = userInfoHashMap;
     }
 
     public UserInfo show() {
@@ -24,15 +24,15 @@ public class LoginManager {
             System.out.print("login이나 register를 통해 로그인이나 회원가입을 해주세요\n> ");
             String prompt = scanner.nextLine().trim();
 
-            if (prompt.equals("register"))
+            if (prompt.equals("register")) {
                 register();
-            else if (prompt.startsWith("login "))
-                try{
+            } else if (prompt.startsWith("login ")) {
+                try {
                     signedInUser = login(prompt.split(" ")[1], prompt.split(" ")[2]);
-                }catch(ArrayIndexOutOfBoundsException e){
+                } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.print("비밀번호를 입력해주세요\n\n");
                 }
-            else if (prompt.startsWith("exit")) {
+            } else if (prompt.startsWith("exit")) {
                 System.out.println("프로그램을 종료합니다. 이용해주셔서 감사합니다");
                 System.exit(0);
             }
@@ -45,7 +45,7 @@ public class LoginManager {
     public void register() {
         UserInfo userInfo = new UserInfo();
 
-        userInfo.setId();
+        userInfo.setId(userInfoHashMap);
         userInfo.setPassword();
 
         System.out.println("계정이 생성되었습니다.");

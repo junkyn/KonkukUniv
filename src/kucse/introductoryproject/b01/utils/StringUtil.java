@@ -5,9 +5,6 @@ public class StringUtil {
     private static final String[] CONSONANTS = {"ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ",
         "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"};
 
-    public static final String GENERATE_CODE_FROM = "23456789QWERTYUPASDFGHJKLZXCVBNM";
-    public static final String ALPHANUMERICS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
     public static String getHangulOnly(String str) {
         return str.replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣]", "");
     }
@@ -18,10 +15,6 @@ public class StringUtil {
 
     public static boolean isNumber(String str) {
         return str.matches("^[0-9]+$");
-    }
-
-    public static boolean isAlphanumeric(String str) {
-        return str.matches("^[a-zA-Z0-9]+$");
     }
 
     public static String getNumbersOnly(String str) { // 정수만 추출

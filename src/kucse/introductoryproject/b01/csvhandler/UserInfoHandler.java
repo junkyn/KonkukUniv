@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.Set;
 import kucse.introductoryproject.b01.dto.Group;
@@ -16,27 +15,10 @@ import kucse.introductoryproject.b01.observer.Observer;
 
 public class UserInfoHandler extends CsvHandler implements Observer {
 
-    private static volatile UserInfoHandler instance = null;
     public ObservableUserInfoHashMap userInfoHashMap;
 
-
-    protected UserInfoHandler(String fileName) {
+    public UserInfoHandler(String fileName) {
         super(fileName);
-    }
-
-    public static UserInfoHandler getInstance(String fileName) {
-        if (Objects.isNull(instance)) {
-            synchronized (UserInfoHandler.class) {
-                if (Objects.isNull(instance)) {
-                    instance = new UserInfoHandler(fileName);
-                }
-            }
-        }
-        return instance;
-    }
-
-    public static UserInfoHandler getInstance() {
-        return instance;
     }
 
     @Override
@@ -53,7 +35,7 @@ public class UserInfoHandler extends CsvHandler implements Observer {
                     if (userInfoHashMap.isIdPresent(userInfoStr[0].trim())) {
                         throw new IllegalArgumentException("중복된 아이디입니다.");
                     }
-                    if (!userInfo.validateId(userInfoStr[0].trim())) {
+                    if (!userInfo.validateId(null, userInfoStr[0].trim())) {
                         throw new IllegalArgumentException("아이디 형식이 올바르지 않습니다.");
                     }
                     if (!userInfo.validatePassword(userInfoStr[1].trim())) {

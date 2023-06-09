@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import kucse.introductoryproject.b01.dto.Group;
 import kucse.introductoryproject.b01.observer.Observable;
 import kucse.introductoryproject.b01.observer.ObservableGroupHashMap;
@@ -36,10 +37,6 @@ public class GroupHandler extends CsvHandler implements Observer {
         return instance;
     }
 
-    public synchronized static void destroyInstance() {
-        instance = null;
-    }
-
     @Override
     protected void parseDataFromCSV(File file) {
         groupHashMap = new ObservableGroupHashMap();
@@ -50,7 +47,9 @@ public class GroupHandler extends CsvHandler implements Observer {
 
                 try {
                     String name = groupStr[0].trim();
-                    if (!StringUtil.isNumber(groupStr[1].trim())) throw new IllegalArgumentException("태그 형식이 올바르지 않습니다.");
+                    if (!StringUtil.isNumber(groupStr[1].trim())) {
+                        throw new IllegalArgumentException("태그 형식이 올바르지 않습니다.");
+                    }
 
                     int tag = Integer.parseInt(groupStr[1].trim());
                     String id = groupStr[2].trim();
@@ -85,6 +84,7 @@ public class GroupHandler extends CsvHandler implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        super.writeData(groupHashMap.toString());
+        super.writeData(
+            groupHashMap.values().stream().map(Group::toCsv).collect(Collectors.joining()));
     }
 }

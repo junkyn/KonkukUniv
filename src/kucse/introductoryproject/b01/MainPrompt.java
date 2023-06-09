@@ -13,6 +13,7 @@ public class MainPrompt {
 
     private Scanner scanner;
     private AddressBook addressBook;
+    private UserInfo userInfo;
 
     public MainPrompt(Scanner scanner, AddressBook addressBook) {
         this.scanner = scanner;
@@ -20,6 +21,7 @@ public class MainPrompt {
     }
 
     public UserInfo executeCommands(UserInfo signedInUser) {
+        this.userInfo = signedInUser;
         displayHelpList();
         boolean loop = true;
         while (loop) {
@@ -151,11 +153,10 @@ public class MainPrompt {
                     System.out.println("생성할 그룹의 이름을 입력해주세요");
                 } else if (commands[0].equals("join")) {
                     System.out.println("초대코드를 입력해주세요");
-                } else if (commands[0].equals("open")){
+                } else if (commands[0].equals("open")) {
                     System.out.println("진입할 그룹의 번호를 입력해주세요");
-                }
-                else{
-                        System.out.println("잘못된 입력입니다.");
+                } else {
+                    System.out.println("잘못된 입력입니다.");
 
                 }
             }
@@ -208,7 +209,8 @@ public class MainPrompt {
             return;
         }
 
-        signedInUser.joinGroup(group);
+        signedInUser.getGroupList().add(group);
+        signedInUser.notifyObservers();
 
         System.out.println(group.getName() + "#" + group.getTag() + "에 가입되었습니다.");
     }
@@ -221,7 +223,8 @@ public class MainPrompt {
 
         Group group = new Group(name);
         GroupHandler.getInstance().groupHashMap.append(group);
-        signedInUser.joinGroup(group);
+        signedInUser.getGroupList().add(group);
+        signedInUser.notifyObservers();
 
         System.out.println(group.getName() + "#" + group.getTag() + "이 생성되었습니다.");
     }

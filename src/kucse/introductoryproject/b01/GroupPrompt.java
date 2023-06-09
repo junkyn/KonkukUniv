@@ -35,10 +35,12 @@ public class GroupPrompt {
                 case "invite" -> System.out.println("초대코드: " + groupInfo.getCode());
                 case "regen" -> {
                     groupInfo.regenerateCode();
+                    groupInfo.notifyObservers();
                     System.out.println("초대코드: " + groupInfo.getCode());
                 }
                 case "quit" -> {
-                    userInfo.leaveGroup(groupInfo);
+                    userInfo.getGroupList().remove(groupInfo);
+                    userInfo.notifyObservers();
                     System.out.println("탈퇴했습니다.");
                     loop = false;
                 }

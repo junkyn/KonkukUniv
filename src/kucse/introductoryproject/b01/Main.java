@@ -5,6 +5,7 @@ import kucse.introductoryproject.b01.csvhandler.ContactHandler;
 import kucse.introductoryproject.b01.csvhandler.GroupHandler;
 import kucse.introductoryproject.b01.csvhandler.UserInfoHandler;
 import kucse.introductoryproject.b01.dto.UserInfo;
+import kucse.introductoryproject.b01.observer.ObservableUserInfoHashMap;
 
 public class Main {
 
@@ -12,22 +13,22 @@ public class Main {
     public static UserInfo signedInUser = null;
     public static AddressBook addressBook = null;
     public static GroupHandler groupHandler = null;
-    public static UserInfoHandler userInfoUtil = null;
+    public static UserInfoHandler userInfoHandler = null;
 
     public static void main(String[] args) {
         groupHandler = GroupHandler.getInstance("$groupData");
-        userInfoUtil = UserInfoHandler.getInstance("userData");
+        userInfoHandler = new UserInfoHandler("$userData");
 
         do {
-            showLoginManager();
+            showLoginManager(userInfoHandler.userInfoHashMap);
             executeCommand();
         } while (signedInUser == null);
 
         System.out.println("프로그램을 종료합니다. 이용해주셔서 감사합니다");
     }
 
-    public static void showLoginManager() {
-        LoginManager loginManager = new LoginManager();
+    public static void showLoginManager(ObservableUserInfoHashMap userInfoHashMap) {
+        LoginManager loginManager = new LoginManager(userInfoHashMap);
         signedInUser = loginManager.show();
         if (signedInUser != null) {
             ContactHandler contactHandler = new ContactHandler(signedInUser.getId());

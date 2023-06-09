@@ -1,8 +1,6 @@
 package kucse.introductoryproject.b01.dto;
 
 import static kucse.introductoryproject.b01.Main.scanner;
-import static kucse.introductoryproject.b01.utils.StringUtil.ALPHANUMERICS;
-import static kucse.introductoryproject.b01.utils.StringUtil.GENERATE_CODE_FROM;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +8,9 @@ import java.util.Random;
 import kucse.introductoryproject.b01.csvhandler.GroupHandler;
 import kucse.introductoryproject.b01.observer.Observable;
 import kucse.introductoryproject.b01.observer.Observer;
-import kucse.introductoryproject.b01.utils.StringUtil;
 
 public class Group implements Observable {
 
-    private static final Random random = new Random();
     private final List<Observer> observers = new ArrayList<>();
     private String name;
     private int tag;
@@ -30,20 +26,22 @@ public class Group implements Observable {
 
         // Generate Tag
         do {
-            this.tag = random.nextInt(1000, 10000);
+            this.tag = new Random().nextInt(1000, 10000);
         } while (GroupHandler.getInstance().groupHashMap.isGroupPresent(this.name, this.tag));
 
         // Generate ID
         do {
             StringBuilder sb = new StringBuilder("$");
             while (sb.length() < 9) {
-                sb.append(ALPHANUMERICS.charAt(random.nextInt(ALPHANUMERICS.length())));
+                sb.append("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".charAt(
+                    new Random().nextInt(
+                        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".length())));
             }
             id = sb.toString();
         } while (GroupHandler.getInstance().groupHashMap.isGroupPresent(id));
 
         // Generate Code
-        generateCode();
+        regenerateCode();
     }
 
     public Group(String name, int tag, String id, String code) {
@@ -69,21 +67,17 @@ public class Group implements Observable {
         return true;
     }
 
-    private void generateCode() {
+    public void regenerateCode() {
         Random random = new Random();
         StringBuilder sb;
         do {
             sb = new StringBuilder();
             while (sb.length() < 5) {
-                sb.append(GENERATE_CODE_FROM.charAt(random.nextInt(GENERATE_CODE_FROM.length())));
+                sb.append("23456789QWERTYUPASDFGHJKLZXCVBNM".charAt(
+                    random.nextInt("23456789QWERTYUPASDFGHJKLZXCVBNM".length())));
             }
         } while (GroupHandler.getInstance().groupHashMap.isCodeDuplicated(sb.toString()));
         code = sb.toString();
-    }
-
-    public void regenerateCode() {
-        generateCode();
-        notifyObservers();
     }
 
     public String getName() {
@@ -115,7 +109,7 @@ public class Group implements Observable {
             return false;
         }
 
-        return StringUtil.isAlphanumeric(id.substring(1));
+        return id.substring(1).matches("^[a-zA-Z0-9]+$");
     }
 
     public static boolean isCodeValid(String code) {

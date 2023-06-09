@@ -4,7 +4,7 @@ import static kucse.introductoryproject.b01.Main.scanner;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-import kucse.introductoryproject.b01.csvhandler.UserInfoHandler;
+import kucse.introductoryproject.b01.observer.ObservableUserInfoHashMap;
 
 public class UserInfo extends UserData {
 
@@ -24,17 +24,17 @@ public class UserInfo extends UserData {
         return id;
     }
 
-    public void setId() {
+    public void setId(ObservableUserInfoHashMap userInfoHashMap) {
         do {
             System.out.print("ID를 입력하세요\n> ");
         }
-        while (!validateId(scanner.nextLine().trim()));
+        while (!validateId(userInfoHashMap, scanner.nextLine().trim()));
         notifyObservers();
     }
 
-    public boolean validateId(String id) {
-        if (UserInfoHandler.getInstance() != null
-            && UserInfoHandler.getInstance().userInfoHashMap.isIdPresent(id)) {
+    public boolean validateId(ObservableUserInfoHashMap userInfoHashMap, String id) {
+        if (userInfoHashMap != null
+            && userInfoHashMap.isIdPresent(id)) {
             System.out.println("이미 존재하는 아이디입니다.");
         } else if (id.length() < 5) {
             System.out.println("ID의 길이는 5 이상이어야 합니다.");
@@ -115,11 +115,6 @@ public class UserInfo extends UserData {
 
     public ArrayList<Group> getGroupList() {
         return groupList;
-    }
-
-    public void joinGroup(Group group) {
-        groupList.add(group);
-        notifyObservers();
     }
 
     public void leaveGroup(Group group) {
