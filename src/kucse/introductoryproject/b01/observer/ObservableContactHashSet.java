@@ -68,11 +68,11 @@ public class ObservableContactHashSet extends HashSet<Contact> implements Observ
         }
 
         while (count.get() > 0 && this.stream()
-            .anyMatch(it -> it.getName().equals(name + "(" + count.get() + ")"))) {
+            .anyMatch(it -> it.getName().equals(name + "[" + count.get() + "]"))) {
             count.incrementAndGet();
         }
 
-        return count.get() == 0 ? name : name + "(" + count.get() + ")";
+        return count.get() == 0 ? name : name + "[" + count.get() + "]";
     }
 
     public String renameFrom(String fromName, String toName) {
@@ -83,11 +83,11 @@ public class ObservableContactHashSet extends HashSet<Contact> implements Observ
         }
 
         while (count.get() > 0 && this.stream().filter(it -> !it.getName().equals(fromName))
-            .anyMatch(it -> it.getName().equals(toName + "(" + count.get() + ")"))) {
+            .anyMatch(it -> it.getName().equals(toName + "[" + count.get() + "]"))) {
             count.incrementAndGet();
         }
 
-        return count.get() == 0 ? toName : toName + "(" + count.get() + ")";
+        return count.get() == 0 ? toName : toName + "[" + count.get() + "]";
     }
 
     @Override
