@@ -214,6 +214,11 @@ public class MainPrompt {
     }
 
     private void createGroup(UserInfo signedInUser, String name) {
+        if (name.contains("[\t\n]") || name.isEmpty()) {
+            System.out.println("그루비룸이 올바르지 않습니다.");
+            return;
+        }
+
         Group group = new Group(name);
         GroupHandler.getInstance().groupHashMap.append(group);
         signedInUser.joinGroup(group);

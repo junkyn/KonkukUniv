@@ -74,7 +74,6 @@ public class Group implements Observable {
         StringBuilder sb;
         do {
             sb = new StringBuilder();
-            System.out.println(code + "::모에모에뀽");
             while (sb.length() < 5) {
                 sb.append(GENERATE_CODE_FROM.charAt(random.nextInt(GENERATE_CODE_FROM.length())));
             }
