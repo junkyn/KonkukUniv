@@ -38,6 +38,8 @@ public class MainPrompt {
                 case "add" -> addressBook.addContact();
                 case "myprofile" -> myProfile(signedInUser);
                 case "group" -> handleGroupCommand(signedInUser);
+                case "edit" -> System.out.println("수정할 연락처를 열람해주세요");
+                case "delete" -> System.out.println("삭제할 연락처를 열람해주세요");
                 default -> {
                     System.out.println("잘못된 입력입니다");
                     displayHelpList();
@@ -149,8 +151,12 @@ public class MainPrompt {
                     System.out.println("생성할 그룹의 이름을 입력해주세요");
                 } else if (commands[0].equals("join")) {
                     System.out.println("초대코드를 입력해주세요");
-                } else {
-                    System.out.println("잘못된 입력입니다.");
+                } else if (commands[0].equals("open")){
+                    System.out.println("진입할 그룹의 번호를 입력해주세요");
+                }
+                else{
+                        System.out.println("잘못된 입력입니다.");
+
                 }
             }
         }
@@ -158,12 +164,12 @@ public class MainPrompt {
 
     private void openGroup(UserInfo signedInUser, String index, List<String> groupList) {
         if (!StringUtil.isNumber(index)) {
-            System.out.println("그룹 숫자를 입력하세용");
+            System.out.println("그룹이 존재하지 않습니다");
             return;
         }
         int i = Integer.parseInt(index);
         if (i > groupList.size() || i <= 0) {
-            System.out.println("그런 그룹은 없습니다..");
+            System.out.println("그룹이 존재하지 않습니다");
             return;
         }
 

@@ -44,6 +44,8 @@ public class GroupPrompt {
                 }
                 case "exit" -> loop = false;
                 case "help" -> displayHelpList();
+                case "edit" -> System.out.println("수정할 연락처를 열람해주세요");
+                case "delete" -> System.out.println("삭제할 연락처를 열람해주세요");
                 default -> {
                     System.out.println("잘못된 입력입니다");
                     displayHelpList();
@@ -75,7 +77,7 @@ public class GroupPrompt {
             } else {
                 Contact contact = addressBook.viewAddressBook(query);
                 var loop = true;
-                while (loop) {
+                while (loop && contact != null) {
                     System.out.print(contact.getName() + " > ");
 
                     String command = scanner.nextLine().trim();
@@ -97,7 +99,7 @@ public class GroupPrompt {
     private void displayHelpList() {
         System.out.println("""
             ========================= 도 움 말 =========================
-            add: 연락처 추가
+            - add: 연락처 추가
             - search <query>: <query> 검색
             - view <name>: 이름이 <name>인 연락처 열람
                 - edit: 연락처 수정
