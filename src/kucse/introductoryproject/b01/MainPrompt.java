@@ -182,7 +182,7 @@ public class MainPrompt {
             "0" + groupList.get(i - 1).substring(groupList.get(i - 1).indexOf('#') + 1));
 
         if (!GroupHandler.getInstance().groupHashMap.isGroupPresent(name, tag)) {
-            System.out.println("그런 그룹은 없습니다..");
+            System.out.println("그룹이 존재하지 않습니다");
             return;
         }
 
@@ -215,7 +215,7 @@ public class MainPrompt {
 
     private void createGroup(UserInfo signedInUser, String name) {
         if (name.contains("[\t\n]") || name.isEmpty()) {
-            System.out.println("그루비룸이 올바르지 않습니다.");
+            System.out.println("그룹이름이 올바르지 않습니다.");
             return;
         }
 
