@@ -9,6 +9,7 @@ import kucse.introductoryproject.b01.dto.Group;
 import kucse.introductoryproject.b01.observer.Observable;
 import kucse.introductoryproject.b01.observer.ObservableGroupHashMap;
 import kucse.introductoryproject.b01.observer.Observer;
+import kucse.introductoryproject.b01.utils.StringUtil;
 
 public class GroupHandler extends CsvHandler implements Observer {
 
@@ -47,12 +48,14 @@ public class GroupHandler extends CsvHandler implements Observer {
                 String str = fileScanner.nextLine();
                 String[] groupStr = str.split("\t");
 
-                String name = groupStr[0].trim();
-                int tag = Integer.parseInt(groupStr[1].trim());
-                String id = groupStr[2].trim();
-                String code = groupStr[3].trim();
-
                 try {
+                    String name = groupStr[0].trim();
+                    if (!StringUtil.isNumber(groupStr[1].trim())) throw new IllegalArgumentException("태그 형식이 올바르지 않습니다.");
+
+                    int tag = Integer.parseInt(groupStr[1].trim());
+                    String id = groupStr[2].trim();
+                    String code = groupStr[3].trim();
+
                     if (!Group.isTagValid(tag)) {
                         throw new IllegalArgumentException("태그 형식이 올바르지 않습니다.");
                     }
@@ -65,13 +68,14 @@ public class GroupHandler extends CsvHandler implements Observer {
                     if (!Group.isCodeValid(code)) {
                         throw new IllegalArgumentException("초대코드 형식이 올바르지 않습니다.");
                     }
+
+                    groupHashMap.append(new Group(name, tag, id, code));
+
                 } catch (IllegalArgumentException e) {
                     System.err.println(file.getName() + " 파일 무결성 에러:\n" + str);
                     System.err.println(e.getMessage());
                     System.exit(0);
                 }
-
-                groupHashMap.append(new Group(name, tag, id, code));
             }
         } catch (IOException e) {
             e.printStackTrace();
