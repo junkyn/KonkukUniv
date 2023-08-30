@@ -1,0 +1,93 @@
+*{margin:0; padding:0;}
+body{width:960px;margin:0 auto;font-family: 'Gamja Flower', cursive;}
+li{list-style:none;}
+a{text-decoration:none;}
+img{border:0;}
+header{ width:900px; height:80px; background-color:#f6f9d4;
+			position:fixed; top:0; padding: 40px 30px 0 30px; }
+
+#title{ 
+	font-family: 'Alkatra', cursive;
+	height:40px; 
+	text-align:center; 
+	font-size:30px; font-weight:bold; 
+	}
+header>nav{height:40px;overflow:hidden;}
+#ctime{
+	width:250px;
+	height:36px;
+	float:right; 
+	border:1px dashed orange; 
+	border-radius:15px;
+	text-align : center;
+	font-family: 'Gamja Flower', cursive;
+	line-height:36px;
+}
+.main-menu{
+	display:block;
+	float:left;
+	width:100px;
+	height:40px;
+	text-align:center;
+	line-height:40px;
+	color:black;
+	text-decoration:underline;
+}
+#content{
+	margin-top:120px;
+	padding:10px;
+}
+footer{
+	padding:20px;
+	width:920px;
+	background-color: #d2f299;
+}
+footer>p{
+	font-family: 'Nunito', sans-serif;
+	font-weight:bold;
+	text-align:center;
+}
+.lab{
+	padding:10px;
+	border:1px solid black;
+	margin-top:10px;
+}
+.lab .level{
+	background-color:bisque;
+}
+.lab tr{
+	
+	text-align:center;
+}
+#hangman{
+	text-align:center;
+	font-family: 'Gamja Flower', cursive;
+}
+#hangman button{
+	font-family: 'Gamja Flower', cursive;
+}
+#newgamearea {
+	margin-top:2em;
+}
+#clue,#guesstr{
+	font-family:monospace;
+	font-size:2em;
+	padding:1em;
+	font-family: 'Gamja Flower', cursive;
+}
+#container{
+	width:400px;
+	height:400px;
+	position:relative;
+	background:yellow;
+}
+#animate{
+	width:50px;
+	height:50px;
+	position:absolute;
+	background-color: red;
+}
+#off_test{
+	color:red;
+	background-color:yellow;
+}

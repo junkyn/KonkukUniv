@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Alkatra&display=swap" rel="stylesheet">
+	<link type="text/css"rel="stylesheet"href="playjs.css">
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+	<script src="playjs.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="jquery.js"></script>
+</head>
+<body>
+	<header>
+		<div id="title">
+			Play with JS! 
+		</div>
+		<div id="ctime">
+		</div>
+		<nav>
+			<ul>
+				<li><a class="main-menu" href="#">Basic JS</a></li>
+				<li><a class="main-menu" href="#">Hangman</a></li>
+				<li><a class="main-menu" href="#">jQuery</a></li>
+				<li><a class="main-menu" href="#">Advanced JS</a></li>
+			</ul>
+		</nav>
+	</header>
+	<div id="content">
+		Put contents here.
+		<div class ="lab">
+			<button id="b1">전체 화면 보기</button>
+			
+
+
+		</div>
+		<div class="lab">
+			<button id="theone">Does nothing...</button>
+			<button id="bind">Add Click</button>
+			<button id="unbind">Remove Click</buton>
+			<div id="off_test" style="display:none;">Click!</div>
+		</div>
+		<div class="lab">
+			<button id="FirstBtn">Button #1</button>
+			<button id="SecondBtn">Button #2</button>
+			<div><span>0</span>button #1 clicks</div>
+			<div><span>0</span>button #2 clicks</div>
+			
+		</div>
+		<div class="lab">
+			<h3>이미지 변경하기</h3>
+			<div id="imageArea">
+				
+			</div>
+		</div>
+		<div class="lab">
+			<h3>덧셈 계산기</h3>
+			<form name="myform">
+				첫번째 정수:
+				<input id="x"/><br/>
+				두번째 정수:
+				<input id="y"/><br/>
+				합계:
+				<input id="sum"/><br/>
+				<input type="button" value="계산"/>
+			</form>
+			<h3>▶ 구구단 표</h3>
+			<table border="1">
+				<tr>
+					<script>
+						for(var idx=2;idx<=9;idx++){
+							document.write("<td class='level' width='80'>"+idx+"단</td>");
+						}
+						
+					</script>
+				</tr>
+					<script>
+						for(var i=1;i<=9;i++){
+							document.write("<tr>")
+							for(var j=2;j<=9;j++){
+								document.write("<td>"+j+"x"+i+"="+(i*j)+"</td>");
+							}
+							document.write("</tr>")
+						}
+					</script>
+			</table>
+			<h3>숫자 맞추기 게임</h3>
+			<p>이 게임은 컴퓨터가 생성한 숫자를 맞추는 게임입니다.<br>
+			숫자는 1부터 100 사이에 있습니다.</p><br>
+			<form>
+				숫자:
+				<input type="text" id="user" size="5">
+				<input type="button" value="확인">
+				<input type="button" value="다시하기">
+				<br><br>
+				추측횟수:
+				<input type="text" id="guesses" size="5">
+				힌트:
+				<input type="text" id="result" size="16">
+				<input type="text" id="answer" size="16">
+			</form>
+			
+		</div>
+		<div class ="lab">
+			<h3>이미지 변경하기</h3>
+			<img id="image" src="hannie.jpg"><br></br><br></br>
+			<input type="button" value="눌러보세요"/>
+		</div>
+		<div class="lab">
+			<h3>색상 테이블 출력하기</h3>
+			<input type="button" id="ctCreate" value="출력하기"/>
+			<input type="button" id="ctRemove" value="없애기"/>
+			<div id="colorTable">
+				
+			</div>
+		</div>
+		<div class="lab">
+			<div id="target">
+				This is a Text.
+			</div>
+			<button>중지</button>
+		<div class="lab">
+			<h3>상자 이동하기</h3>
+			<p>
+				<button>Click Me</button>
+			</p>
+			<div id = "container">
+				<div id="animate">
+
+				</div>
+			</div>
+		</div>
+		</div>
+			<div id="hangman">
+				<div>
+					<img id="hangmanpic" src="hangman6.gif" alt="hangman"/>
+				</div>
+				<div id="clue">Press New Game to play!</div>
+				<div>
+					<input id="hguess" type="text" size="1" maxlength="1"/>
+					<button id="guessbutton";"
+						disabled="disabled">Guess</button>
+				</div>
+				<div id="newgamearea">
+					<button>New Game</button>
+				</div>
+				<div id="guessstr"></div>
+			</div>
+
+
+	</div>
+	<footer>
+		<p>Web Programming, Spring 2023</p>
+		<p>Created by Junkyu Choi</p>
+	</footer>
+</body>
+</html>

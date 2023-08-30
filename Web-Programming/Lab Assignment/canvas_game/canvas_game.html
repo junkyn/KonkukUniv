@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Javascript Game</title>
+        <style>
+            canvas{
+                border: 1px dotted red;
+                background-color:#fcff00;
+            }
+        </style>
+        <script src="canvas_game.js"></script>
+    </head>
+    <body onload="init();">
+        <canvas id="canvas" width="500" height="300"></canvas>
+        <div id="control">
+            속도<input id="velocity" value="30" type="number" min="0" max="100" step="1"/>
+            각도<input id="angle" value="45" type="number" min="0" max="90" step="1"/>
+            <div id="score">점수 = 0</div>
+            <button onclick="start()">발사</button>
+        </div>
+    </body>
+
+</html>

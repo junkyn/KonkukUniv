@@ -1,0 +1,84 @@
+/*202211389 최준규*/
+*{
+    margin : 0;
+    padding : 0;
+}
+li{
+    list-style:none;
+}
+body{
+
+    font-family:serif;
+}
+a{
+    text-decoration:none;
+}
+img{
+    border:0;
+}
+header{
+    height:200px;background-color:#FFF2C6;
+    top:0;
+    left:0;
+    right:0;
+    position:fixed;
+}
+#title{
+    height:100px;
+    padding-top:50px;
+    font-size:35px;
+    line-height:100px;
+    text-align:center;
+    font-family:'Indie Flower',normal;
+}
+nav{
+    width:720px;
+    height:50px;
+    margin:0 auto;  
+    background-color:#E5A840;
+}
+section{
+    width:720px;
+    margin: 0 auto;
+    margin-top:200px;
+
+}
+#content{
+    height:700px;
+    padding:50px 50px;
+    background-color:#DCEFAC;
+}
+footer{
+    height:100px;
+    background-color:#C6E8F2;
+    font-weight:bold;
+    text-align:center;
+    line-height:100px;
+}
+.menu{
+    display:block; width:100px; height:50px;
+    margin:0 70px; text-align:center; line-height:50px;
+    float:left; color:#8106CE;font-size:20px;font-weight:bold;
+}
+.image{
+    width:250px;
+    float:left;
+}
+#content>div{
+    height:660px;
+    padding:20px;
+    border:1px;
+    border-style:dashed;
+    border-color:black;
+    border-radius:15px;
+}
+.colorDiv{width:250px;height:30px;text-align:center;line-height:30px;font-weight:bold;}
+input:nth-of-type(1){display:none;}
+input:nth-of-type(1)~section>div#content>div:nth-of-type(1){display:none;}
+input:nth-of-type(1):checked~section>div#content>div:nth-of-type(1){display:block;}
+input:nth-of-type(2){display:none;}
+input:nth-of-type(2)~section>div#content>div:nth-of-type(2){display:none;}
+input:nth-of-type(2):checked~section>div#content>div:nth-of-type(2){display:block;}
+input:nth-of-type(3){display:none;}
+input:nth-of-type(3)~section>div#content>div:nth-of-type(3){display:none;}
+input:nth-of-type(3):checked~section>div#content>div:nth-of-type(3){display:block;}
